@@ -1,22 +1,11 @@
 {
   "framework": "nextjs",
   "regions": ["iad1"],
+  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/",
       "destination": "/index.html"
-    },
-    {
-      "source": "/tools",
-      "destination": "/tools/index.html"
-    },
-    {
-      "source": "/tools/:path*",
-      "destination": "/tools/:path*"
-    },
-    {
-      "source": "/shared/:path*",
-      "destination": "/shared/:path*"
     }
   ]
 }
