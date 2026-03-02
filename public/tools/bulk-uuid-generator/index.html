@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="bulk uuid generator, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm-start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ``; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bulk UUID Generator | Generate 1-1000 UUIDs | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Generate bulk UUIDs instantly. Support for UUID v1, v4, and v5. Generate up to 1000 UUIDs at once. Copy, download as TXT or CSV. Free UUID generator." name="description"/>
+<link href="https://abetworks.in/tools/bulk-uuid-generator/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Bulk UUID Generator | Abetworks" property="og:title"/>
+<meta content="Generate up to 1000 UUIDs instantly. Support for v1, v4, and v5 UUIDs with export options." property="og:description"/>
+<meta content="https://abetworks.in/tools/bulk-uuid-generator/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is the Bulk UUID Generator free to use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the Bulk UUID Generator by Abetworks is 100% free with unlimited usage and no signup required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What UUID versions are supported?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our tool supports UUID version 1 (time-based), version 4 (random), and version 5 (namespace-based SHA-1)."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How many UUIDs can I generate at once?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can generate between 1 and 1000 UUIDs in a single batch with our bulk generator."
+            }
+        }
+    ]
+}</script>
+<style>
+    .no-ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #51cf66, #40c057);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+    .uuid-list-container {
+        background: var(--icon-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-top: 1.5rem;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    .uuid-list-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        font-family: monospace;
+        font-size: 0.9rem;
+        transition: background 0.2s ease;
+    }
+    .uuid-list-item:hover {
+        background: rgba(37, 99, 235, 0.1);
+    }
+    .uuid-list-item:last-child {
+        border-bottom: none;
+    }
+    .uuid-value {
+        color: var(--text-primary);
+        cursor: pointer;
+        flex: 1;
+    }
+    .uuid-value:hover {
+        color: var(--accent-blue);
+    }
+    .uuid-copy-btn {
+        padding: 0.25rem 0.75rem;
+        border: 1px solid var(--border-color);
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        margin-left: 1rem;
+        transition: all 0.2s ease;
+    }
+    .uuid-copy-btn:hover {
+        border-color: var(--accent-blue);
+        color: var(--accent-blue);
+    }
+    .uuid-stats {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: var(--bg-card);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+    .uuid-stat {
+        text-align: center;
+    }
+    .uuid-stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent-blue);
+    }
+    .uuid-stat-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 0.25rem;
+    }
+    .version-info {
+        background: var(--bg-card);
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 1.5rem;
+    }
+    .version-info h4 {
+        color: var(--accent-blue);
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+    .version-info p {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    .namespace-input {
+        display: none;
+        margin-top: 1rem;
+    }
+    .namespace-input.visible {
+        display: block;
+    }
+</style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/bulk-uuid-generator/">
+    <meta name="twitter:title" content="Free Bulk Uuid Generator Online | Abetworks">
+    <meta name="twitter:description" content="Free online bulk uuid generator tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>Bulk UUID Generator</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Bulk UUID Generator</h1>
+<p class="tool-subtitle">Generate unique identifiers in bulk. Support for UUID v1, v4, and v5. Generate up to 1000 UUIDs at once with copy and export options.</p>
+<div class="no-ai-badge">
+    <span>⚡</span>
+</div>
+</div>
+
+<div class="tool-workspace">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">UUID Version</label>
+            <select class="form-select" id="uuidVersion" onchange="onVersionChange()">
+                <option value="4">Version 4 (Random) - Most Common</option>
+                <option value="1">Version 1 (Time-based)</option>
+                <option value="5">Version 5 (Namespace SHA-1)</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Number of UUIDs</label>
+            <input type="number" id="uuidCount" class="form-input" value="10" min="1" max="1000"/>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Enter a number between 1 and 1000</p>
+        </div>
+    </div>
+
+    <div class="namespace-input" id="namespaceInput">
+        <div class="form-group">
+            <label class="form-label">Namespace (for v5)</label>
+            <select class="form-select" id="namespaceType">
+                <option value="dns">DNS Namespace (6ba7b810-9dad-11d1-80b4-00c04fd430c8)</option>
+                <option value="url">URL Namespace (6ba7b811-9dad-11d1-80b4-00c04fd430c8)</option>
+                <option value="oid">OID Namespace (6ba7b812-9dad-11d1-80b4-00c04fd430c8)</option>
+                <option value="x500">X.500 DN Namespace (6ba7b814-9dad-11d1-80b4-00c04fd430c8)</option>
+            </select>
+        </div>
+        <div class="form-group" style="margin-top: 1rem;">
+            <label class="form-label">Name</label>
+            <input type="text" id="namespaceName" class="form-input" placeholder="e.g., example.com or https://example.com"/>
+        </div>
+    </div>
+
+    <div class="version-info" id="versionInfo">
+        <h4>📌 Version 4 (Random)</h4>
+        <p>Generated using cryptographically secure random numbers. Most commonly used UUID version. Perfect for database primary keys, session tokens, and general-purpose unique identifiers. Collision probability is extremely low.</p>
+    </div>
+
+    <button class="btn btn-primary" id="generateBtn" onclick="generateUUIDs()" style="width: 100%;">
+        <span class="btn-text">🆔 Generate UUIDs</span>
+        <div class="loader"></div>
+    </button>
+
+    <div class="result-area hidden" id="resultArea">
+        <div class="uuid-stats">
+            <div class="uuid-stat">
+                <div class="uuid-stat-value" id="generatedCount">0</div>
+                <div class="uuid-stat-label">Generated</div>
+            </div>
+            <div class="uuid-stat">
+                <div class="uuid-stat-value" id="uuidVersion Display">v4</div>
+                <div class="uuid-stat-label">Version</div>
+            </div>
+            <div class="uuid-stat">
+                <div class="uuid-stat-value" id="timestamp">-</div>
+                <div class="uuid-stat-label">Generated At</div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="copyAllUUIDs()">📋 Copy All</button>
+            <button class="btn btn-secondary" onclick="downloadUUIDs('txt')">⬇️ Download TXT</button>
+            <button class="btn btn-secondary" onclick="downloadUUIDs('csv')">⬇️ Download CSV</button>
+            <button class="btn btn-secondary" onclick="generateUUIDs()">🔄 Generate More</button>
+        </div>
+
+        <div class="uuid-list-container" id="uuidListContainer">
+            <!-- UUID list will be populated here -->
+        </div>
+
+        <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">
+            ✅ All UUIDs are generated locally in your browser using secure algorithms
+        </p>
+    </div>
+</div>
+
+<!-- Related Tools Section -->
+<section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+        🔗 Related Tools
+    </h3>
+    <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        <a href="../uuid-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">🆔</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">UUID Generator</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Generate single UUIDs</span>
+            </div>
+        </a>
+        <a href="../qr-code-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">QR Code Generator</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Create custom QR codes</span>
+            </div>
+        </a>
+        <a href="../bulk-qr-code-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Bulk QR Code Generator</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Generate multiple QR codes</span>
+            </div>
+        </a>
+        <a href="../url-shortener/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">URL Shortener</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Shorten long URLs</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+    <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+        What is the Bulk UUID Generator?
+    </h2>
+    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+        The Bulk UUID Generator by Abetworks is a powerful, free tool that generates Universally Unique Identifiers (UUIDs) in bulk. Support for multiple UUID versions including v1 (time-based), v4 (random), and v5 (namespace-based). Generate up to 1000 UUIDs at once with options to copy, download as TXT or CSV.
+    </p>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        How to Use
+    </h3>
+    <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>Select the UUID version you need (v1, v4, or v5)</li>
+        <li>Enter the number of UUIDs to generate (1-1000)</li>
+        <li>For v5, select a namespace type and enter a name</li>
+        <li>Click "Generate UUIDs" to create your unique identifiers</li>
+        <li>Copy individual UUIDs, copy all, or download as TXT/CSV</li>
+    </ol>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        UUID Versions Explained
+    </h3>
+    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Version 1 (Time-based)</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            Generated using timestamp and MAC address. UUIDs are sortable by time. Useful when you need to track when identifiers were created or sort them chronologically. Contains node identifier (usually MAC address).
+        </p>
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">Example: <code style="background: var(--icon-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">9a7b330a-a736-11ec-93b4-212fc0d91dc0</code></p>
+    </div>
+
+    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Version 4 (Random)</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            Generated using cryptographically secure random numbers. Most popular and recommended for general use. Perfect for database keys, session IDs, and API tokens. Extremely low collision probability.
+        </p>
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">Example: <code style="background: var(--icon-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">550e8400-e29b-41d4-a716-446655440000</code></p>
+    </div>
+
+    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Version 5 (Namespace SHA-1)</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            Generated using SHA-1 hash of a namespace and name. Produces consistent UUIDs for the same input. Useful for generating deterministic identifiers from known values like URLs, domain names, or database keys.
+        </p>
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">Example: <code style="background: var(--icon-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">886313e1-3b8a-5372-9b90-0c9aee199e5d</code></p>
+    </div>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        Common Use Cases
+    </h3>
+    <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>✅ Database primary keys and unique identifiers</li>
+        <li>✅ Session tokens and authentication tokens</li>
+        <li>✅ API request tracking and correlation IDs</li>
+        <li>✅ File and document identifiers</li>
+        <li>✅ Distributed system coordination</li>
+        <li>✅ Test data generation for development</li>
+        <li>✅ Transaction and order IDs</li>
+    </ul>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+        Frequently Asked Questions
+    </h3>
+    <div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                Is the Bulk UUID Generator free to use?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Yes, the Bulk UUID Generator by Abetworks is 100% free with unlimited usage and no signup required.
+            </p>
+        </div>
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                What UUID versions are supported?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Our tool supports UUID version 1 (time-based), version 4 (random), and version 5 (namespace-based SHA-1).
+            </p>
+        </div>
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                How many UUIDs can I generate at once?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                You can generate between 1 and 1000 UUIDs in a single batch with our bulk generator.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Sitemap Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder &amp; Checker</a>
+<a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+<a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+<a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">AI Chat &amp; Prompt Tools</span>
+<a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+<a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+<a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+<a class="sitegpt-footer-link" href="../ai-chat-document-data/index.html">AI Chat with Document Data</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters &amp; Generators</span>
+<a class="sitegpt-footer-link" href="../currency-converter/index.html">Currency Converter</a>
+<a class="sitegpt-footer-link" href="../color-converter/index.html">Color Converter</a>
+<a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+<a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+</div>
+</div>
+</div>
+
+<style>
+.related-tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+</style>
+
+</main>
+
+<script src="/tools/shared/api-client.js"></script>
+<script>
+    let generatedUUIDs = [];
+
+    // Namespace UUIDs for v5
+    const NAMESPACES = {
+        dns: '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+        url: '6ba7b811-9dad-11d1-80b4-00c04fd430c8',
+        oid: '6ba7b812-9dad-11d1-80b4-00c04fd430c8',
+        x500: '6ba7b814-9dad-11d1-80b4-00c04fd430c8'
+    };
+
+    function onVersionChange() {
+        const version = document.getElementById('uuidVersion').value;
+        const namespaceInput = document.getElementById('namespaceInput');
+        const versionInfo = document.getElementById('versionInfo');
+
+        if (version === '5') {
+            namespaceInput.classList.add('visible');
+            versionInfo.innerHTML = `
+                <h4>📌 Version 5 (Namespace SHA-1)</h4>
+                <p>Generated using SHA-1 hash of a namespace and name. Produces consistent UUIDs for the same input. Useful for generating deterministic identifiers from known values like URLs or domain names.</p>
+            `;
+        } else if (version === '1') {
+            namespaceInput.classList.remove('visible');
+            versionInfo.innerHTML = `
+                <h4>📌 Version 1 (Time-based)</h4>
+                <p>Generated using timestamp and MAC address. UUIDs are sortable by time. Useful when you need to track when identifiers were created. Contains node identifier.</p>
+            `;
+        } else {
+            namespaceInput.classList.remove('visible');
+            versionInfo.innerHTML = `
+                <h4>📌 Version 4 (Random)</h4>
+                <p>Generated using cryptographically secure random numbers. Most popular and recommended for general use. Perfect for database keys, session IDs, and API tokens.</p>
+            `;
+        }
+    }
+
+    async function generateUUIDs() {
+        const count = parseInt(document.getElementById('uuidCount').value) || 10;
+        const version = document.getElementById('uuidVersion').value;
+
+        if (count < 1 || count > 1000) {
+            alert('Please enter a number between 1 and 1000');
+            return;
+        }
+
+        if (version === '5') {
+            const name = document.getElementById('namespaceName').value.trim();
+            if (!name) {
+                alert('Please enter a name for v5 UUID generation');
+                return;
+            }
+        }
+
+        const btn = document.getElementById('generateBtn');
+        btn.classList.add('loading');
+
+        try {
+            generatedUUIDs = [];
+            
+            for (let i = 0; i < count; i++) {
+                let uuid;
+                
+                if (version === '4') {
+                    uuid = generateUUIDv4();
+                } else if (version === '1') {
+                    uuid = generateUUIDv1();
+                } else if (version === '5') {
+                    const namespaceType = document.getElementById('namespaceType').value;
+                    const name = document.getElementById('namespaceName').value.trim();
+                    uuid = await generateUUIDv5(NAMESPACES[namespaceType], name);
+                }
+                
+                generatedUUIDs.push(uuid);
+            }
+
+            displayUUIDs(generatedUUIDs, version);
+            AbetworksUI.showToast(`Generated ${count} UUIDs!`);
+        } catch (error) {
+            alert('Failed to generate UUIDs: ' + error.message);
+        } finally {
+            btn.classList.remove('loading');
+        }
+    }
+
+    function displayUUIDs(uuids, version) {
+        const container = document.getElementById('uuidListContainer');
+        container.innerHTML = uuids.map((uuid, index) => `
+            <div class="uuid-list-item">
+                <span class="uuid-value" onclick="copyUUID('${uuid}')" title="Click to copy">${index + 1}. ${uuid}</span>
+                <button class="uuid-copy-btn" onclick="copyUUID('${uuid}')">📋 Copy</button>
+            </div>
+        `).join('');
+
+        document.getElementById('generatedCount').textContent = uuids.length;
+        document.getElementById('uuidVersion Display').textContent = `v${version}`;
+        document.getElementById('timestamp').textContent = new Date().toLocaleTimeString();
+
+        document.getElementById('resultArea').classList.remove('hidden');
+        document.getElementById('resultArea').style.display = 'block';
+        document.getElementById('resultArea').classList.add('active');
+    }
+
+    function copyUUID(uuid) {
+        navigator.clipboard.writeText(uuid);
+        AbetworksUI.showToast(`Copied ${uuid} to clipboard!`);
+    }
+
+    function copyAllUUIDs() {
+        const text = generatedUUIDs.join('\n');
+        navigator.clipboard.writeText(text);
+        AbetworksUI.showToast('All UUIDs copied to clipboard!');
+    }
+
+    function downloadUUIDs(format) {
+        const header = `UUIDs Generated by Abetworks Bulk UUID Generator\nGenerated: ${new Date().toISOString()}\nVersion: ${document.getElementById('uuidVersion').value}\nCount: ${generatedUUIDs.length}\n\n`;
+        const content = header + generatedUUIDs.join('\n');
+        
+        if (format === 'txt') {
+            AbetworksUI.downloadFile(content, 'uuids.txt', 'text/plain');
+        } else if (format === 'csv') {
+            const csv = 'UUID\n' + generatedUUIDs.join('\n');
+            AbetworksUI.downloadFile(csv, 'uuids.csv', 'text/csv');
+        }
+        
+        AbetworksUI.showToast(`Downloaded as ${format.toUpperCase()}!`);
+    }
+
+    // UUID v4 (Random) - Using crypto.randomUUID()
+    function generateUUIDv4() {
+        if (crypto.randomUUID) {
+            return crypto.randomUUID();
+        }
+        
+        // Fallback for older browsers
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    // UUID v1 (Time-based)
+    function generateUUIDv1() {
+        const timestamp = Date.now();
+        const clockseq = Math.floor(Math.random() * 0x3fff);
+        
+        const timeLow = (timestamp & 0xffffffff).toString(16).padStart(8, '0');
+        const timeMid = ((timestamp >>> 32) & 0xffff).toString(16).padStart(4, '0');
+        const timeHiAndVersion = (((timestamp >>> 48) & 0x0fff) | 0x1000).toString(16).padStart(4, '0');
+        const clockSeqHiAndReserved = ((clockseq >>> 8) & 0x3f | 0x80).toString(16).padStart(2, '0');
+        const clockSeqLow = (clockseq & 0xff).toString(16).padStart(2, '0');
+        const node = Array(6).fill(0).map(() => Math.floor(Math.random() * 256).toString(16).padStart(2, '0')).join('');
+        
+        return `${timeLow}-${timeMid}-${timeHiAndVersion}-${clockSeqHiAndReserved}${clockSeqLow}-${node}`;
+    }
+
+    // UUID v5 (Namespace SHA-1)
+    async function generateUUIDv5(namespace, name) {
+        const encoder = new TextEncoder();
+        const namespaceBytes = hexToBytes(namespace.replace(/-/g, ''));
+        const nameBytes = encoder.encode(name);
+        
+        // Combine namespace and name
+        const data = new Uint8Array(namespaceBytes.length + nameBytes.length);
+        data.set(namespaceBytes);
+        data.set(nameBytes, namespaceBytes.length);
+        
+        // Hash using SHA-1
+        const hashBuffer = await crypto.subtle.digest('SHA-1', data);
+        const hash = new Uint8Array(hashBuffer);
+        
+        // Convert to UUID v5 format
+        const hex = bytesToHex(hash);
+        
+        // Set version to 5
+        const versioned = hex.substring(0, 12) + '5' + hex.substring(13, 16) + 
+                         ((parseInt(hex.substring(16, 18), 16) & 0x3f) | 0x80).toString(16).padStart(2, '0') +
+                         hex.substring(18);
+        
+        return `${versioned.substring(0, 8)}-${versioned.substring(8, 12)}-${versioned.substring(12, 16)}-${versioned.substring(16, 20)}-${versioned.substring(20)}`;
+    }
+
+    function hexToBytes(hex) {
+        const bytes = new Uint8Array(hex.length / 2);
+        for (let i = 0; i < hex.length; i += 2) {
+            bytes[i / 2] = parseInt(hex.substring(i, i + 2), 16);
+        }
+        return bytes;
+    }
+
+    function bytesToHex(bytes) {
+        return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+</script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

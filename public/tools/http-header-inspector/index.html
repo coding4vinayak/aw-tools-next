@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="http header inspector, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm-start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Free HTTP Header Inspector - View & Analyze HTTP Headers | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Inspect HTTP headers of any URL. View security headers, response codes, and export as JSON. Free HTTP header analysis tool for developers." name="description"/>
+<link href="https://abetworks.in/tools/http-header-inspector/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Free HTTP Header Inspector - View & Analyze HTTP Headers | Abetworks" property="og:title"/>
+<meta content="Inspect HTTP headers of any URL. View security headers, response codes, and export as JSON." property="og:description"/>
+<meta content="https://abetworks.in/tools/http-header-inspector/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is this HTTP header inspector tool free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, this HTTP header inspector is 100% free with no limits or registration required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What are HTTP headers?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HTTP headers are key-value pairs sent between client and server that contain metadata about the request or response."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Why are security headers important?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Security headers help protect against common web vulnerabilities like XSS, clickjacking, and MIME-type sniffing."
+            }
+        }
+    ]
+}</script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/http-header-inspector/">
+    <meta name="twitter:title" content="Free Http Header Inspector Online | Abetworks">
+    <meta name="twitter:description" content="Free online http header inspector tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>HTTP Header Inspector</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">HTTP Header Inspector</h1>
+<p class="tool-subtitle">Inspect HTTP headers of any URL. View security headers, response codes, and export as JSON.</p>
+</div>
+<div class="tool-workspace">
+<div class="form-group">
+<label class="form-label">Enter URL to Inspect</label>
+<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+<input class="form-input flex-1" id="urlInput" placeholder="https://example.com" type="text" style="flex: 1; min-width: 200px;"/>
+<button class="btn btn-primary" onclick="inspectHeaders()" style="white-space: nowrap;">
+<span class="btn-text">🔍 Inspect Headers</span>
+<div class="loader"></div>
+</button>
+</div>
+</div>
+
+<div class="result-area hidden" id="resultArea">
+<div class="result-header">
+<span class="result-title">HTTP Headers Analysis</span>
+<div style="display: flex; gap: 0.5rem;">
+<button class="btn btn-secondary" onclick="copyHeaders()">📋 Copy</button>
+<button class="btn btn-primary" onclick="exportJSON()">⬇️ Export JSON</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Status Code</p>
+<p id="statusCode" style="font-size: 1.5rem; font-weight: 700; color: var(--accent-blue);">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Content Type</p>
+<p id="contentType" style="font-size: 1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Server</p>
+<p id="server" style="font-size: 1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Response Time</p>
+<p id="responseTime" style="font-size: 1.1rem; font-weight: 600;">- ms</p>
+</div>
+</div>
+
+<div style="margin-top: 1.5rem;">
+<h4 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">Security Headers Analysis</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">X-Frame-Options</p>
+<p id="xFrameOptions" style="font-size: 0.9rem; font-weight: 500;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">X-Content-Type-Options</p>
+<p id="xContentTypeOptions" style="font-size: 0.9rem; font-weight: 500;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">X-XSS-Protection</p>
+<p id="xXSSProtection" style="font-size: 0.9rem; font-weight: 500;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Strict-Transport-Security</p>
+<p id="hsts" style="font-size: 0.9rem; font-weight: 500;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Content-Security-Policy</p>
+<p id="csp" style="font-size: 0.9rem; font-weight: 500;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Referrer-Policy</p>
+<p id="referrerPolicy" style="font-size: 0.9rem; font-weight: 500;">-</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top: 1.5rem;">
+<h4 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">All Response Headers</h4>
+<div style="background: var(--icon-bg); border-radius: 8px; padding: 1rem; border: 1px solid var(--border-color); max-height: 400px; overflow-y: auto;">
+<pre id="allHeaders" style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; white-space: pre-wrap; word-break: break-all; font-family: 'Courier New', monospace;">-</pre>
+</div>
+</div>
+
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Security Score</p>
+<p id="securityScore" style="font-size: 1.5rem; font-weight: 700;">-</p>
+<p id="securityNotes" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;"></p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Related Tools Section -->
+<section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+🔗 Related Tools
+</h3>
+<div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+<a href="../meta-tag-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">🏷️</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Meta Tag Extractor</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Extract meta tags</span>
+</div>
+</a>
+<a href="../network-diagnostics/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">📡</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Network Diagnostics</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Test network speed</span>
+</div>
+</a>
+<a href="../user-agent-parser/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">🔍</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">User Agent Parser</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Parse user agents</span>
+</div>
+</a>
+<a href="../website-screenshot-tool/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">📸</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Screenshot</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Capture website screenshots</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+<h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+What is the HTTP Header Inspector?
+</h2>
+<p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+The HTTP Header Inspector by Abetworks is a free, developer-friendly tool that analyzes HTTP response headers from any website. View all response headers, check security headers implementation, and get a security score with actionable recommendations for improving your website's HTTP headers configuration.
+</p>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+How to Use
+</h3>
+<ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Enter the URL you want to inspect (include https://)</li>
+<li>Click "Inspect Headers" to fetch the response</li>
+<li>View status code, content type, and server information</li>
+<li>Check security headers implementation</li>
+<li>Copy headers or export as JSON for documentation</li>
+</ol>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Features
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>✅ HTTP status code detection</li>
+<li>✅ Content-Type identification</li>
+<li>✅ Server software detection</li>
+<li>✅ Response time measurement</li>
+<li>✅ Security headers analysis (X-Frame-Options, CSP, HSTS, etc.)</li>
+<li>✅ All response headers display</li>
+<li>✅ Security score calculation</li>
+<li>✅ Copy headers to clipboard</li>
+<li>✅ Export headers as JSON</li>
+<li>✅ Works with any publicly accessible URL</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Benefits
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>🔍 Debug HTTP response issues quickly</li>
+<li>🛡️ Audit security headers implementation</li>
+<li>📊 Get actionable security recommendations</li>
+<li>⚡ Fast, browser-based header inspection</li>
+<li>📋 Export headers for documentation</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Use Cases
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Web developers debugging API responses</li>
+<li>Security auditors checking header configuration</li>
+<li>SEO specialists analyzing server responses</li>
+<li>DevOps engineers monitoring server headers</li>
+<li>Students learning about HTTP protocol</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+Frequently Asked Questions
+</h3>
+<div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Is this HTTP header inspector tool free?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, this HTTP header inspector is 100% free with no limits or registration required.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+What are HTTP headers?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+HTTP headers are key-value pairs sent between client and server that contain metadata about the request or response.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Why are security headers important?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Security headers help protect against common web vulnerabilities like XSS, clickjacking, and MIME-type sniffing.
+</p>
+</div>
+</div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Quick Tools</span>
+<a class="sitegpt-footer-link" href="../what-is-my-ip/index.html">What Is My IP</a>
+<a class="sitegpt-footer-link" href="../browser-detector/index.html">Browser Detector</a>
+<a class="sitegpt-footer-link" href="../network-diagnostics/index.html">Network Diagnostics</a>
+<a class="sitegpt-footer-link" href="../user-agent-parser/index.html">User Agent Parser</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">SEO Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder</a>
+<a class="sitegpt-footer-link" href="../meta-tag-extractor/index.html">Meta Tag Extractor</a>
+<a class="sitegpt-footer-link" href="../website-screenshot-tool/index.html">Website Screenshot</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters</span>
+<a class="sitegpt-footer-link" href="../convert-csv-to-markdown/index.html">CSV to Markdown</a>
+<a class="sitegpt-footer-link" href="../convert-json-to-markdown/index.html">JSON to Markdown</a>
+<a class="sitegpt-footer-link" href="../text-to-pdf-converter/index.html">Text to PDF</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">📅 Free Consultation</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+</div>
+</div>
+</div>
+
+</main>
+
+<script src="/tools/shared/api-client.js"></script>
+<script>
+let headerData = null;
+
+async function inspectHeaders() {
+    const urlInput = document.getElementById('urlInput');
+    const btn = document.querySelector('#resultArea + button, button[onclick="inspectHeaders()"]');
+    const resultArea = document.getElementById('resultArea');
+    
+    let url = urlInput.value.trim();
+    
+    if (!url) {
+        alert('Please enter a URL to inspect');
+        return;
+    }
+    
+    // Add protocol if missing
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+        urlInput.value = url;
+    }
+    
+    // Validate URL
+    try {
+        new URL(url);
+    } catch (e) {
+        alert('Please enter a valid URL');
+        return;
+    }
+    
+    btn.classList.add('loading');
+    resultArea.classList.add('hidden');
+    
+    const startTime = performance.now();
+    const headers = {};
+    const securityHeaders = {
+        'x-frame-options': null,
+        'x-content-type-options': null,
+        'x-xss-protection': null,
+        'strict-transport-security': null,
+        'content-security-policy': null,
+        'referrer-policy': null
+    };
+    
+    try {
+        // Use a CORS proxy for cross-origin requests
+        // For demo purposes, we'll use a direct fetch which works for same-origin or CORS-enabled sites
+        const response = await fetch(url, { 
+            method: 'HEAD',
+            mode: 'cors'
+        });
+        
+        const endTime = performance.now();
+        const responseTime = Math.round(endTime - startTime);
+        
+        // Get all headers
+        response.headers.forEach((value, key) => {
+            headers[key] = value;
+            
+            // Check security headers
+            if (securityHeaders.hasOwnProperty(key.toLowerCase())) {
+                securityHeaders[key.toLowerCase()] = value;
+            }
+        });
+        
+        headerData = {
+            url: url,
+            timestamp: new Date().toISOString(),
+            statusCode: response.status,
+            statusText: response.statusText,
+            responseTime: responseTime,
+            headers: headers,
+            securityHeaders: securityHeaders
+        };
+        
+        // Update UI
+        document.getElementById('statusCode').textContent = `${response.status} ${response.statusText}`;
+        document.getElementById('statusCode').style.color = response.status >= 200 && response.status < 300 ? 'var(--accent-blue)' : '#ef4444';
+        document.getElementById('contentType').textContent = headers['content-type'] || 'N/A';
+        document.getElementById('server').textContent = headers['server'] || headers['x-powered-by'] || 'N/A';
+        document.getElementById('responseTime').textContent = `${responseTime} ms`;
+        
+        // Security headers
+        document.getElementById('xFrameOptions').textContent = securityHeaders['x-frame-options'] || '❌ Not set';
+        document.getElementById('xFrameOptions').style.color = securityHeaders['x-frame-options'] ? '#22c55e' : '#ef4444';
+        
+        document.getElementById('xContentTypeOptions').textContent = securityHeaders['x-content-type-options'] || '❌ Not set';
+        document.getElementById('xContentTypeOptions').style.color = securityHeaders['x-content-type-options'] === 'nosniff' ? '#22c55e' : '#ef4444';
+        
+        document.getElementById('xXSSProtection').textContent = securityHeaders['x-xss-protection'] || '❌ Not set';
+        document.getElementById('xXSSProtection').style.color = securityHeaders['x-xss-protection'] ? '#22c55e' : '#ef4444';
+        
+        document.getElementById('hsts').textContent = securityHeaders['strict-transport-security'] ? '✅ Enabled' : '❌ Not set';
+        document.getElementById('hsts').style.color = securityHeaders['strict-transport-security'] ? '#22c55e' : '#ef4444';
+        
+        document.getElementById('csp').textContent = securityHeaders['content-security-policy'] ? '✅ Enabled' : '❌ Not set';
+        document.getElementById('csp').style.color = securityHeaders['content-security-policy'] ? '#22c55e' : '#ef4444';
+        
+        document.getElementById('referrerPolicy').textContent = securityHeaders['referrer-policy'] || '❌ Not set';
+        document.getElementById('referrerPolicy').style.color = securityHeaders['referrer-policy'] ? '#22c55e' : '#ef4444';
+        
+        // All headers
+        let allHeadersText = '';
+        for (const [key, value] of Object.entries(headers)) {
+            allHeadersText += `${key}: ${value}\n`;
+        }
+        document.getElementById('allHeaders').textContent = allHeadersText || 'No headers available';
+        
+        // Security score
+        let score = 0;
+        const maxScore = 6;
+        const notes = [];
+        
+        if (securityHeaders['x-frame-options']) score++;
+        else notes.push('• Add X-Frame-Options to prevent clickjacking');
+        
+        if (securityHeaders['x-content-type-options'] === 'nosniff') score++;
+        else notes.push('• Add X-Content-Type-Options: nosniff');
+        
+        if (securityHeaders['x-xss-protection']) score++;
+        else notes.push('• Add X-XSS-Protection header');
+        
+        if (securityHeaders['strict-transport-security']) score++;
+        else notes.push('• Add Strict-Transport-Security (HSTS)');
+        
+        if (securityHeaders['content-security-policy']) score++;
+        else notes.push('• Add Content-Security-Policy (CSP)');
+        
+        if (securityHeaders['referrer-policy']) score++;
+        else notes.push('• Add Referrer-Policy header');
+        
+        const percentage = Math.round((score / maxScore) * 100);
+        const scoreElement = document.getElementById('securityScore');
+        scoreElement.textContent = `${percentage}% (${score}/${maxScore})`;
+        
+        if (percentage >= 80) {
+            scoreElement.style.color = '#22c55e';
+        } else if (percentage >= 50) {
+            scoreElement.style.color = '#f59e0b';
+        } else {
+            scoreElement.style.color = '#ef4444';
+        }
+        
+        document.getElementById('securityNotes').textContent = notes.length > 0 ? notes.join('\n') : 'All security headers are properly configured!';
+        
+        resultArea.classList.remove('hidden');
+    } catch (error) {
+        console.error('Header inspection error:', error);
+        // Fallback: Show error with suggestion to use CORS proxy
+        alert(`Failed to fetch headers for ${url}\n\nThis may be due to CORS restrictions. Try:\n1. Using a URL with CORS enabled\n2. Using a CORS proxy service\n3. Running this from the same domain`);
+    } finally {
+        btn.classList.remove('loading');
+    }
+}
+
+function copyHeaders() {
+    if (!headerData) return;
+    
+    let text = `HTTP Headers Report for: ${headerData.url}\nGenerated: ${new Date(headerData.timestamp).toLocaleString()}\n\n`;
+    text += `Status Code: ${headerData.statusCode} ${headerData.statusText}\n`;
+    text += `Response Time: ${headerData.responseTime} ms\n\n`;
+    text += `Security Headers:\n`;
+    for (const [key, value] of Object.entries(headerData.securityHeaders)) {
+        text += `  ${key}: ${value || 'Not set'}\n`;
+    }
+    text += `\nAll Headers:\n`;
+    for (const [key, value] of Object.entries(headerData.headers)) {
+        text += `${key}: ${value}\n`;
+    }
+    
+    navigator.clipboard.writeText(text);
+    if (window.AbetworksUI) {
+        AbetworksUI.showToast('Headers copied to clipboard!');
+    } else {
+        alert('Headers copied to clipboard!');
+    }
+}
+
+function exportJSON() {
+    if (!headerData) return;
+    
+    const json = JSON.stringify(headerData, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `http-headers-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    if (window.AbetworksUI) {
+        AbetworksUI.showToast('Headers exported as JSON!');
+    }
+}
+</script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

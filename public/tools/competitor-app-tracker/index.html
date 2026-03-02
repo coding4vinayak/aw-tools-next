@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="competitor app tracker, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+
+    <title>Free Competitor App Tracker | App Performance Monitor | Abetworks</title>
+    <meta name="description" content="Track multiple competitor apps across iOS and Android. Monitor rating changes, review counts, price changes, and compare features. Free app tracking tool.">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/competitor-app-tracker/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free Competitor App Tracker | Abetworks">
+    <meta property="og:description" content="Track competitor apps, monitor ratings, and compare features. Free app performance tracker.">
+    <meta property="og:url" content="https://abetworks.in/tools/competitor-app-tracker/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the Competitor App Tracker completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Competitor App Tracker by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which app stores are supported?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "This tool supports both iOS App Store (via iTunes API) and can track Android apps through manual data entry for comparison."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many apps can I track?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can track up to 10 competitor apps simultaneously and compare them in a feature comparison table."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I export the comparison data?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! You can export the app comparison as PDF or CSV for presentations and reports."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+.platform-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .platform-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--icon-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .platform-btn.active {
+            border-color: var(--accent-blue);
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--accent-blue);
+        }
+        .tracked-apps-section {
+            margin-top: 1.5rem;
+        }
+        .tracked-app-card {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .tracked-app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            flex-shrink: 0;
+        }
+        .tracked-app-info {
+            flex: 1;
+            min-width: 200px;
+        }
+        .tracked-app-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        .tracked-app-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+        .tracked-app-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .tracked-stat {
+            text-align: center;
+        }
+        .tracked-stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        .tracked-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        .tracked-app-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .remove-app-btn {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .remove-app-btn:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+        .comparison-section {
+            margin-top: 2rem;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        .comparison-table th {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .comparison-table td {
+            color: var(--text-secondary);
+        }
+        .comparison-table .app-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .comparison-table .app-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stars {
+            color: #fbbf24;
+        }
+        .price-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .price-tag.paid {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+        .feature-check {
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+        .feature-cross {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+        .alert-section {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.1));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--icon-bg);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+        .alert-content {
+            flex: 1;
+        }
+        .alert-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        .alert-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .alert-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        .add-app-section {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/competitor-app-tracker/">
+    <meta name="twitter:title" content="Free Competitor App Tracker Online | Abetworks">
+    <meta name="twitter:description" content="Free online competitor app tracker tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Competitor App Tracker</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Competitor App Tracker</h1>
+            <p class="tool-subtitle">Track multiple competitor apps, monitor rating changes, review counts, and compare features. Export comparison reports.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="platform-selector">
+                <div class="platform-btn active" onclick="setPlatform('ios')">
+                    <span>🍎</span> iOS App Store
+                </div>
+                <div class="platform-btn" onclick="setPlatform('android')">
+                    <span>🤖</span> Android (Manual)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Add App to Track</label>
+                <div class="add-app-section">
+                    <input type="text" id="appSearchInput" class="form-input" placeholder="Search iOS apps (e.g., WhatsApp, Instagram)" style="flex: 1; min-width: 250px;">
+                    <button id="searchBtn" class="btn btn-primary" onclick="searchAndAddApp()">
+                        <span class="btn-text">🔍 Search & Add</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Track up to 10 apps. For Android, enter app details manually.
+                </p>
+            </div>
+
+            <div id="emptyState" class="empty-state">
+                <div class="empty-state-icon">📱</div>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                    No Apps Tracked Yet
+                </h3>
+                <p>Search for an app above to start tracking your competitors</p>
+            </div>
+
+            <div id="trackedAppsSection" class="tracked-apps-section" style="display: none;"></div>
+
+            <div class="comparison-section" id="comparisonSection" style="display: none;">
+                <div class="result-header">
+                    <span class="result-title">📊 Feature Comparison</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyComparison()" class="btn btn-secondary">📋 Copy</button>
+                        <button onclick="exportPDF()" class="btn btn-secondary">📥 Download PDF</button>
+                        <button onclick="exportCSV()" class="btn btn-secondary">📥 Export CSV</button>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="comparison-table" id="comparisonTable"></table>
+                </div>
+            </div>
+
+            <div class="alert-section" id="alertSection" style="display: none;">
+                <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                    🔔 Recent Changes & Alerts
+                </h3>
+                <div id="alertsContainer"></div>
+            </div>
+
+            <div id="resultContent" style="display: none; margin-top: 1.5rem; white-space: pre-wrap;"></div>
+        </div>
+
+        <!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the Competitor App Tracker?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                The Competitor App Tracker is a free tool that helps you monitor and compare multiple mobile apps across iOS and Android platforms. Track rating changes, review count growth, price updates, and compare features side by side. Perfect for app developers, product managers, marketers, and investors who need to stay on top of the competitive landscape.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Select your platform (iOS or Android)</li>
+                <li>Search for an app by name and click "Search & Add"</li>
+                <li>Add up to 10 competitor apps to track</li>
+                <li>View real-time app statistics and metrics</li>
+                <li>Compare features in the comparison table</li>
+                <li>Monitor alerts for rating and price changes</li>
+                <li>Export comparison data as PDF or CSV</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Track up to 10 competitor apps</li>
+                <li>✅ iOS App Store integration (iTunes API)</li>
+                <li>✅ Manual entry for Android apps</li>
+                <li>✅ Rating and review count monitoring</li>
+                <li>✅ Price change detection</li>
+                <li>✅ Feature comparison table</li>
+                <li>✅ Alert notifications for changes</li>
+                <li>✅ Export reports as PDF or CSV</li>
+                <li>✅ No signup required, completely free</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>📊 Stay informed about competitor updates</li>
+                <li>📈 Track market positioning over time</li>
+                <li>💡 Identify feature gaps and opportunities</li>
+                <li>🎯 Make data-driven product decisions</li>
+                <li>⚡ Quick competitive analysis without tools</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>App developers monitoring competition</li>
+                <li>Product managers benchmarking features</li>
+                <li>Marketers analyzing app positioning</li>
+                <li>Investors evaluating app market opportunities</li>
+                <li>Agencies reporting on client competitors</li>
+            </ul>
+
+            <!-- Related Tools Section -->
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); margin-top: 2rem;">
+                📊 Related Analytics Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <a href="../app-store-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">App Store Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze app performance</span>
+                    </div>
+                </a>
+                <a href="../topic-trend-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📈</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Topic Trend Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze search trends</span>
+                    </div>
+                </a>
+                <a href="../wikipedia-popularity-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📄</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Wikipedia Popularity Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Check page views</span>
+                    </div>
+                </a>
+                <a href="../company-lookup/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🏢</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Company Lookup</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Get company information</span>
+                    </div>
+                </a>
+            </div>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the Competitor App Tracker completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the Competitor App Tracker by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Which app stores are supported?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        This tool supports both iOS App Store (via iTunes API) and can track Android apps through manual data entry for comparison.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How many apps can I track?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        You can track up to 10 competitor apps simultaneously and compare them in a feature comparison table.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Can I export the comparison data?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes! You can export the app comparison as PDF or CSV for presentations and reports.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SiteGPT Multi-Column Footer -->
+        <div class="sitegpt-footer-wrapper">
+            <div class="sitegpt-footer-container">
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Sitemap Tools</span>
+                    <a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder & Checker</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+                    <a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">AI Chat & Prompt Tools</span>
+                    <a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+                    <a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+                    <a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Converters & Generators</span>
+                    <a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../csv-to-markdown/index.html">Convert CSV to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../json-to-markdown/index.html">Convert JSON to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+                </div>
+                <div class="sitegpt-footer-col aw-footer-brand">
+                    <span class="sitegpt-footer-title">AbetWorks</span>
+                    <a class="sitegpt-footer-link" href="https://abetworks.in" target="_blank" rel="noopener">🌐 Main Website</a>
+                    <a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">📅 Free Consultation</a>
+                    <a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+                    <div class="aw-footer-socials">
+                        <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                        <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                        <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                        <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // State
+        let trackedApps = [];
+        let currentPlatform = 'ios';
+        let previousRatings = {};
+
+        // Initialize theme
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('abet_theme_preference') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Set platform
+        function setPlatform(platform) {
+            currentPlatform = platform;
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.platform-btn').classList.add('active');
+            
+            const input = document.getElementById('appSearchInput');
+            if (platform === 'ios') {
+                input.placeholder = 'Search iOS apps (e.g., WhatsApp, Instagram)';
+            } else {
+                input.placeholder = 'Enter Android app name (manual entry)';
+            }
+        }
+
+        // Search and add app
+        async function searchAndAddApp() {
+            const input = document.getElementById('appSearchInput');
+            const query = input.value.trim();
+            
+            if (!query) {
+                alert('Please enter an app name');
+                return;
+            }
+
+            if (trackedApps.length >= 10) {
+                alert('Maximum 10 apps can be tracked');
+                return;
+            }
+
+            const btn = document.getElementById('searchBtn');
+            btn.classList.add('loading');
+
+            try {
+                if (currentPlatform === 'ios') {
+                    // Search iTunes API
+                    const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=software&limit=1`);
+                    const data = await response.json();
+                    
+                    if (data.resultCount === 0) {
+                        throw new Error('No app found. Please check the name.');
+                    }
+
+                    const appData = data.results[0];
+                    addApp({
+                        id: appData.trackId,
+                        name: appData.trackName,
+                        developer: appData.artistName || appData.sellerName,
+                        icon: appData.artworkUrl100,
+                        rating: appData.averageUserRating || 0,
+                        reviews: appData.userRatingCount || 0,
+                        price: appData.price === 0 ? 'Free' : '$' + appData.price,
+                        category: appData.primaryGenreName || 'App',
+                        platform: 'iOS',
+                        features: generateFeatures(appData)
+                    });
+                } else {
+                    // Manual entry for Android
+                    addApp({
+                        id: 'android-' + Date.now(),
+                        name: query,
+                        developer: 'Unknown',
+                        icon: 'https://via.placeholder.com/100',
+                        rating: 0,
+                        reviews: 0,
+                        price: 'Free',
+                        category: 'App',
+                        platform: 'Android',
+                        features: {}
+                    });
+                }
+
+                input.value = '';
+                updateUI();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        // Generate features based on app data
+        function generateFeatures(appData) {
+            const description = (appData.description || '').toLowerCase();
+            return {
+                inAppPurchases: appData.features && appData.features.includes('iosInAppPurchases') || description.includes('purchase'),
+                subscriptions: description.includes('subscription'),
+                offlineMode: description.includes('offline'),
+                socialSharing: description.includes('share') || description.includes('social'),
+                cloudSync: description.includes('cloud') || description.includes('sync'),
+                darkMode: description.includes('dark mode') || description.includes('theme')
+            };
+        }
+
+        // Add app to tracking
+        function addApp(app) {
+            if (trackedApps.find(a => a.id === app.id)) {
+                alert('This app is already being tracked');
+                return;
+            }
+
+            trackedApps.push(app);
+            previousRatings[app.id] = app.rating;
+        }
+
+        // Remove app
+        function removeApp(id) {
+            trackedApps = trackedApps.filter(a => a.id !== id);
+            delete previousRatings[id];
+            updateUI();
+        }
+
+        // Update UI
+        function updateUI() {
+            const emptyState = document.getElementById('emptyState');
+            const trackedAppsSection = document.getElementById('trackedAppsSection');
+            const comparisonSection = document.getElementById('comparisonSection');
+            const alertSection = document.getElementById('alertSection');
+
+            if (trackedApps.length === 0) {
+                emptyState.style.display = 'block';
+                trackedAppsSection.style.display = 'none';
+                comparisonSection.style.display = 'none';
+                alertSection.style.display = 'none';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            trackedAppsSection.style.display = 'block';
+            comparisonSection.style.display = 'block';
+            alertSection.style.display = 'block';
+
+            // Render tracked apps
+            trackedAppsSection.innerHTML = trackedApps.map(app => `
+                <div class="tracked-app-card">
+                    <img src="${app.icon}" alt="${app.name}" class="tracked-app-icon" onerror="this.src='https://via.placeholder.com/80'">
+                    <div class="tracked-app-info">
+                        <div class="tracked-app-name">${app.name}</div>
+                        <div class="tracked-app-meta">${app.developer} • ${app.category} • ${app.platform}</div>
+                        <div class="tracked-app-stats">
+                            <div class="tracked-stat">
+                                <div class="tracked-stat-value">${getStars(app.rating)}</div>
+                                <div class="tracked-stat-label">Rating</div>
+                            </div>
+                            <div class="tracked-stat">
+                                <div class="tracked-stat-value">${formatNumber(app.reviews)}</div>
+                                <div class="tracked-stat-label">Reviews</div>
+                            </div>
+                            <div class="tracked-stat">
+                                <div class="tracked-stat-value">${app.price}</div>
+                                <div class="tracked-stat-label">Price</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tracked-app-actions">
+                        <button class="remove-app-btn" onclick="removeApp('${app.id}')">Remove</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render comparison table
+            renderComparisonTable();
+
+            // Generate alerts
+            generateAlerts();
+
+            // Update result content
+            document.getElementById('resultContent').textContent = generateResultText();
+        }
+
+        // Render comparison table
+        function renderComparisonTable() {
+            const table = document.getElementById('comparisonTable');
+            
+            const headers = ['Feature', ...trackedApps.map(app => `
+                <div class="app-header">
+                    <img src="${app.icon}" alt="${app.name}" onerror="this.src='https://via.placeholder.com/40'">
+                    <div>
+                        <div style="font-weight: 600;">${app.name}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">${app.platform}</div>
+                    </div>
+                </div>
+            `)];
+
+            const rows = [
+                ['Rating', ...trackedApps.map(app => `
+                    <div class="rating-display">
+                        <span class="stars">${getStars(app.rating)}</span>
+                        <span>${app.rating > 0 ? app.rating.toFixed(1) : 'N/A'}</span>
+                    </div>
+                `)],
+                ['Reviews', ...trackedApps.map(app => formatNumber(app.reviews))],
+                ['Price', ...trackedApps.map(app => `<span class="price-tag ${app.price !== 'Free' ? 'paid' : ''}">${app.price}</span>`)],
+                ['Category', ...trackedApps.map(app => app.category)],
+                ['In-App Purchases', ...trackedApps.map(app => app.features?.inAppPurchases ? '<span class="feature-check">✓</span>' : '<span class="feature-cross">✗</span>')],
+                ['Subscriptions', ...trackedApps.map(app => app.features?.subscriptions ? '<span class="feature-check">✓</span>' : '<span class="feature-cross">✗</span>')],
+                ['Offline Mode', ...trackedApps.map(app => app.features?.offlineMode ? '<span class="feature-check">✓</span>' : '<span class="feature-cross">✗</span>')],
+                ['Social Sharing', ...trackedApps.map(app => app.features?.socialSharing ? '<span class="feature-check">✓</span>' : '<span class="feature-cross">✗</span>')],
+                ['Cloud Sync', ...trackedApps.map(app => app.features?.cloudSync ? '<span class="feature-check">✓</span>' : '<span class="feature-cross">✗</span>')],
+                ['Dark Mode', ...trackedApps.map(app => app.features?.darkMode ? '<span class="feature-check">✓</span>' : '<span class="feature-cross">✗</span>')]
+            ];
+
+            table.innerHTML = `
+                <thead>
+                    <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
+                </thead>
+                <tbody>
+                    ${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('')}
+                </tbody>
+            `;
+        }
+
+        // Generate alerts
+        function generateAlerts() {
+            const alerts = [];
+            
+            trackedApps.forEach(app => {
+                const prevRating = previousRatings[app.id];
+                if (prevRating !== undefined && app.rating !== prevRating) {
+                    const change = app.rating - prevRating;
+                    alerts.push({
+                        type: change > 0 ? 'positive' : 'negative',
+                        icon: change > 0 ? '📈' : '📉',
+                        title: `${app.name} rating ${change > 0 ? 'increased' : 'decreased'}`,
+                        desc: `Changed from ${prevRating.toFixed(1)} to ${app.rating.toFixed(1)}`,
+                        time: 'Just now'
+                    });
+                }
+            });
+
+            // Add simulated alerts for demo
+            if (alerts.length === 0 && trackedApps.length > 0) {
+                alerts.push({
+                    type: 'info',
+                    icon: 'ℹ️',
+                    title: 'Tracking started',
+                    desc: `${trackedApps[0].name} is now being tracked`,
+                    time: 'Just now'
+                });
+            }
+
+            const container = document.getElementById('alertsContainer');
+            container.innerHTML = alerts.map(alert => `
+                <div class="alert-item">
+                    <span class="alert-icon">${alert.icon}</span>
+                    <div class="alert-content">
+                        <div class="alert-title">${alert.title}</div>
+                        <div class="alert-desc">${alert.desc}</div>
+                    </div>
+                    <span class="alert-time">${alert.time}</span>
+                </div>
+            `).join('');
+        }
+
+        // Generate result text
+        function generateResultText() {
+            if (trackedApps.length === 0) return '';
+
+            let text = `Competitor App Comparison Report\n================================\nGenerated: ${new Date().toLocaleString()}\n\n`;
+            
+            trackedApps.forEach(app => {
+                text += `${app.name} (${app.platform})\n`;
+                text += `  Developer: ${app.developer}\n`;
+                text += `  Category: ${app.category}\n`;
+                text += `  Rating: ${app.rating > 0 ? app.rating.toFixed(1) : 'N/A'}\n`;
+                text += `  Reviews: ${formatNumber(app.reviews)}\n`;
+                text += `  Price: ${app.price}\n\n`;
+            });
+
+            return text;
+        }
+
+        // Get stars
+        function getStars(rating) {
+            if (!rating || rating === 0) return '☆☆☆☆☆';
+            const full = Math.floor(rating);
+            const half = rating % 1 >= 0.5;
+            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(5 - full - (half ? 1 : 0));
+        }
+
+        // Format number
+        function formatNumber(num) {
+            if (!num) return '0';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+
+        // Copy comparison
+        function copyComparison() {
+            const text = generateResultText();
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Comparison copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        // Export PDF
+        function exportPDF() {
+            const printWindow = window.open('', '_blank');
+            if (!printWindow) {
+                alert('Please allow popups to download PDF');
+                return;
+            }
+
+            const tableHTML = document.getElementById('comparisonTable').outerHTML;
+
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>App Comparison Report</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; }
+                        h1 { color: #333; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                        th { background: #f5f5f5; }
+                        @media print { body { padding: 0; } }
+                    </style>
+                
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/competitor-app-tracker/">
+    <meta name="twitter:title" content="Free Competitor App Tracker Online | Abetworks">
+    <meta name="twitter:description" content="Free online competitor app tracker tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+                <body>
+                    <h1>📱 Competitor App Comparison</h1>
+                    <p>Generated: ${new Date().toLocaleString()}</p>
+                    ${tableHTML}
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                            setTimeout(() => window.close(), 500);
+                        };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+
+        // Export CSV
+        function exportCSV() {
+            if (trackedApps.length === 0) {
+                alert('No apps to export');
+                return;
+            }
+
+            let csv = 'Feature,' + trackedApps.map(a => a.name).join(',') + '\n';
+            csv += 'Platform,' + trackedApps.map(a => a.platform).join(',') + '\n';
+            csv += 'Developer,' + trackedApps.map(a => a.developer).join(',') + '\n';
+            csv += 'Category,' + trackedApps.map(a => a.category).join(',') + '\n';
+            csv += 'Rating,' + trackedApps.map(a => a.rating || 'N/A').join(',') + '\n';
+            csv += 'Reviews,' + trackedApps.map(a => a.reviews || 0).join(',') + '\n';
+            csv += 'Price,' + trackedApps.map(a => a.price).join(',') + '\n';
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `app-comparison-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            
+            document.getElementById('appSearchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') searchAndAddApp();
+            });
+        });
+    </script>
+
+    
+        <!-- Related Tools Section -->
+        <div class="related-tools" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e5e7eb;">
+            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 24px;">🔗 Related Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <a href="../qr-code-generator/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">📱</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">QR Code Generator</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Create custom QR codes instantly</span>
+                </a>
+                <a href="../url-shortener/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🔗</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">URL Shortener</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Shorten long URLs into clean links</span>
+                </a>
+                <a href="../image-compressor/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🖼️</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">Image Compressor</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Compress images while maintaining quality</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style>
+[data-theme="dark"] .related-tools h2 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:first-child {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:last-child {
+    color: #94a3b8 !important;
+}
+
+    </style>
+</body>
+</html>

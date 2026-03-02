@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="historical currency converter, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ``; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historical Currency Converter | Past Exchange Rates | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Get historical exchange rates for any date. Compare past and current currency rates, track rate changes, and export results. Free currency converter with historical data." name="description"/>
+<link href="https://abetworks.in/tools/historical-currency-converter/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Historical Currency Converter | Abetworks" property="og:title"/>
+<meta content="Get historical exchange rates for any date. Compare past and current currency rates instantly." property="og:description"/>
+<meta content="https://abetworks.in/tools/historical-currency-converter/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is the Historical Currency Converter free to use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the Historical Currency Converter by Abetworks is 100% free with no usage limits or signup required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How far back can I get historical rates?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our tool provides historical exchange rates going back several years for most major currency pairs."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How often are exchange rates updated?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Historical rates are from end-of-day data. Current rates are updated daily from reliable financial sources."
+            }
+        }
+    ]
+}</script>
+<style>
+    .no-ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #51cf66, #40c057);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+    .rate-comparison {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    .rate-card {
+        background: var(--icon-bg);
+        padding: 1.25rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+    .rate-change-positive {
+        color: #51cf66;
+        font-weight: 700;
+    }
+    .rate-change-negative {
+        color: #ff6b6b;
+        font-weight: 700;
+    }
+    .chart-container {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: var(--icon-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+</style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/historical-currency-converter/">
+    <meta name="twitter:title" content="Free Historical Currency Converter Online | Abetworks">
+    <meta name="twitter:description" content="Free online historical currency converter tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>Historical Currency Converter</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Historical Currency Converter</h1>
+<p class="tool-subtitle">Get exchange rates from any past date. Compare historical and current rates to track currency changes over time.</p>
+<div class="no-ai-badge">
+    <span>⚡</span>
+</div>
+</div>
+
+<div class="tool-workspace">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">From Currency</label>
+            <select class="form-select" id="fromCurrency" onchange="getHistoricalRate()">
+                <option value="USD" selected>USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="INR">INR - Indian Rupee</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SGD">SGD - Singapore Dollar</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+                <option value="MXN">MXN - Mexican Peso</option>
+                <option value="BRL">BRL - Brazilian Real</option>
+                <option value="ZAR">ZAR - South African Rand</option>
+                <option value="RUB">RUB - Russian Ruble</option>
+                <option value="KRW">KRW - South Korean Won</option>
+                <option value="SEK">SEK - Swedish Krona</option>
+                <option value="NOK">NOK - Norwegian Krone</option>
+                <option value="DKK">DKK - Danish Krone</option>
+                <option value="HKD">HKD - Hong Kong Dollar</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">To Currency</label>
+            <select class="form-select" id="toCurrency" onchange="getHistoricalRate()">
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD">USD - US Dollar</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="INR" selected>INR - Indian Rupee</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SGD">SGD - Singapore Dollar</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+                <option value="MXN">MXN - Mexican Peso</option>
+                <option value="BRL">BRL - Brazilian Real</option>
+                <option value="ZAR">ZAR - South African Rand</option>
+                <option value="RUB">RUB - Russian Ruble</option>
+                <option value="KRW">KRW - South Korean Won</option>
+                <option value="SEK">SEK - Swedish Krona</option>
+                <option value="NOK">NOK - Norwegian Krone</option>
+                <option value="DKK">DKK - Danish Krone</option>
+                <option value="HKD">HKD - Hong Kong Dollar</option>
+            </select>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Historical Date</label>
+            <input type="date" id="historicalDate" class="form-input" onchange="getHistoricalRate()"/>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Select any past date</p>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Amount</label>
+            <input type="number" id="amount" class="form-input" value="1" min="0" step="0.01" onchange="getHistoricalRate()"/>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" id="convertBtn" onclick="getHistoricalRate()" style="width: 100%;">
+        <span class="btn-text">📅 Get Historical Rate</span>
+        <div class="loader"></div>
+    </button>
+
+    <div class="result-area hidden" id="resultArea">
+        <div class="result-header">
+            <span class="result-title">Conversion Result</span>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary" onclick="copyResult()">📋 Copy</button>
+                <button class="btn btn-secondary" onclick="exportToPDF()">📄 Export PDF</button>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.1)); border: 1px solid rgba(37, 99, 235, 0.3); border-radius: 16px; padding: 2rem; margin-top: 1.5rem; text-align: center;">
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Historical Conversion (<span id="displayDate"></span>)</p>
+            <p id="historicalResult" style="font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 0.5rem;">-</p>
+            <p id="historicalRate" style="font-size: 1.1rem; color: var(--text-secondary);">1 XXX = X.XXXX XXX</p>
+        </div>
+
+        <div class="rate-comparison">
+            <div class="rate-card">
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Historical Rate</p>
+                <p id="histRateValue" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">-</p>
+                <p id="histDateLabel" style="font-size: 0.85rem; color: var(--text-secondary);">-</p>
+            </div>
+            <div class="rate-card">
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Current Rate</p>
+                <p id="currentRateValue" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">-</p>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">Today</p>
+            </div>
+            <div class="rate-card">
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Rate Change</p>
+                <p id="rateChangeValue" style="font-size: 1.5rem; font-weight: 700;">-</p>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">Percentage difference</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">📊 Rate Comparison</h4>
+            <div style="display: flex; align-items: flex-end; gap: 2rem; height: 150px; padding: 1rem;">
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <div id="histBar" style="width: 60px; height: 100px; background: var(--accent-blue); border-radius: 8px 8px 0 0; transition: height 0.5s ease;"></div>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">Historical</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <div id="currentBar" style="width: 60px; height: 100px; background: var(--accent-purple); border-radius: 8px 8px 0 0; transition: height 0.5s ease;"></div>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">Current</span>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1.5rem;">
+            ⚠️ Rates are for informational purposes. Actual rates may vary.
+        </p>
+    </div>
+</div>
+
+<!-- Related Tools Section -->
+<section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+        💱 Related Tools
+    </h3>
+    <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        <a href="../currency-converter/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">💱</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Currency Converter</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Live currency conversion</span>
+            </div>
+        </a>
+        <a href="../currency-trend-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📈</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Currency Trend Analyzer</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Track currency trends</span>
+            </div>
+        </a>
+        <a href="../cpl-calculator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">CPL Calculator</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Calculate cost per lead</span>
+            </div>
+        </a>
+        <a href="../roas-quick-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📈</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">ROAS Quick Checker</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Calculate ad returns</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+    <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+        What is the Historical Currency Converter?
+    </h2>
+    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+        The Historical Currency Converter by Abetworks is a free tool that lets you check exchange rates from any past date. Whether you need to verify a historical transaction, analyze currency trends, or compare past and present rates, our tool provides accurate historical forex data instantly.
+    </p>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        How to Use
+    </h3>
+    <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>Select the source currency from the "From Currency" dropdown</li>
+        <li>Select the target currency from the "To Currency" dropdown</li>
+        <li>Choose a historical date using the date picker</li>
+        <li>Enter the amount you want to convert</li>
+        <li>Click "Get Historical Rate" to see the conversion</li>
+        <li>Compare with current rates and export results as PDF</li>
+    </ol>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        Features
+    </h3>
+    <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>✅ Historical exchange rates for any past date</li>
+        <li>✅ Support for 20+ major world currencies</li>
+        <li>✅ Side-by-side comparison with current rates</li>
+        <li>✅ Rate change percentage calculation</li>
+        <li>✅ Visual bar chart comparison</li>
+        <li>✅ Export results as PDF</li>
+        <li>✅ No signup required, completely free</li>
+    </ul>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        Use Cases
+    </h3>
+    <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>📊 Verifying historical financial transactions</li>
+        <li>💼 Accounting and bookkeeping for past conversions</li>
+        <li>📈 Analyzing currency trends over time</li>
+        <li>🌍 International business historical rate checks</li>
+        <li>📝 Tax documentation requiring historical rates</li>
+        <li>🎓 Academic research on currency fluctuations</li>
+    </ul>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+        Frequently Asked Questions
+    </h3>
+    <div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                Is the Historical Currency Converter free to use?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Yes, the Historical Currency Converter by Abetworks is 100% free with no usage limits or signup required.
+            </p>
+        </div>
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                How far back can I get historical rates?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Our tool provides historical exchange rates going back several years for most major currency pairs.
+            </p>
+        </div>
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                How often are exchange rates updated?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Historical rates are from end-of-day data. Current rates are updated daily from reliable financial sources.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Sitemap Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder &amp; Checker</a>
+<a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+<a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+<a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">AI Chat &amp; Prompt Tools</span>
+<a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+<a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+<a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+<a class="sitegpt-footer-link" href="../ai-chat-document-data/index.html">AI Chat with Document Data</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters &amp; Generators</span>
+<a class="sitegpt-footer-link" href="../currency-converter/index.html">Currency Converter</a>
+<a class="sitegpt-footer-link" href="../color-converter/index.html">Color Converter</a>
+<a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+<a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+</div>
+</div>
+</div>
+
+<style>
+.related-tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+</style>
+
+</main>
+
+<script src="/tools/shared/api-client.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+    // Set max date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('historicalDate').max = today;
+    // Set default date to 30 days ago
+    const defaultDate = new Date();
+    defaultDate.setDate(defaultDate.getDate() - 30);
+    document.getElementById('historicalDate').value = defaultDate.toISOString().split('T')[0];
+
+    let currentRateData = null;
+    let historicalRateData = null;
+
+    async function getHistoricalRate() {
+        const fromCurrency = document.getElementById('fromCurrency').value;
+        const toCurrency = document.getElementById('toCurrency').value;
+        const historicalDate = document.getElementById('historicalDate').value;
+        const amount = parseFloat(document.getElementById('amount').value) || 1;
+
+        if (!historicalDate) {
+            alert('Please select a historical date');
+            return;
+        }
+
+        const btn = document.getElementById('convertBtn');
+        btn.classList.add('loading');
+
+        try {
+            // Fetch historical rate
+            const histResponse = await fetch(`https://api.exchangerate-api.com/v4/historical/${historicalDate}/base/${fromCurrency}`);
+            if (!histResponse.ok) throw new Error('Failed to fetch historical rate');
+            const histData = await histResponse.json();
+            historicalRateData = histData.rates[toCurrency];
+
+            // Fetch current rate
+            const currResponse = await fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+            if (!currResponse.ok) throw new Error('Failed to fetch current rate');
+            const currData = await currResponse.json();
+            currentRateData = currData.rates[toCurrency];
+
+            // Calculate conversion
+            const historicalConverted = amount * historicalRateData;
+            const currentConverted = amount * currentRateData;
+
+            // Calculate rate change
+            const rateChange = ((currentRateData - historicalRateData) / historicalRateData) * 100;
+
+            // Display results
+            document.getElementById('displayDate').textContent = formatDate(historicalDate);
+            document.getElementById('historicalResult').textContent = `${historicalConverted.toFixed(2)} ${toCurrency}`;
+            document.getElementById('historicalRate').textContent = `1 ${fromCurrency} = ${historicalRateData.toFixed(4)} ${toCurrency}`;
+
+            document.getElementById('histRateValue').textContent = `${historicalRateData.toFixed(4)}`;
+            document.getElementById('histDateLabel').textContent = formatDate(historicalDate);
+            document.getElementById('currentRateValue').textContent = `${currentRateData.toFixed(4)}`;
+
+            const changeElement = document.getElementById('rateChangeValue');
+            const changeText = `${rateChange >= 0 ? '+' : ''}${rateChange.toFixed(2)}%`;
+            changeElement.textContent = changeText;
+            changeElement.className = rateChange >= 0 ? 'rate-change-positive' : 'rate-change-negative';
+
+            // Update chart bars
+            const maxRate = Math.max(historicalRateData, currentRateData);
+            const histHeight = (historicalRateData / maxRate) * 100;
+            const currHeight = (currentRateData / maxRate) * 100;
+            document.getElementById('histBar').style.height = `${histHeight}px`;
+            document.getElementById('currentBar').style.height = `${currHeight}px`;
+
+            document.getElementById('resultArea').classList.remove('hidden');
+            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('resultArea').classList.add('active');
+
+            AbetworksUI.showToast('Historical rate fetched successfully!');
+        } catch (error) {
+            alert('Failed to fetch rates: ' + error.message);
+        } finally {
+            btn.classList.remove('loading');
+        }
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function copyResult() {
+        const fromCurrency = document.getElementById('fromCurrency').value;
+        const toCurrency = document.getElementById('toCurrency').value;
+        const historicalDate = document.getElementById('historicalDate').value;
+        const amount = document.getElementById('amount').value;
+        const historicalResult = document.getElementById('historicalResult').textContent;
+        const historicalRate = document.getElementById('historicalRate').textContent;
+        const currentRate = document.getElementById('currentRateValue').textContent;
+        const rateChange = document.getElementById('rateChangeValue').textContent;
+
+        const text = `Historical Currency Conversion\nDate: ${formatDate(historicalDate)}\n\n${amount} ${fromCurrency} = ${historicalResult}\n${historicalRate}\n\nCurrent Rate: 1 ${fromCurrency} = ${currentRate} ${toCurrency}\nRate Change: ${rateChange}`;
+        AbetworksUI.copyToClipboard(text);
+    }
+
+    function exportToPDF() {
+        const element = document.getElementById('resultArea');
+        const fromCurrency = document.getElementById('fromCurrency').value;
+        const toCurrency = document.getElementById('toCurrency').value;
+        const historicalDate = document.getElementById('historicalDate').value;
+
+        const opt = {
+            margin: 10,
+            filename: `historical-currency-${fromCurrency}-${toCurrency}-${historicalDate}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        if (typeof html2pdf !== 'undefined') {
+            html2pdf().set(opt).from(element).save();
+            AbetworksUI.showToast('PDF exported successfully!');
+        } else {
+            alert('PDF export requires html2pdf library. Please try again.');
+        }
+    }
+</script>
+
+    
+        <!-- Related Tools Section -->
+        <div class="related-tools" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e5e7eb;">
+            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 24px;">🔗 Related Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <a href="../qr-code-generator/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">📱</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">QR Code Generator</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Create custom QR codes instantly</span>
+                </a>
+                <a href="../url-shortener/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🔗</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">URL Shortener</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Shorten long URLs into clean links</span>
+                </a>
+                <a href="../image-compressor/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🖼️</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">Image Compressor</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Compress images while maintaining quality</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style>
+[data-theme="dark"] .related-tools h2 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:first-child {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:last-child {
+    color: #94a3b8 !important;
+}
+
+    </style>
+</body>
+</html>

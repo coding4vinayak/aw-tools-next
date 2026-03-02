@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abetworks OG Image Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .canvas-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <h2>🎨 Abetworks OG Image - Click button to download</h2>
+    
+    <div class="canvas-container">
+        <canvas id="ogCanvas" width="1200" height="630"></canvas>
+    </div>
+    
+    <button class="download-btn" onclick="downloadOG()">📥 Download OG Image</button>
+    
+    <script>
+        const canvas = document.getElementById('ogCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Create gradient background
+        const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+        gradient.addColorStop(0, '#1e3a8a');
+        gradient.addColorStop(0.5, '#7c3aed');
+        gradient.addColorStop(1, '#db2777');
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 1200, 630);
+        
+        // Add decorative circles
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.beginPath();
+        ctx.arc(100, 100, 200, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(1100, 530, 150, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(600, 315, 250, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Add "✨" sparkle
+        ctx.font = 'bold 80px Arial';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.fillText('✨', 100, 150);
+        
+        // ABETWORKS LOGO - Stylized Text
+        ctx.font = '900 140px Inter, Arial, sans-serif';
+        ctx.textAlign = 'center';
+        
+        // Gradient for text
+        const textGradient = ctx.createLinearGradient(0, 0, 1200, 0);
+        textGradient.addColorStop(0, '#60a5fa');
+        textGradient.addColorStop(0.5, '#a78bfa');
+        textGradient.addColorStop(1, '#f472b6');
+        
+        ctx.fillStyle = textGradient;
+        ctx.fillText('ABETWORKS', 600, 220);
+        
+        // Underline
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.moveTo(250, 250);
+        ctx.lineTo(950, 250);
+        ctx.stroke();
+        
+        // MAIN HEADING
+        ctx.font = '900 72px Inter, Arial, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('100+ FREE AI TOOLS', 600, 360);
+        
+        ctx.font = '700 56px Inter, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.fillText('& SEO TOOLS', 600, 430);
+        
+        // FEATURES
+        ctx.font = '600 42px Inter, Arial, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        
+        // Feature 1
+        ctx.fillText('✓', 320, 510);
+        ctx.font = '500 42px Inter, Arial, sans-serif';
+        ctx.fillText('No Signup Required', 380, 510);
+        
+        // Feature 2
+        ctx.font = '600 42px Inter, Arial, sans-serif';
+        ctx.fillText('✓', 620, 510);
+        ctx.font = '500 42px Inter, Arial, sans-serif';
+        ctx.fillText('Instant Results', 680, 510);
+        
+        // Feature 3
+        ctx.font = '600 42px Inter, Arial, sans-serif';
+        ctx.fillText('✓', 920, 510);
+        ctx.font = '500 42px Inter, Arial, sans-serif';
+        ctx.fillText('100% Free', 980, 510);
+        
+        // URL
+        ctx.font = '700 48px Inter, Arial, sans-serif';
+        const urlGradient = ctx.createLinearGradient(0, 0, 1200, 0);
+        urlGradient.addColorStop(0, '#93c5fd');
+        urlGradient.addColorStop(0.5, '#c4b5fd');
+        urlGradient.addColorStop(1, '#f9a8d4');
+        ctx.fillStyle = urlGradient;
+        ctx.fillText('abetworks.in/tools', 600, 590);
+        
+        // Download function
+        function downloadOG() {
+            const link = document.createElement('a');
+            link.download = 'og-image.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 0.95);
+            link.click();
+        }
+    </script>
+</body>
+</html>

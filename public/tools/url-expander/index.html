@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="url expander, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <title>Free URL Expander Online | Unshorten Links & Check Safety | Abetworks</title>
+    <meta name="description" content="Expand shortened URLs to their original destination. View redirect chains, check if links are safe or malicious, and copy expanded URLs. Free, no signup required.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/url-expander/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free URL Expander Online | Abetworks">
+    <meta property="og:description" content="Expand shortened URLs to their original destination. Check link safety and view redirect chains.">
+    <meta property="og:url" content="https://abetworks.in/tools/url-expander/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the URL Expander completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the URL Expander by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which URL shorteners are supported?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our tool supports all major URL shorteners including bit.ly, tinyurl.com, t.co, goo.gl, is.gd, and many more."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does the safety check work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The tool analyzes the expanded URL domain against known malicious patterns and provides a safety assessment based on industry best practices."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/url-expander/">
+    <meta name="twitter:title" content="Free Url Expander Online | Abetworks">
+    <meta name="twitter:description" content="Free online url expander tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>URL Expander</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+            <h1 class="sitegpt-h1">URL Expander</h1>
+            <p class="tool-subtitle">Expand shortened URLs to their original destination. View redirect chains, check link safety, and copy expanded URLs.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Paste Shortened URL</label>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="url" id="shortUrlInput" class="form-input" placeholder="Paste shortened URL (e.g., https://bit.ly/abc123)" style="flex: 1; min-width: 250px;">
+                    <button id="expandBtn" class="btn btn-primary" onclick="expandUrl()">
+                        <span class="btn-text">🔍 Expand URL</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="quick-links" style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Try:</span>
+                <button onclick="setExample('https://bit.ly/')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">bit.ly</button>
+                <button onclick="setExample('https://tinyurl.com/')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">tinyurl</button>
+                <button onclick="setExample('https://t.co/')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">t.co</button>
+                <button onclick="setExample('https://is.gd/')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">is.gd</button>
+            </div>
+
+            <div class="result-area" id="resultArea" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <div class="result-header">
+                    <span class="result-title">Expanded URL</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyExpandedUrl()" class="btn btn-secondary">📋 Copy</button>
+                        <a id="visitLink" href="#" target="_blank" rel="noopener" class="btn btn-primary">🔗 Visit</a>
+                    </div>
+                </div>
+
+                <div id="expandedUrlDisplay" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 1rem; word-break: break-all; font-family: monospace; font-size: 1rem; line-height: 1.6; color: var(--text-primary);">
+                </div>
+
+                <div id="safetyBadge" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: 50px; margin-top: 1rem; font-weight: 600; font-size: 0.9rem;">
+                </div>
+
+                <div class="redirect-chain-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <div class="result-header">
+                        <span class="result-title">🔗 Redirect Chain</span>
+                    </div>
+                    <div id="redirectChain" style="margin-top: 1rem;">
+                        <!-- Redirect chain will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="url-details-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <div class="result-header">
+                        <span class="result-title">📊 URL Details</span>
+                    </div>
+                    <div id="urlDetails" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <!-- URL details will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                🔗 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../url-shortener/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">URL Shortener</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Shorten long URLs</span>
+                    </div>
+                </a>
+                <a href="../link-preview-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Link Preview Generator</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Generate link previews</span>
+                    </div>
+                </a>
+                <a href="../user-agent-parser/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🖥️</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">User Agent Parser</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Parse browser user agents</span>
+                    </div>
+                </a>
+                <a href="../ip-location-finder/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🌍</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">IP Location Finder</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Find IP geolocation</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+<!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the URL Expander?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                Our free URL Expander is a powerful security and productivity tool that reveals the original destination of shortened URLs. Before clicking on suspicious links from emails, social media, or messaging apps, use this tool to see where they really lead. View the complete redirect chain, check safety status, and protect yourself from phishing attacks and malicious websites.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Copy the shortened URL you want to expand (from bit.ly, tinyurl, t.co, etc.)</li>
+                <li>Paste it into the input field above</li>
+                <li>Click "Expand URL" to reveal the destination</li>
+                <li>Review the expanded URL, safety status, and redirect chain</li>
+                <li>Copy the expanded URL or visit it safely if it's legitimate</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Supports all major URL shorteners (bit.ly, tinyurl, t.co, goo.gl, is.gd, and more)</li>
+                <li>✅ Displays complete redirect chain showing all intermediate URLs</li>
+                <li>✅ Safety check to identify potentially malicious links</li>
+                <li>✅ One-click copy to clipboard for expanded URLs</li>
+                <li>✅ Direct visit option with safety confirmation</li>
+                <li>✅ Detailed URL analysis including domain and protocol info</li>
+                <li>✅ No signup required, completely free and unlimited</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>🛡️ Protect yourself from phishing attacks and malicious websites</li>
+                <li>🛡️ Verify link destinations before clicking in emails or messages</li>
+                <li>🛡️ Understand redirect paths for marketing and SEO analysis</li>
+                <li>🛡️ Save time by knowing where links lead without visiting them</li>
+                <li>🛡️ Build trust by verifying shortened links before sharing</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>📧 Email security: Verify links in suspicious emails before clicking</li>
+                <li>💬 Social media: Check shortened links from Twitter, Facebook, etc.</li>
+                <li>📱 Messaging apps: Verify WhatsApp, Telegram, SMS links</li>
+                <li>🔍 Security research: Analyze redirect chains for threat intelligence</li>
+                <li>📊 Marketing analysis: Understand affiliate and tracking redirects</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the URL Expander completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the URL Expander by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Which URL shorteners are supported?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Our tool supports all major URL shorteners including bit.ly, tinyurl.com, t.co, goo.gl, is.gd, and many more.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How does the safety check work?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        The tool analyzes the expanded URL domain against known malicious patterns and provides a safety assessment based on industry best practices.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+    
+        
+
+        <style>
+        .related-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+        }
+        </style>
+
+</main>
+
+    <script src="/tools/shared/api-client.js"></script>
+    <script>
+        function setExample(prefix) {
+            const examples = {
+                'https://bit.ly/': 'https://bit.ly/3xK9mNp',
+                'https://tinyurl.com/': 'https://tinyurl.com/2p9z8k7h',
+                'https://t.co/': 'https://t.co/abc123xyz',
+                'https://is.gd/': 'https://is.gd/example'
+            };
+            document.getElementById('shortUrlInput').value = examples[prefix] || prefix;
+        }
+
+        async function expandUrl() {
+            const shortUrl = document.getElementById('shortUrlInput').value.trim();
+            const btn = document.getElementById('expandBtn');
+            const resultArea = document.getElementById('resultArea');
+
+            if (!shortUrl) {
+                AbetworksUI.showError('Please enter a shortened URL');
+                return;
+            }
+
+            if (!isValidUrl(shortUrl)) {
+                AbetworksUI.showError('Please enter a valid URL (include http:// or https://)');
+                return;
+            }
+
+            btn.classList.add('loading');
+            resultArea.style.display = 'none';
+
+            try {
+                // Use unshorten.me API
+                const apiUrl = `https://unshorten.me/json/${encodeURIComponent(shortUrl)}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to expand URL. The shortener service may be unavailable.');
+                }
+
+                const data = await response.json();
+                
+                // Display results
+                displayResults(data, shortUrl);
+                
+            } catch (error) {
+                console.error('URL Expansion Error:', error);
+                // Fallback: Try to resolve via redirect
+                await expandViaRedirect(shortUrl);
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        async function expandViaRedirect(shortUrl) {
+            try {
+                // Use a CORS proxy or direct fetch with redirect follow
+                const response = await fetch(shortUrl, {
+                    method: 'HEAD',
+                    redirect: 'follow'
+                });
+                
+                const expandedUrl = response.url;
+                
+                if (expandedUrl !== shortUrl) {
+                    displaySimpleResults(expandedUrl, shortUrl);
+                } else {
+                    AbetworksUI.showError('Unable to expand URL. The link may not be a shortened URL or the service is unavailable.');
+                }
+            } catch (error) {
+                console.error('Redirect expansion error:', error);
+                AbetworksUI.showError('Unable to expand URL. Please try again later or verify the URL is correct.');
+            }
+        }
+
+        function displayResults(data, originalUrl) {
+            const resultArea = document.getElementById('resultArea');
+            const expandedUrlDisplay = document.getElementById('expandedUrlDisplay');
+            const safetyBadge = document.getElementById('safetyBadge');
+            const redirectChain = document.getElementById('redirectChain');
+            const urlDetails = document.getElementById('urlDetails');
+            const visitLink = document.getElementById('visitLink');
+
+            // Get expanded URL from API response
+            const expandedUrl = data.resolved_url || data.url || data.final_url || 'Unable to resolve';
+            
+            // Display expanded URL
+            expandedUrlDisplay.textContent = expandedUrl;
+            visitLink.href = expandedUrl;
+
+            // Safety check
+            const safetyStatus = checkUrlSafety(expandedUrl);
+            safetyBadge.innerHTML = safetyStatus.html;
+            safetyBadge.style.background = safetyStatus.bg;
+            safetyBadge.style.color = safetyStatus.color;
+
+            // Build redirect chain
+            let chainHtml = '<div style="display: flex; flex-direction: column; gap: 0.75rem;">';
+            chainHtml += `<div class="chain-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--icon-bg); border-radius: 8px; border: 1px solid var(--border-color);">
+                <span style="font-size: 1.25rem;">📍</span>
+                <div style="flex: 1;">
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Original URL</div>
+                    <div style="font-family: monospace; word-break: break-all; color: var(--text-primary);">${originalUrl}</div>
+                </div>
+            </div>`;
+            
+            // Add intermediate redirects if available
+            if (data.redirects && data.redirects.length > 0) {
+                data.redirects.forEach((redirect, index) => {
+                    chainHtml += `<div style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">⬇️</div>`;
+                    chainHtml += `<div class="chain-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--icon-bg); border-radius: 8px; border: 1px solid var(--border-color);">
+                        <span style="font-size: 1.25rem;">🔄</span>
+                        <div style="flex: 1;">
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Redirect ${index + 1}</div>
+                            <div style="font-family: monospace; word-break: break-all; color: var(--text-primary);">${redirect}</div>
+                        </div>
+                    </div>`;
+                });
+            }
+            
+            chainHtml += `<div style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">⬇️</div>`;
+            chainHtml += `<div class="chain-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 8px; border: 1px solid var(--accent-blue);">
+                <span style="font-size: 1.25rem;">🎯</span>
+                <div style="flex: 1;">
+                    <div style="font-size: 0.75rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.5px;">Final Destination</div>
+                    <div style="font-family: monospace; word-break: break-all; color: var(--text-primary);">${expandedUrl}</div>
+                </div>
+            </div>`;
+            chainHtml += '</div>';
+            redirectChain.innerHTML = chainHtml;
+
+            // URL Details
+            const urlInfo = parseUrl(expandedUrl);
+            urlDetails.innerHTML = `
+                <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Protocol</div>
+                    <div style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">${urlInfo.protocol}</div>
+                </div>
+                <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Domain</div>
+                    <div style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">${urlInfo.domain}</div>
+                </div>
+                <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Path</div>
+                    <div style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-primary); word-break: break-all;">${urlInfo.path || '/'}</div>
+                </div>
+                <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">URL Length</div>
+                    <div style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">${expandedUrl.length} characters</div>
+                </div>
+            `;
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function displaySimpleResults(expandedUrl, originalUrl) {
+            const resultArea = document.getElementById('resultArea');
+            const expandedUrlDisplay = document.getElementById('expandedUrlDisplay');
+            const safetyBadge = document.getElementById('safetyBadge');
+            const redirectChain = document.getElementById('redirectChain');
+            const urlDetails = document.getElementById('urlDetails');
+            const visitLink = document.getElementById('visitLink');
+
+            expandedUrlDisplay.textContent = expandedUrl;
+            visitLink.href = expandedUrl;
+
+            const safetyStatus = checkUrlSafety(expandedUrl);
+            safetyBadge.innerHTML = safetyStatus.html;
+            safetyBadge.style.background = safetyStatus.bg;
+            safetyBadge.style.color = safetyStatus.color;
+
+            redirectChain.innerHTML = `
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div class="chain-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--icon-bg); border-radius: 8px; border: 1px solid var(--border-color);">
+                        <span style="font-size: 1.25rem;">📍</span>
+                        <div style="flex: 1;">
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Original URL</div>
+                            <div style="font-family: monospace; word-break: break-all; color: var(--text-primary);">${originalUrl}</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">⬇️</div>
+                    <div class="chain-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: rgba(37, 99, 235, 0.1); border-radius: 8px; border: 1px solid var(--accent-blue);">
+                        <span style="font-size: 1.25rem;">🎯</span>
+                        <div style="flex: 1;">
+                            <div style="font-size: 0.75rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.5px;">Final Destination</div>
+                            <div style="font-family: monospace; word-break: break-all; color: var(--text-primary);">${expandedUrl}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const urlInfo = parseUrl(expandedUrl);
+            urlDetails.innerHTML = `
+                <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Protocol</div>
+                    <div style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">${urlInfo.protocol}</div>
+                </div>
+                <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Domain</div>
+                    <div style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">${urlInfo.domain}</div>
+                </div>
+            `;
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function checkUrlSafety(url) {
+            const suspiciousPatterns = [
+                /\.ru$/, /\.cn$/, /\.tk$/, /\.ml$/, /\.ga$/, /\.cf$/, /\.gq$/,
+                /bit\.ly\/[a-zA-Z0-9]{2,4}$/,
+                /login.*verify/, /account.*suspend/, /password.*reset/,
+                /secure.*update/, /confirm.*identity/
+            ];
+
+            const safeDomains = [
+                'google.com', 'youtube.com', 'facebook.com', 'twitter.com',
+                'linkedin.com', 'instagram.com', 'github.com', 'stackoverflow.com',
+                'medium.com', 'notion.so', 'figma.com', 'canva.com'
+            ];
+
+            const urlLower = url.toLowerCase();
+            let isSuspicious = false;
+            let reason = '';
+
+            for (const pattern of suspiciousPatterns) {
+                if (pattern.test(urlLower)) {
+                    isSuspicious = true;
+                    reason = 'Suspicious pattern detected';
+                    break;
+                }
+            }
+
+            const domain = parseUrl(url).domain;
+            for (const safeDomain of safeDomains) {
+                if (domain.includes(safeDomain)) {
+                    return {
+                        html: '✅ Safe - Trusted Domain',
+                        bg: 'rgba(34, 197, 94, 0.1)',
+                        color: '#22c55e'
+                    };
+                }
+            }
+
+            if (isSuspicious) {
+                return {
+                    html: `⚠️ Caution - ${reason}`,
+                    bg: 'rgba(234, 179, 8, 0.1)',
+                    color: '#eab308'
+                };
+            }
+
+            // Check for HTTPS
+            if (url.startsWith('https://')) {
+                return {
+                    html: '✅ Likely Safe - HTTPS Secured',
+                    bg: 'rgba(34, 197, 94, 0.1)',
+                    color: '#22c55e'
+                };
+            }
+
+            return {
+                html: '⚠️ Unknown - Verify Before Visiting',
+                bg: 'rgba(234, 179, 8, 0.1)',
+                color: '#eab308'
+            };
+        }
+
+        function parseUrl(url) {
+            try {
+                const urlObj = new URL(url);
+                return {
+                    protocol: urlObj.protocol.replace(':', ''),
+                    domain: urlObj.hostname,
+                    path: urlObj.pathname + urlObj.search,
+                    port: urlObj.port
+                };
+            } catch (e) {
+                return {
+                    protocol: 'unknown',
+                    domain: 'unknown',
+                    path: ''
+                };
+            }
+        }
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function copyExpandedUrl() {
+            const url = document.getElementById('expandedUrlDisplay').textContent;
+            AbetworksUI.copyToClipboard(url);
+        }
+    </script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

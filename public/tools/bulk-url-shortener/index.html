@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="bulk url shortener, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <title>Free Bulk URL Shortener | Shorten Multiple URLs | Abetworks</title>
+    <meta name="description" content="Shorten multiple URLs at once. Paste up to 50 URLs, get shortened links in bulk, download as CSV/TXT, and copy all short URLs. Free, no signup required.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/bulk-url-shortener/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free Bulk URL Shortener | Abetworks">
+    <meta property="og:description" content="Shorten multiple URLs at once. Download as CSV/TXT. Free and unlimited.">
+    <meta property="og:url" content="https://abetworks.in/tools/bulk-url-shortener/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the Bulk URL Shortener completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Bulk URL Shortener by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many URLs can I shorten at once?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can shorten up to 50 URLs in a single batch. For larger batches, simply run multiple shortening operations."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What formats can I download?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can download the shortened URLs as CSV (for spreadsheets) or TXT (plain text) format, or copy all short URLs to clipboard."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/bulk-url-shortener/">
+    <meta name="twitter:title" content="Free Bulk Url Shortener Online | Abetworks">
+    <meta name="twitter:description" content="Free online bulk url shortener tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Bulk URL Shortener</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+            <h1 class="sitegpt-h1">Bulk URL Shortener</h1>
+            <p class="tool-subtitle">Shorten multiple URLs at once. Paste up to 50 URLs, get shortened links in bulk, and download as CSV/TXT.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Enter URLs to Shorten (one per line)</label>
+                <textarea id="bulkInput" class="form-textarea" placeholder="https://example.com/very/long/url/that/needs/shortening&#10;https://another-example.com/page?param1=value1&param2=value2&#10;https://my-website.com/products/category/item/12345&#10;...&#10;(Up to 50 lines)" rows="8" style="font-family: monospace; font-size: 0.95rem;"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                        💡 Enter one URL per line. Maximum 50 entries.
+                    </p>
+                    <span id="lineCount" style="font-size: 0.85rem; color: var(--accent-blue); font-weight: 600;">0 / 50 lines</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Shortener Service</label>
+                <select id="shortenerService" class="form-select" style="max-width: 250px;">
+                    <option value="is.gd">is.gd (Recommended)</option>
+                    <option value="tinyurl">TinyURL</option>
+                </select>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    💡 is.gd is fast and doesn't require API keys. TinyURL is a reliable alternative.
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                <button id="shortenBtn" class="btn btn-primary" onclick="shortenBulkUrls()">
+                    <span class="btn-text">✂️ Shorten All URLs</span>
+                    <div class="loader"></div>
+                </button>
+                <button id="downloadCsvBtn" class="btn btn-secondary" onclick="downloadAsCSV()" disabled>
+                    <span class="btn-text">📊 Download CSV</span>
+                </button>
+                <button id="downloadTxtBtn" class="btn btn-secondary" onclick="downloadAsTXT()" disabled>
+                    <span class="btn-text">📄 Download TXT</span>
+                </button>
+                <button id="clearBtn" class="btn btn-secondary" onclick="clearAll()">
+                    <span class="btn-text">🗑️ Clear All</span>
+                </button>
+            </div>
+
+            <div id="progressSection" style="display: none; margin-top: 2rem; padding: 1.5rem; background: var(--icon-bg); border-radius: 12px; border: 1px solid var(--border-color);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                    <span style="font-weight: 600; color: var(--text-primary);">Shortening URLs...</span>
+                    <span id="progressText" style="font-size: 0.9rem; color: var(--text-secondary);">0 / 0</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden;">
+                    <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); transition: width 0.3s ease; border-radius: 4px;"></div>
+                </div>
+            </div>
+
+            <div class="result-area" id="resultArea" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <div class="result-header">
+                    <span class="result-title">🔗 Shortened URLs (<span id="totalUrlCount">0</span>)</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyAllShortUrls()" class="btn btn-secondary">📋 Copy All Short URLs</button>
+                        <button onclick="copyAllPairs()" class="btn btn-secondary">📋 Copy URL Pairs</button>
+                    </div>
+                </div>
+
+                <div id="urlList" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Shortened URLs will be displayed here -->
+                </div>
+
+                <div id="errorSection" style="display: none; margin-top: 2rem; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px;">
+                    <h4 style="color: #ef4444; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Failed Items</h4>
+                    <div id="errorList" style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;"></div>
+                </div>
+            </div>
+        </div>
+
+        
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                🔗 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../url-shortener/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">URL Shortener</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Shorten long URLs instantly</span>
+                    </div>
+                </a>
+                <a href="../bulk-qr-code-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Bulk QR Code Generator</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Generate multiple QR codes</span>
+                    </div>
+                </a>
+                <a href="../qr-code-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">QR Code Generator</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Create custom QR codes</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+<!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the Bulk URL Shortener?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                Our free Bulk URL Shortener lets you shorten multiple URLs simultaneously using popular services like is.gd and TinyURL. Simply paste up to 50 long URLs (one per line), choose your preferred shortener, and get all shortened links in seconds. Download results as CSV for spreadsheets or TXT for simple lists. Perfect for social media management, marketing campaigns, affiliate link management, and batch URL processing.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Paste your long URLs in the input area (one URL per line)</li>
+                <li>Select your preferred shortener service (is.gd or TinyURL)</li>
+                <li>Click "Shorten All URLs" to process your links</li>
+                <li>Review the shortened URLs and copy or download as needed</li>
+                <li>Export as CSV for spreadsheets or TXT for simple lists</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Shorten up to 50 URLs in a single batch</li>
+                <li>✅ Multiple shortener services (is.gd, TinyURL)</li>
+                <li>✅ Progress indicator for large batches</li>
+                <li>✅ Side-by-side comparison of original and shortened URLs</li>
+                <li>✅ Download as CSV (Excel-compatible) or TXT format</li>
+                <li>✅ Copy all short URLs or URL pairs to clipboard</li>
+                <li>✅ Individual copy and open buttons for each URL</li>
+                <li>✅ Error handling with failed item reporting</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>⚡ Save time by processing URLs in bulk instead of one-by-one</li>
+                <li>⚡ Create cleaner, shareable links for social media posts</li>
+                <li>⚡ Track and manage affiliate links more efficiently</li>
+                <li>⚡ Export results directly to spreadsheets for reporting</li>
+                <li>⚡ No account creation or API keys required</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>📱 Social media: Shorten URLs for Twitter character limits</li>
+                <li>📧 Email marketing: Create clean links for campaigns</li>
+                <li>🔗 Affiliate marketing: Manage multiple affiliate links</li>
+                <li>📊 Analytics: Track clicks on shortened URLs</li>
+                <li>📝 Content creation: Share multiple resources cleanly</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the Bulk URL Shortener completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the Bulk URL Shortener by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How many URLs can I shorten at once?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        You can shorten up to 50 URLs in a single batch. For larger batches, simply run multiple shortening operations.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What formats can I download?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        You can download the shortened URLs as CSV (for spreadsheets) or TXT (plain text) format, or copy all short URLs to clipboard.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+    
+        
+
+        <style>
+        .related-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+        }
+        </style>
+
+</main>
+
+    <script src="/tools/shared/api-client.js"></script>
+    <script>
+        const MAX_LINES = 50;
+        let shortenedUrls = []; // Store shortened URL data
+
+        // Line count tracker
+        document.getElementById('bulkInput').addEventListener('input', function() {
+            const lines = this.value.split('\n').filter(line => line.trim());
+            const count = Math.min(lines.length, MAX_LINES);
+            document.getElementById('lineCount').textContent = `${count} / ${MAX_LINES} lines`;
+            
+            if (lines.length > MAX_LINES) {
+                this.value = lines.slice(0, MAX_LINES).join('\n');
+                AbetworksUI.showToast(`Maximum ${MAX_LINES} lines allowed`);
+            }
+        });
+
+        async function shortenBulkUrls() {
+            const input = document.getElementById('bulkInput').value.trim();
+            const service = document.getElementById('shortenerService').value;
+            const btn = document.getElementById('shortenBtn');
+            const progressSection = document.getElementById('progressSection');
+            const resultArea = document.getElementById('resultArea');
+            const urlList = document.getElementById('urlList');
+
+            if (!input) {
+                AbetworksUI.showError('Please enter at least one URL');
+                return;
+            }
+
+            const lines = input.split('\n').filter(line => line.trim()).slice(0, MAX_LINES);
+            
+            if (lines.length === 0) {
+                AbetworksUI.showError('Please enter valid URLs');
+                return;
+            }
+
+            // Validate URLs
+            const invalidUrls = [];
+            const validUrls = [];
+            lines.forEach((line, index) => {
+                const url = line.trim();
+                if (isValidUrl(url)) {
+                    validUrls.push({ index: index + 1, url });
+                } else {
+                    invalidUrls.push({ index: index + 1, url });
+                }
+            });
+
+            if (validUrls.length === 0) {
+                AbetworksUI.showError('No valid URLs found. Please ensure URLs start with http:// or https://');
+                return;
+            }
+
+            if (invalidUrls.length > 0) {
+                AbetworksUI.showToast(`${invalidUrls.length} invalid URL(s) skipped`);
+            }
+
+            btn.classList.add('loading');
+            progressSection.style.display = 'block';
+            resultArea.style.display = 'none';
+            shortenedUrls = [];
+            urlList.innerHTML = '';
+
+            const total = validUrls.length;
+            let completed = 0;
+            const errors = [];
+
+            for (const item of validUrls) {
+                const progressBar = document.getElementById('progressBar');
+                const progressText = document.getElementById('progressText');
+
+                try {
+                    const shortUrl = await shortenUrl(item.url, service);
+                    
+                    shortenedUrls.push({
+                        index: item.index,
+                        original: item.url,
+                        short: shortUrl
+                    });
+
+                    // Add to list
+                    const urlCard = createUrlCard(item.index, item.url, shortUrl);
+                    urlList.appendChild(urlCard);
+
+                    completed++;
+                } catch (error) {
+                    console.error(`Failed to shorten URL ${item.index}:`, error);
+                    errors.push({ 
+                        index: item.index, 
+                        url: item.url.substring(0, 50), 
+                        error: error.message 
+                    });
+                }
+
+                // Update progress
+                const percent = (completed / total) * 100;
+                progressBar.style.width = `${percent}%`;
+                progressText.textContent = `${completed} / ${total}`;
+
+                // Small delay to prevent rate limiting
+                if (completed < total) {
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+            }
+
+            // Show results
+            document.getElementById('totalUrlCount').textContent = completed;
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+
+            // Enable download buttons
+            document.getElementById('downloadCsvBtn').disabled = completed === 0;
+            document.getElementById('downloadTxtBtn').disabled = completed === 0;
+
+            // Show errors if any
+            if (errors.length > 0) {
+                const errorSection = document.getElementById('errorSection');
+                const errorList = document.getElementById('errorList');
+                errorList.innerHTML = errors.map(e => 
+                    `<div>Line ${e.index}: "${e.url}..." - ${e.error}</div>`
+                ).join('');
+                errorSection.style.display = 'block';
+            } else {
+                document.getElementById('errorSection').style.display = 'none';
+            }
+
+            btn.classList.remove('loading');
+            AbetworksUI.showToast(`Shortened ${completed} URL${completed !== 1 ? 's' : ''}!`);
+        }
+
+        async function shortenUrl(longUrl, service) {
+            if (service === 'is.gd') {
+                // Use is.gd API
+                const apiUrl = `https://is.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`;
+                
+                try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error('API request failed');
+                    
+                    const data = await response.json();
+                    if (data.shorturl) {
+                        return data.shorturl;
+                    }
+                    throw new Error(data.errormessage || 'Unknown error');
+                } catch (error) {
+                    // Fallback: Try alternative approach
+                    throw new Error(error.message || 'is.gd unavailable');
+                }
+            } else if (service === 'tinyurl') {
+                // Use TinyURL API
+                const apiUrl = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`;
+                
+                try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error('API request failed');
+                    
+                    const shortUrl = await response.text();
+                    if (shortUrl && shortUrl.startsWith('http')) {
+                        return shortUrl;
+                    }
+                    throw new Error('Invalid response from TinyURL');
+                } catch (error) {
+                    throw new Error(error.message || 'TinyURL unavailable');
+                }
+            }
+            
+            throw new Error('Unknown shortener service');
+        }
+
+        function createUrlCard(index, original, shortened) {
+            const card = document.createElement('div');
+            card.style.cssText = `
+                background: var(--icon-bg);
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                padding: 1.25rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                transition: all 0.2s;
+            `;
+            card.onmouseover = function() {
+                this.style.borderColor = 'var(--accent-blue)';
+            };
+            card.onmouseout = function() {
+                this.style.borderColor = 'var(--border-color)';
+            };
+
+            const truncatedOriginal = original.length > 60 ? original.substring(0, 60) + '...' : original;
+
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.25rem;">Original URL #${index}</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary); word-break: break-all; text-decoration: line-through;">${escapeHtml(truncatedOriginal)}</div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: var(--text-secondary);">⬇️</div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="font-size: 0.75rem; color: var(--accent-blue); margin-bottom: 0.25rem; font-weight: 600;">Shortened URL</div>
+                        <a href="${shortened}" target="_blank" rel="noopener" 
+                           style="font-size: 1rem; color: var(--accent-blue); word-break: break-all; text-decoration: none; font-weight: 600;">
+                            ${escapeHtml(shortened)}
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button onclick="copyToClipboard('${escapeHtml(shortened)}')" 
+                            class="btn btn-secondary" 
+                            style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                        📋 Copy Short URL
+                    </button>
+                    <button onclick="openUrl('${escapeHtml(shortened)}')" 
+                            class="btn btn-primary" 
+                            style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                        🔗 Open
+                    </button>
+                    <button onclick="copyPair('${escapeHtml(original)}', '${escapeHtml(shortened)}')" 
+                            class="btn btn-secondary" 
+                            style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                        📋 Copy Pair
+                    </button>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function copyToClipboard(text) {
+            AbetworksUI.copyToClipboard(text);
+        }
+
+        function openUrl(url) {
+            window.open(url, '_blank', 'noopener');
+        }
+
+        function copyPair(original, shortened) {
+            const pair = `${original}\n${shortened}`;
+            AbetworksUI.copyToClipboard(pair);
+        }
+
+        function downloadAsCSV() {
+            if (shortenedUrls.length === 0) {
+                AbetworksUI.showError('No URLs to download');
+                return;
+            }
+
+            const headers = ['Index,Original URL,Shortened URL'];
+            const rows = shortenedUrls.map(item => 
+                `${item.index},"${item.original}","${item.short}"`
+            );
+            
+            const csvContent = [headers, ...rows].join('\n');
+            AbetworksUI.downloadFile(csvContent, `shortened-urls-${new Date().getTime()}.csv`, 'text/csv');
+        }
+
+        function downloadAsTXT() {
+            if (shortenedUrls.length === 0) {
+                AbetworksUI.showError('No URLs to download');
+                return;
+            }
+
+            const content = shortenedUrls.map(item => 
+                `${item.original}\n${item.short}\n`
+            ).join('---\n');
+            
+            AbetworksUI.downloadFile(content, `shortened-urls-${new Date().getTime()}.txt`, 'text/plain');
+        }
+
+        function copyAllShortUrls() {
+            if (shortenedUrls.length === 0) {
+                AbetworksUI.showError('No URLs to copy');
+                return;
+            }
+
+            const allUrls = shortenedUrls.map(item => item.short).join('\n');
+            AbetworksUI.copyToClipboard(allUrls);
+        }
+
+        function copyAllPairs() {
+            if (shortenedUrls.length === 0) {
+                AbetworksUI.showError('No URLs to copy');
+                return;
+            }
+
+            const allPairs = shortenedUrls.map(item => 
+                `${item.original}\n${item.short}`
+            ).join('\n---\n');
+            
+            AbetworksUI.copyToClipboard(allPairs);
+        }
+
+        function clearAll() {
+            document.getElementById('bulkInput').value = '';
+            document.getElementById('lineCount').textContent = `0 / ${MAX_LINES} lines`;
+            document.getElementById('urlList').innerHTML = '';
+            document.getElementById('resultArea').style.display = 'none';
+            document.getElementById('progressSection').style.display = 'none';
+            document.getElementById('errorSection').style.display = 'none';
+            document.getElementById('downloadCsvBtn').disabled = true;
+            document.getElementById('downloadTxtBtn').disabled = true;
+            shortenedUrls = [];
+            AbetworksUI.showToast('Cleared all data');
+        }
+
+        function isValidUrl(string) {
+            try {
+                const url = new URL(string);
+                return url.protocol === 'http:' || url.protocol === 'https:';
+            } catch (_) {
+                return false;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

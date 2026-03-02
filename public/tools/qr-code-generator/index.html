@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free QR Code Generator Online | Abetworks</title>
+    <meta name="description" content="Generate custom QR codes instantly. Free, unlimited, no signup. Create QR codes for URLs, text, email, phone, WiFi and more.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/qr-code-generator/">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-link" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 600;">Contact</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>QR Code Generator</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+            <h1 class="sitegpt-h1">QR Code Generator</h1>
+            <p class="tool-subtitle">Create custom QR codes instantly. Free, unlimited, no signup required.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Content Type</label>
+                <select id="contentType" class="form-select" onchange="updatePlaceholder()">
+                    <option value="url">URL (Website Link)</option>
+                    <option value="text">Plain Text</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Phone Number</option>
+                    <option value="sms">SMS</option>
+                    <option value="whatsapp">WhatsApp</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Content</label>
+                <textarea 
+                    id="qrContent" 
+                    class="form-textarea" 
+                    placeholder="Enter URL (e.g., https://abetworks.in)..."
+                    rows="4"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">QR Code Size</label>
+                <select id="qrSize" class="form-select">
+                    <option value="100x100">100x100 (Small)</option>
+                    <option value="200x200" selected>200x200 (Medium)</option>
+                    <option value="300x300">300x300 (Large)</option>
+                    <option value="500x500">500x500 (Extra Large)</option>
+                </select>
+            </div>
+
+            <button id="generateBtn" class="btn btn-primary" onclick="generateQR()">
+                <span class="btn-text">Generate QR Code</span>
+                <div class="loader"></div>
+            </button>
+
+            <div class="result-area" id="resultArea" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <div class="result-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span class="result-title">Your QR Code</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyQR()" class="btn btn-secondary">📋 Copy</button>
+                        <button onclick="downloadQR()" class="btn btn-primary">⬇️ Download PNG</button>
+                    </div>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: var(--icon-bg); border-radius: 12px;">
+                    <img id="qrImage" alt="QR Code" style="max-width: 100%; height: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+                </div>
+                <p style="text-align: center; color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                    ✅ Right-click to save or share
+                </p>
+            </div>
+        </div>
+
+        
+        <!-- Q&A / FAQ Section -->
+        <section class="faq-section" style="margin-top: 4rem; padding: 2rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #1a1a1a;">❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem;">What is a QR Code?</h3>
+                <p style="color: #333333; line-height: 1.6; font-size: 0.95rem;">A QR Code (Quick Response Code) is a two-dimensional barcode that can store information such as URLs, text, contact details, and more. It can be scanned by smartphones to quickly access the encoded information.</p>
+            </div>
+            
+            <div class="faq-item" style="margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.1rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.75rem;">Is this QR Code generator free?</h3>
+                <p style="color: #333333; line-height: 1.6; font-size: 0.95rem;">Yes! Our QR Code Generator is 100% free, unlimited, and requires no signup. You can create custom QR codes for any purpose.</p>
+            </div>
+        </section>
+
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                🔗 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../bulk-qr-code-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Bulk QR Code Generator</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Generate 1-50 QR codes at once</span>
+                    </div>
+                </a>
+                <a href="../url-shortener/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">URL Shortener</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Shorten long URLs instantly</span>
+                    </div>
+                </a>
+                <a href="../image-compressor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🖼️</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Image Compressor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Reduce image file size</span>
+                    </div>
+                </a>
+                <a href="../link-preview-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Link Preview Generator</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Generate link previews</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 3rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the QR Code Generator?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                Our free QR Code Generator lets you create custom QR codes for URLs, text, email, phone numbers, SMS, and WhatsApp instantly. No signup required, completely unlimited, and free forever.
+            </p>
+            
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Select the content type (URL, text, email, etc.)</li>
+                <li>Enter your content in the text area</li>
+                <li>Choose your preferred QR code size</li>
+                <li>Click "Generate QR Code"</li>
+                <li>Download or copy your QR code instantly</li>
+            </ol>
+            
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Multiple content types (URL, text, email, phone, SMS, WhatsApp)</li>
+                <li>✅ Multiple sizes (100x100 to 500x500)</li>
+                <li>✅ Instant generation</li>
+                <li>✅ Free download (PNG format)</li>
+                <li>✅ No signup required</li>
+                <li>✅ Unlimited usage</li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="/tools/shared/api-client.js"></script>
+    <script>
+        function updatePlaceholder() {
+            const type = document.getElementById('contentType').value;
+            const textarea = document.getElementById('qrContent');
+            
+            const placeholders = {
+                url: 'Enter URL (e.g., https://abetworks.in)',
+                text: 'Enter your text message...',
+                email: 'Enter email (e.g., user@example.com)',
+                phone: 'Enter phone number (e.g., +91 9876543210)',
+                sms: 'Enter phone number and message (e.g., +919876543210:Hello)',
+                whatsapp: 'Enter phone number and message (e.g., +919876543210:Hello)'
+            };
+            
+            textarea.placeholder = placeholders[type];
+        }
+
+        function generateQR() {
+            let content = document.getElementById('qrContent').value.trim();
+            const type = document.getElementById('contentType').value;
+            const size = document.getElementById('qrSize').value;
+            
+            if (!content) {
+                alert('Please enter content for the QR code');
+                return;
+            }
+            
+            // Format content based on type
+            switch(type) {
+                case 'email':
+                    content = `mailto:${content}`;
+                    break;
+                case 'phone':
+                    content = `tel:${content}`;
+                    break;
+                case 'sms':
+                    const [phone, msg] = content.split(':');
+                    content = `sms:${phone}${msg ? `?body=${encodeURIComponent(msg)}` : ''}`;
+                    break;
+                case 'whatsapp':
+                    const [waPhone, waMsg] = content.split(':');
+                    content = `https://wa.me/${waPhone}${waMsg ? `?text=${encodeURIComponent(waMsg)}` : ''}`;
+                    break;
+            }
+            
+            const btn = document.getElementById('generateBtn');
+            btn.classList.add('loading');
+            
+            // Generate QR code URL
+            const qrUrl = `http://api.qrserver.com/v1/create-qr-code/?size=${size}&data=${encodeURIComponent(content)}`;
+            
+            // Load image
+            const img = document.getElementById('qrImage');
+            img.onload = () => {
+                btn.classList.remove('loading');
+                document.getElementById('resultArea').style.display = 'block';
+                document.getElementById('resultArea').classList.add('active');
+            };
+            img.onerror = () => {
+                btn.classList.remove('loading');
+                alert('Failed to generate QR code. Please try again.');
+            };
+            img.src = qrUrl;
+        }
+
+        function downloadQR() {
+            const img = document.getElementById('qrImage');
+            const link = document.createElement('a');
+            link.download = 'qrcode.png';
+            link.href = img.src;
+            link.click();
+            AbetworksUI.showToast('QR code downloaded!');
+        }
+
+        function copyQR() {
+            const img = document.getElementById('qrImage');
+            // Copy the image URL (users can paste in browser)
+            navigator.clipboard.writeText(img.src);
+            AbetworksUI.showToast('QR code URL copied!');
+        }
+    </script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

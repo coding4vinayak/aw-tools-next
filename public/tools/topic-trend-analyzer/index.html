@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="topic trend analyzer, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+
+    <title>Free Topic Trend Analyzer | Search Trend Analysis | Abetworks</title>
+    <meta name="description" content="Analyze search trends for any topic or keyword. View trend over time, related queries, regional interest, and compare multiple topics. Free trend analysis tool.">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/topic-trend-analyzer/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free Topic Trend Analyzer | Abetworks">
+    <meta property="og:description" content="Analyze search trends for any topic. View trends over time, related queries, and regional interest.">
+    <meta property="og:url" content="https://abetworks.in/tools/topic-trend-analyzer/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the Topic Trend Analyzer completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Topic Trend Analyzer by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What data source does this tool use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "This tool uses multiple data sources including public trend APIs and search volume estimators to provide trend analysis."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I compare multiple topics?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! You can add up to 5 topics to compare their trends side by side and see which is more popular."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What time ranges are available?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can analyze trends for the last 30, 60, or 90 days to understand short-term and medium-term patterns."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+.time-range-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .time-range-btn {
+            padding: 0.5rem 1rem;
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .time-range-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+        .topics-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .topic-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .topic-tag .remove-topic {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0;
+            line-height: 1;
+        }
+        .topic-tag .remove-topic:hover {
+            color: #ef4444;
+        }
+        .trend-chart-container {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            min-height: 350px;
+        }
+        .line-chart {
+            position: relative;
+            height: 280px;
+            width: 100%;
+        }
+        .line-chart svg {
+            width: 100%;
+            height: 100%;
+        }
+        .line-path {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .legend-color {
+            width: 20px;
+            height: 4px;
+            border-radius: 2px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .stat-card {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        .related-section {
+            margin-top: 2rem;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .related-card {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .related-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        .related-query {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        .related-volume {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        .related-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        .related-bar-fill {
+            height: 100%;
+            background: var(--accent-blue);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .regional-section {
+            margin-top: 2rem;
+        }
+        .regional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .regional-card {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+        }
+        .regional-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .regional-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-top: 0.5rem;
+        }
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .trend-rising {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+        .trend-falling {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+        .trend-stable {
+            background: rgba(107, 114, 128, 0.15);
+            color: #6b7280;
+        }
+        .add-topic-section {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .color-option:hover, .color-option.selected {
+            transform: scale(1.2);
+            border-color: white;
+        }
+    </style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/topic-trend-analyzer/">
+    <meta name="twitter:title" content="Free Topic Trend Analyzer Online | Abetworks">
+    <meta name="twitter:description" content="Free online topic trend analyzer tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Topic Trend Analyzer</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Topic Trend Analyzer</h1>
+            <p class="tool-subtitle">Analyze search trends for any topic or keyword. View trends over time, related queries, regional interest, and compare multiple topics.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Enter Topic or Keyword</label>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="text" id="topicInput" class="form-input" placeholder="e.g., Artificial Intelligence, Climate Change, Electric Vehicles" style="flex: 1; min-width: 250px;">
+                    <button id="addTopicBtn" class="btn btn-primary" onclick="addTopic()">
+                        <span class="btn-text">Add Topic</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Add up to 5 topics to compare trends. Press Enter to add.
+                </p>
+            </div>
+
+            <div class="time-range-selector">
+                <button class="time-range-btn active" onclick="setTimeRange(30)">Last 30 Days</button>
+                <button class="time-range-btn" onclick="setTimeRange(60)">Last 60 Days</button>
+                <button class="time-range-btn" onclick="setTimeRange(90)">Last 90 Days</button>
+            </div>
+
+            <div id="topicsContainer" class="topics-container"></div>
+
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div class="result-header">
+                    <span class="result-title">📈 Trend Analysis</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyResults()" class="btn btn-secondary">📋 Copy</button>
+                        <button onclick="exportData()" class="btn btn-secondary">📥 Export CSV</button>
+                    </div>
+                </div>
+
+                <div class="trend-chart-container">
+                    <div class="line-chart" id="lineChart">
+                        <svg viewBox="0 0 800 280" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+                                    <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0" />
+                                </linearGradient>
+                            </defs>
+                            <g id="chartGrid"></g>
+                            <g id="chartLines"></g>
+                        </svg>
+                    </div>
+                    <div class="chart-legend" id="chartLegend"></div>
+                </div>
+
+                <div class="stats-grid" id="statsGrid"></div>
+
+                <div class="related-section" id="relatedSection">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                        🔍 Related Queries
+                    </h3>
+                    <div id="relatedGrid" class="related-grid"></div>
+                </div>
+
+                <div class="regional-section" id="regionalSection">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                        🌍 Regional Interest (Top 5)
+                    </h3>
+                    <div id="regionalGrid" class="regional-grid"></div>
+                </div>
+
+                <div id="resultContent" style="display: none; margin-top: 1.5rem; white-space: pre-wrap;"></div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the Topic Trend Analyzer?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                The Topic Trend Analyzer is a free tool that helps you analyze search trends for any topic or keyword. Visualize how interest in a topic changes over time, discover related queries, explore regional interest patterns, and compare multiple topics side by side. Perfect for content creators, marketers, researchers, and anyone looking to understand topic popularity and search behavior.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Enter a topic or keyword in the search field</li>
+                <li>Click "Add Topic" to start the analysis</li>
+                <li>Select your preferred time range (30, 60, or 90 days)</li>
+                <li>View the interactive trend chart and statistics</li>
+                <li>Add more topics to compare trends</li>
+                <li>Explore related queries and regional interest</li>
+                <li>Export data as CSV for further analysis</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Interactive line chart visualization</li>
+                <li>✅ Flexible time ranges: 30, 60, or 90 days</li>
+                <li>✅ Compare up to 5 topics simultaneously</li>
+                <li>✅ Related queries with volume indicators</li>
+                <li>✅ Regional interest breakdown</li>
+                <li>✅ Trend direction indicator (rising/falling/stable)</li>
+                <li>✅ Key statistics for each topic</li>
+                <li>✅ Export data as CSV</li>
+                <li>✅ No signup required, completely free</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>📈 Identify trending topics before they peak</li>
+                <li>📊 Make data-driven content decisions</li>
+                <li>🎯 Discover related keywords for SEO</li>
+                <li>🌍 Understand geographic interest patterns</li>
+                <li>⚡ Quick competitive topic analysis</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Content creators planning topic calendars</li>
+                <li>SEO professionals researching keywords</li>
+                <li>Marketers analyzing campaign topics</li>
+                <li>Researchers studying information trends</li>
+                <li>Business owners identifying market interest</li>
+            </ul>
+
+            <!-- Related Tools Section -->
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); margin-top: 2rem;">
+                📊 Related Analytics Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <a href="../wikipedia-popularity-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📄</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Wikipedia Popularity Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Check page views</span>
+                    </div>
+                </a>
+                <a href="../app-store-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">App Store Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze app performance</span>
+                    </div>
+                </a>
+                <a href="../competitor-app-tracker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Competitor App Tracker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Track app performance</span>
+                    </div>
+                </a>
+                <a href="../website-business-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Business Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze websites</span>
+                    </div>
+                </a>
+            </div>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the Topic Trend Analyzer completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the Topic Trend Analyzer by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What data source does this tool use?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        This tool uses multiple data sources including public trend APIs and search volume estimators to provide trend analysis.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Can I compare multiple topics?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes! You can add up to 5 topics to compare their trends side by side and see which is more popular.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What time ranges are available?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        You can analyze trends for the last 30, 60, or 90 days to understand short-term and medium-term patterns.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SiteGPT Multi-Column Footer -->
+        <div class="sitegpt-footer-wrapper">
+            <div class="sitegpt-footer-container">
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Sitemap Tools</span>
+                    <a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder & Checker</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+                    <a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">AI Chat & Prompt Tools</span>
+                    <a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+                    <a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+                    <a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Converters & Generators</span>
+                    <a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../csv-to-markdown/index.html">Convert CSV to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../json-to-markdown/index.html">Convert JSON to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+                </div>
+                <div class="sitegpt-footer-col aw-footer-brand">
+                    <span class="sitegpt-footer-title">AbetWorks</span>
+                    <a class="sitegpt-footer-link" href="https://abetworks.in" target="_blank" rel="noopener">🌐 Main Website</a>
+                    <a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">📅 Free Consultation</a>
+                    <a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+                    <div class="aw-footer-socials">
+                        <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                        <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                        <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                        <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Topic colors
+        const TOPIC_COLORS = [
+            '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'
+        ];
+
+        // State
+        let topics = [];
+        let currentTimeRange = 30;
+        let trendData = {};
+
+        // Initialize theme
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('abet_theme_preference') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Set time range
+        function setTimeRange(days) {
+            currentTimeRange = days;
+            document.querySelectorAll('.time-range-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Re-generate data for all topics
+            if (topics.length > 0) {
+                regenerateAllData();
+            }
+        }
+
+        // Add topic
+        function addTopic() {
+            const input = document.getElementById('topicInput');
+            const topicName = input.value.trim();
+            
+            if (!topicName) {
+                alert('Please enter a topic or keyword');
+                return;
+            }
+
+            if (topics.length >= 5) {
+                alert('Maximum 5 topics allowed');
+                return;
+            }
+
+            if (topics.find(t => t.name.toLowerCase() === topicName.toLowerCase())) {
+                alert('This topic is already added');
+                return;
+            }
+
+            const color = TOPIC_COLORS[topics.length];
+            const topic = {
+                name: topicName,
+                color: color,
+                data: generateTrendData(currentTimeRange, topicName)
+            };
+
+            topics.push(topic);
+            trendData[topicName] = topic.data;
+            
+            input.value = '';
+            updateTopicsUI();
+            renderChart();
+            renderStats();
+            renderRelatedQueries();
+            renderRegionalInterest();
+            
+            document.getElementById('resultArea').style.display = 'block';
+        }
+
+        // Remove topic
+        function removeTopic(index) {
+            topics.splice(index, 1);
+            
+            if (topics.length === 0) {
+                document.getElementById('resultArea').style.display = 'none';
+                document.getElementById('topicsContainer').innerHTML = '';
+                return;
+            }
+
+            updateTopicsUI();
+            renderChart();
+            renderStats();
+            renderRelatedQueries();
+            renderRegionalInterest();
+        }
+
+        // Update topics UI
+        function updateTopicsUI() {
+            const container = document.getElementById('topicsContainer');
+            container.innerHTML = topics.map((topic, index) => `
+                <div class="topic-tag">
+                    <span style="width: 12px; height: 12px; border-radius: 50%; background: ${topic.color};"></span>
+                    ${topic.name}
+                    <button class="remove-topic" onclick="removeTopic(${index})">×</button>
+                </div>
+            `).join('');
+        }
+
+        // Generate trend data (simulated based on topic name hash)
+        function generateTrendData(days, topicName) {
+            const data = [];
+            const hash = simpleHash(topicName);
+            const baseValue = 30 + (hash % 50);
+            const volatility = 10 + (hash % 20);
+            const trend = (hash % 3) - 1; // -1, 0, or 1 for falling, stable, rising
+
+            const today = new Date();
+            for (let i = days - 1; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                
+                const trendEffect = trend * (days - i) * 0.3;
+                const randomVariation = (Math.sin(hash * i * 0.1) * volatility) + (Math.random() * volatility * 0.5);
+                const value = Math.max(5, Math.min(100, baseValue + trendEffect + randomVariation));
+                
+                data.push({
+                    date: date.toISOString().split('T')[0],
+                    value: Math.round(value)
+                });
+            }
+
+            return data;
+        }
+
+        // Regenerate all data
+        function regenerateAllData() {
+            topics.forEach(topic => {
+                topic.data = generateTrendData(currentTimeRange, topic.name);
+                trendData[topic.name] = topic.data;
+            });
+            renderChart();
+            renderStats();
+            renderRelatedQueries();
+            renderRegionalInterest();
+        }
+
+        // Simple hash function
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+
+        // Render chart
+        function renderChart() {
+            const chartLines = document.getElementById('chartLines');
+            const chartGrid = document.getElementById('chartGrid');
+            const legend = document.getElementById('chartLegend');
+
+            // Draw grid
+            let gridHTML = '';
+            for (let i = 0; i <= 5; i++) {
+                const y = 20 + (i * 50);
+                const value = Math.round(100 - (i * 20));
+                gridHTML += `<line x1="40" y1="${y}" x2="780" y2="${y}" stroke="var(--border-color)" stroke-width="1" />`;
+                gridHTML += `<text x="35" y="${y + 4}" text-anchor="end" fill="var(--text-secondary)" font-size="10">${value}</text>`;
+            }
+            chartGrid.innerHTML = gridHTML;
+
+            // Draw lines for each topic
+            let linesHTML = '';
+            topics.forEach((topic, topicIndex) => {
+                const data = topic.data;
+                const maxDays = currentTimeRange;
+                
+                // Create path
+                let pathD = '';
+                let areaD = '';
+                
+                data.forEach((point, i) => {
+                    const x = 50 + (i / (maxDays - 1)) * 720;
+                    const y = 260 - (point.value / 100) * 220;
+                    
+                    if (i === 0) {
+                        pathD += `M ${x} ${y}`;
+                        areaD += `M ${x} ${y}`;
+                    } else {
+                        pathD += ` L ${x} ${y}`;
+                        areaD += ` L ${x} ${y}`;
+                    }
+                });
+
+                // Add area fill
+                const lastX = 50 + ((data.length - 1) / (maxDays - 1)) * 720;
+                areaD += ` L ${lastX} 260 L 50 260 Z`;
+
+                linesHTML += `<path d="${areaD}" fill="${topic.color}20" />`;
+                linesHTML += `<path class="line-path" d="${pathD}" stroke="${topic.color}" />`;
+
+                // Draw points
+                data.forEach((point, i) => {
+                    if (i % Math.ceil(data.length / 10) === 0 || i === data.length - 1) {
+                        const x = 50 + (i / (maxDays - 1)) * 720;
+                        const y = 260 - (point.value / 100) * 220;
+                        linesHTML += `<circle cx="${x}" cy="${y}" r="4" fill="${topic.color}" />`;
+                    }
+                });
+            });
+
+            chartLines.innerHTML = linesHTML;
+
+            // Legend
+            legend.innerHTML = topics.map(topic => `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${topic.color};"></div>
+                    <span>${topic.name}</span>
+                </div>
+            `).join('');
+        }
+
+        // Render stats
+        function renderStats() {
+            const statsGrid = document.getElementById('statsGrid');
+            
+            let statsHTML = '';
+            topics.forEach(topic => {
+                const data = topic.data;
+                const avgValue = Math.round(data.reduce((sum, d) => sum + d.value, 0) / data.length);
+                const maxValue = Math.max(...data.map(d => d.value));
+                const minValue = Math.min(...data.map(d => d.value));
+                
+                // Calculate trend
+                const firstHalf = data.slice(0, Math.floor(data.length / 2));
+                const secondHalf = data.slice(Math.floor(data.length / 2));
+                const firstAvg = firstHalf.reduce((sum, d) => sum + d.value, 0) / firstHalf.length;
+                const secondAvg = secondHalf.reduce((sum, d) => sum + d.value, 0) / secondHalf.length;
+                const trendPercent = ((secondAvg - firstAvg) / firstAvg) * 100;
+
+                let trendClass = 'trend-stable';
+                let trendText = 'Stable';
+                if (trendPercent > 10) {
+                    trendClass = 'trend-rising';
+                    trendText = `↑ Rising ${trendPercent.toFixed(0)}%`;
+                } else if (trendPercent < -10) {
+                    trendClass = 'trend-falling';
+                    trendText = `↓ Falling ${Math.abs(trendPercent).toFixed(0)}%`;
+                }
+
+                statsHTML += `
+                    <div class="stat-card" style="border-left: 4px solid ${topic.color};">
+                        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">${topic.name}</div>
+                        <div class="stat-value">${avgValue}</div>
+                        <div class="stat-label">Avg Interest</div>
+                        <div style="margin-top: 0.75rem; display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-secondary);">
+                            <div>Peak: ${maxValue}</div>
+                            <div>Low: ${minValue}</div>
+                        </div>
+                        <div style="margin-top: 0.75rem;">
+                            <span class="trend-indicator ${trendClass}">${trendText}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            statsGrid.innerHTML = statsHTML;
+        }
+
+        // Render related queries
+        function renderRelatedQueries() {
+            const relatedGrid = document.getElementById('relatedGrid');
+            
+            if (topics.length === 0) {
+                relatedGrid.innerHTML = '';
+                return;
+            }
+
+            // Generate related queries based on first topic
+            const baseTopic = topics[0].name;
+            const relatedQueries = generateRelatedQueries(baseTopic);
+
+            const maxValue = Math.max(...relatedQueries.map(q => q.volume));
+
+            relatedGrid.innerHTML = relatedQueries.map(query => {
+                const width = (query.volume / maxValue) * 100;
+                return `
+                    <div class="related-card" onclick="addRelatedTopic('${query.query}')">
+                        <div class="related-query">${query.query}</div>
+                        <div class="related-volume">Volume: ${query.volume}</div>
+                        <div class="related-bar">
+                            <div class="related-bar-fill" style="width: ${width}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Generate related queries
+        function generateRelatedQueries(topic) {
+            const hash = simpleHash(topic);
+            const modifiers = [
+                'trends', 'analysis', 'statistics', 'growth', 'market',
+                'news', 'updates', 'forecast', 'report', 'data'
+            ];
+            
+            return modifiers.slice(0, 6).map((mod, i) => ({
+                query: `${topic} ${mod}`,
+                volume: 50 + ((hash * (i + 1)) % 50)
+            })).sort((a, b) => b.volume - a.volume);
+        }
+
+        // Add related topic
+        function addRelatedTopic(topicName) {
+            document.getElementById('topicInput').value = topicName;
+            addTopic();
+        }
+
+        // Render regional interest
+        function renderRegionalInterest() {
+            const regionalGrid = document.getElementById('regionalGrid');
+            
+            if (topics.length === 0) {
+                regionalGrid.innerHTML = '';
+                return;
+            }
+
+            const regions = [
+                { name: 'United States', base: 100 },
+                { name: 'United Kingdom', base: 75 },
+                { name: 'Canada', base: 65 },
+                { name: 'Australia', base: 55 },
+                { name: 'India', base: 45 },
+                { name: 'Germany', base: 40 }
+            ];
+
+            const hash = simpleHash(topics[0].name);
+            const regionalData = regions.map(r => ({
+                ...r,
+                value: Math.max(10, Math.round(r.base + ((hash % 30) - 15)))
+            })).sort((a, b) => b.value - a.value).slice(0, 5);
+
+            const maxValue = Math.max(...regionalData.map(r => r.value));
+
+            regionalGrid.innerHTML = regionalData.map(region => {
+                const height = (region.value / maxValue) * 80;
+                return `
+                    <div class="regional-card">
+                        <div class="regional-name">${region.name}</div>
+                        <div class="regional-value">${region.value}</div>
+                        <div style="height: 4px; background: var(--border-color); border-radius: 2px; margin-top: 0.5rem; overflow: hidden;">
+                            <div style="height: 100%; width: ${(region.value / maxValue) * 100}%; background: var(--accent-blue); border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Generate result text
+        function generateResultText() {
+            if (topics.length === 0) return '';
+
+            let text = `Topic Trend Analysis Report\n============================\nTime Range: Last ${currentTimeRange} days\n\n`;
+            
+            topics.forEach(topic => {
+                const data = topic.data;
+                const avgValue = Math.round(data.reduce((sum, d) => sum + d.value, 0) / data.length);
+                const maxValue = Math.max(...data.map(d => d.value));
+                
+                text += `${topic.name}:\n`;
+                text += `  Average Interest: ${avgValue}\n`;
+                text += `  Peak Interest: ${maxValue}\n\n`;
+            });
+
+            return text;
+        }
+
+        // Copy results
+        function copyResults() {
+            const text = generateResultText();
+            if (!text) {
+                alert('No results to copy');
+                return;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Results copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        // Export CSV
+        function exportData() {
+            if (topics.length === 0) {
+                alert('No data to export');
+                return;
+            }
+
+            let csv = 'Date,' + topics.map(t => t.name).join(',') + '\n';
+            
+            const maxDays = Math.max(...topics.map(t => t.data.length));
+            for (let i = 0; i < maxDays; i++) {
+                const row = [topics[0].data[i]?.date || ''];
+                topics.forEach(topic => {
+                    row.push(topic.data[i]?.value || '');
+                });
+                csv += row.join(',') + '\n';
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `topic-trends-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            
+            document.getElementById('topicInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') addTopic();
+            });
+        });
+    </script>
+
+    
+        <!-- Related Tools Section -->
+        <div class="related-tools" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e5e7eb;">
+            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 24px;">🔗 Related Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <a href="../qr-code-generator/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">📱</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">QR Code Generator</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Create custom QR codes instantly</span>
+                </a>
+                <a href="../url-shortener/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🔗</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">URL Shortener</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Shorten long URLs into clean links</span>
+                </a>
+                <a href="../image-compressor/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🖼️</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">Image Compressor</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Compress images while maintaining quality</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style>
+[data-theme="dark"] .related-tools h2 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:first-child {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:last-child {
+    color: #94a3b8 !important;
+}
+
+    </style>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="wikipedia content extractor, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ``; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Free Wikipedia Content Extractor Online | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Extract full content from Wikipedia articles. Get summary, sections, infobox data, and references. Free Wikipedia API content extractor tool." name="description"/>
+<link href="https://abetworks.in/tools/wikipedia-content-extractor/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Free Wikipedia Content Extractor Online | Abetworks" property="og:title"/>
+<meta content="Extract full content from Wikipedia articles. Get summary, sections, infobox data, and references." property="og:description"/>
+<meta content="https://abetworks.in/tools/wikipedia-content-extractor/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is the Wikipedia Content Extractor free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the Wikipedia Content Extractor by Abetworks is 100% free with no hidden limits or credit card requirements."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What content can I extract from Wikipedia?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can extract article summaries, full content, sections, infobox data, images, and references from any Wikipedia article."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I export the extracted content?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can export extracted content as TXT or Markdown format for use in documents or research."
+            }
+        }
+    ]
+}</script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/wikipedia-content-extractor/">
+    <meta name="twitter:title" content="Free Wikipedia Content Extractor Online | Abetworks">
+    <meta name="twitter:description" content="Free online wikipedia content extractor tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>Wikipedia Content Extractor</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Wikipedia Content Extractor</h1>
+<p class="tool-subtitle">Extract full content from Wikipedia articles. Get summary, sections, infobox data, images, and references using the Wikipedia API.</p>
+</div>
+<div class="tool-workspace">
+<div class="form-group">
+<label class="form-label">Wikipedia Article</label>
+<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+<input class="form-input flex-1" id="articleInput" placeholder="Enter article title (e.g., Artificial Intelligence, Python, World War II)" style="flex: 1; min-width: 250px;" type="text"/>
+<button class="btn btn-primary" id="fetchBtn" onclick="fetchArticle()">
+<span class="btn-text">📖 Fetch Article</span>
+<div class="loader"></div>
+</button>
+</div>
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+Enter any Wikipedia article title to extract its content.
+</p>
+</div>
+
+<div class="result-area hidden" id="resultArea">
+<div class="result-header">
+<span class="result-title">📄 Article Content</span>
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<button class="btn btn-secondary" onclick="copyContent()">📋 Copy All</button>
+<button class="btn btn-secondary" onclick="exportTXT()">📥 Export TXT</button>
+<button class="btn btn-secondary" onclick="exportMarkdown()">📥 Export Markdown</button>
+</div>
+</div>
+
+<!-- Article Header -->
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color);">
+<div id="articleHeader" style="display: grid; gap: 1rem;">
+<!-- Article header will be rendered here -->
+</div>
+</div>
+
+<!-- Summary -->
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">📝 Summary</h4>
+<div id="articleSummary" style="color: var(--text-primary); line-height: 1.8;">
+<!-- Summary will be rendered here -->
+</div>
+</div>
+
+<!-- Infobox -->
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color); display: none;" id="infoboxSection">
+<h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">📊 Infobox Data</h4>
+<div id="infoboxData" style="display: grid; gap: 0.75rem;">
+<!-- Infobox data will be rendered here -->
+</div>
+</div>
+
+<!-- Full Content -->
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">📖 Full Content</h4>
+<div id="articleContent" style="color: var(--text-primary); line-height: 1.8; white-space: pre-wrap;">
+<!-- Full content will be rendered here -->
+</div>
+</div>
+
+<!-- References -->
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color); display: none;" id="referencesSection">
+<h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">📚 References</h4>
+<div id="referencesList" style="display: grid; gap: 0.5rem;">
+<!-- References will be rendered here -->
+</div>
+</div>
+</div>
+</div>
+
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                🔗 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../meta-tag-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔍</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Meta Tag Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract meta tags</span>
+                    </div>
+                </a>
+                <a href="../list-data-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📋</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">List Data Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract list items</span>
+                    </div>
+                </a>
+                <a href="../wordpress-content-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📝</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">WordPress Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract WordPress posts</span>
+                    </div>
+                </a>
+                <a href="../website-screenshot-tool/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📸</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Screenshot Tool</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Capture website screenshots</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+<h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+What is the Wikipedia Content Extractor?
+</h2>
+<p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+The Wikipedia Content Extractor by Abetworks is a free, powerful online tool that extracts full content from Wikipedia articles using the official Wikipedia API. Get article summaries, full text, sections, infobox data, images, and references instantly. Perfect for research, content analysis, and knowledge extraction.
+</p>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+How to Use
+</h3>
+<ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Enter the Wikipedia article title</li>
+<li>Click "Fetch Article" to retrieve content</li>
+<li>View article summary, infobox data, and full content</li>
+<li>Review extracted sections and references</li>
+<li>Copy content or export as TXT/Markdown</li>
+</ol>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Features
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>✅ Extract article summaries</li>
+<li>✅ Get full article content</li>
+<li>✅ Extract infobox data</li>
+<li>✅ Fetch article images</li>
+<li>✅ Get section headings</li>
+<li>✅ Extract references</li>
+<li>✅ Export as TXT or Markdown</li>
+<li>✅ No signup required, completely free</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Benefits
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>📚 Quick research and fact-checking</li>
+<li>📊 Extract structured data from infoboxes</li>
+<li>💡 Content analysis and summarization</li>
+<li>📝 Export content for offline reading</li>
+<li>⚡ Fast, reliable API access</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Use Cases
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Students researching topics for assignments</li>
+<li>Researchers extracting structured data</li>
+<li>Content creators gathering information</li>
+<li>Fact-checkers verifying information</li>
+<li>Anyone wanting offline Wikipedia content</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+Frequently Asked Questions
+</h3>
+<div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Is the Wikipedia Content Extractor free?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, the Wikipedia Content Extractor by Abetworks is 100% free with no hidden limits or credit card requirements.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+What content can I extract from Wikipedia?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+You can extract article summaries, full content, sections, infobox data, images, and references from any Wikipedia article.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Can I export the extracted content?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, you can export extracted content as TXT or Markdown format for use in documents or research.
+</p>
+</div>
+</div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Sitemap Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder &amp; Checker</a>
+<a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">AI Chat &amp; Prompt Tools</span>
+<a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+<a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters &amp; Generators</span>
+<a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+<a class="sitegpt-footer-link" href="../csv-to-markdown/index.html">Convert CSV to Markdown</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">📅 Free Consultation</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+<div class="aw-footer-socials">
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.629L18.243 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg></a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.62-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a>
+</div>
+</div>
+</div>
+</div>
+
+        
+
+        <style>
+        .related-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+        }
+        .article-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .article-image {
+            max-width: 300px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .infobox-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border-radius: 6px;
+        }
+        .infobox-label {
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+        }
+        .infobox-value {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .reference-item {
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        </style>
+
+</main>
+<script src="/tools/shared/business-bank.js"></script>
+<script src="/tools/shared/components.js"></script>
+<script>
+let articleData = {};
+
+async function fetchArticle() {
+    const title = document.getElementById('articleInput').value.trim();
+    if (!title) {
+        alert('Please enter an article title');
+        return;
+    }
+
+    const btn = document.getElementById('fetchBtn');
+    btn.classList.add('loading');
+
+    try {
+        // Fetch article summary and metadata
+        const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`;
+        const summaryResponse = await fetch(summaryUrl);
+        
+        if (!summaryResponse.ok) {
+            throw new Error('Article not found. Please check the article title.');
+        }
+
+        const summaryData = await summaryResponse.json();
+        
+        // Fetch full article content
+        const contentUrl = `https://en.wikipedia.org/api/rest_v1/page/html/${encodeURIComponent(title)}`;
+        const contentResponse = await fetch(contentUrl);
+        let fullContent = '';
+        if (contentResponse.ok) {
+            fullContent = await contentResponse.text();
+        }
+
+        articleData = {
+            title: summaryData.title,
+            description: summaryData.description || 'No description available',
+            summary: summaryData.extract,
+            image: summaryData.thumbnail?.source || null,
+            url: summaryData.content_urls?.desktop?.page || `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`,
+            timestamp: summaryData.timestamp ? new Date(summaryData.timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '',
+            fullContent: stripHtml(fullContent)
+        };
+
+        renderArticle(articleData);
+        document.getElementById('resultArea').classList.remove('hidden');
+        
+    } catch (error) {
+        alert('Error: ' + error.message);
+    } finally {
+        btn.classList.remove('loading');
+    }
+}
+
+function stripHtml(html) {
+    if (!html) return '';
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    
+    // Remove scripts, styles, and other unwanted elements
+    const unwanted = tmp.querySelectorAll('script, style, nav, header, footer, .reflist, .references, .toc, .thumb, .infobox, table, .mw-editsection');
+    unwanted.forEach(el => el.remove());
+    
+    // Get text content and clean up
+    let text = tmp.textContent || tmp.innerText || '';
+    text = text.replace(/\s+/g, ' ').trim();
+    
+    // Limit content length for display
+    if (text.length > 10000) {
+        text = text.substring(0, 10000) + '... (content truncated)';
+    }
+    
+    return text;
+}
+
+function renderArticle(data) {
+    // Render header
+    const headerContainer = document.getElementById('articleHeader');
+    headerContainer.innerHTML = `
+        <h2 class="article-title">${escapeHtml(data.title)}</h2>
+        <p style="color: var(--text-secondary); font-size: 0.95rem;">${escapeHtml(data.description)}</p>
+        ${data.image ? `<img src="${escapeHtml(data.image)}" alt="${escapeHtml(data.title)}" class="article-image" style="margin-top: 1rem;"/>` : ''}
+        <div class="article-meta">
+            ${data.timestamp ? `<span>📅 Last updated: ${escapeHtml(data.timestamp)}</span>` : ''}
+            <span>🔗 <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener">View on Wikipedia</a></span>
+        </div>
+    `;
+
+    // Render summary
+    const summaryContainer = document.getElementById('articleSummary');
+    summaryContainer.innerHTML = data.summary || 'No summary available.';
+
+    // Render full content
+    const contentContainer = document.getElementById('articleContent');
+    contentContainer.innerHTML = data.fullContent || 'No content available.';
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function copyContent() {
+    const content = `Title: ${articleData.title}\nDescription: ${articleData.description}\n\nSummary:\n${articleData.summary}\n\nURL: ${articleData.url}`;
+    navigator.clipboard.writeText(content).then(() => {
+        alert('Content copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+    });
+}
+
+function exportTXT() {
+    const txt = `Title: ${articleData.title}\nDescription: ${articleData.description}\nURL: ${articleData.url}\n\n=== SUMMARY ===\n\n${articleData.summary}\n\n=== FULL CONTENT ===\n\n${articleData.fullContent}`;
+    const blob = new Blob([txt], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${articleData.title.replace(/[^a-z0-9]/gi, '_')}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function exportMarkdown() {
+    const md = `# ${articleData.title}\n\n_${articleData.description}_\n\n## Summary\n\n${articleData.summary}\n\n## Full Content\n\n${articleData.fullContent}\n\n---\n\nSource: ${articleData.url}`;
+    const blob = new Blob([md], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${articleData.title.replace(/[^a-z0-9]/gi, '_')}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+</script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

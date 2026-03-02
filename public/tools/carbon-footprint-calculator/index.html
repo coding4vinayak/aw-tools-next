@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="carbon footprint calculator, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+
+    <title>Free Carbon Footprint Calculator | CO2 Emissions Tracker | Abetworks</title>
+    <meta name="description" content="Calculate your carbon footprint from daily activities like driving, flights, electricity, and diet. Get personalized tips to reduce CO2 emissions. Free, no signup required.">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/carbon-footprint-calculator/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free Carbon Footprint Calculator | Abetworks">
+    <meta property="og:description" content="Calculate your carbon footprint and get tips to reduce CO2 emissions. Free environmental impact calculator.">
+    <meta property="og:url" content="https://abetworks.in/tools/carbon-footprint-calculator/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the Carbon Footprint Calculator completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Carbon Footprint Calculator by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How accurate is this carbon footprint calculation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "This calculator uses industry-standard emission factors from EPA and IPCC guidelines. Results are estimates based on average emission data."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What activities are included in the calculation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The calculator includes transportation (driving, flights), home energy (electricity, gas), and diet (meat consumption, food choices)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How can I reduce my carbon footprint?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "After calculation, you'll receive personalized tips based on your highest emission categories. Common reductions include using public transport, reducing flights, and eating less meat."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+.calculator-section {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .result-summary {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.1));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .total-footprint {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .footprint-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        .breakdown-chart {
+            margin-top: 2rem;
+        }
+        .breakdown-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .breakdown-label {
+            width: 120px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .breakdown-bar-container {
+            flex: 1;
+            height: 24px;
+            background: var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+        .breakdown-bar {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+        .breakdown-transport { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .breakdown-energy { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .breakdown-diet { background: linear-gradient(90deg, #ef4444, #f87171); }
+        .breakdown-flights { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+        .comparison-card {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .comparison-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 8px;
+        }
+        .comparison-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        .comparison-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        .tips-section {
+            margin-top: 2rem;
+        }
+        .tip-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(52, 211, 153, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .tip-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .tip-content {
+            flex: 1;
+        }
+        .tip-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        .tip-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .tip-savings {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        .tree-equivalent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 10px;
+        }
+        .tree-icon {
+            font-size: 2.5rem;
+        }
+        .tree-text {
+            text-align: left;
+        }
+        .tree-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #22c55e;
+        }
+        .tree-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+    </style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/carbon-footprint-calculator/">
+    <meta name="twitter:title" content="Free Carbon Footprint Calculator Online | Abetworks">
+    <meta name="twitter:description" content="Free online carbon footprint calculator tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Carbon Footprint Calculator</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Carbon Footprint Calculator</h1>
+            <p class="tool-subtitle">Calculate your CO2 emissions from daily activities. Get personalized tips to reduce your environmental impact.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <!-- Transportation Section -->
+            <div class="calculator-section">
+                <div class="section-title">
+                    <span class="section-icon">🚗</span>
+                    Transportation
+                </div>
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label class="form-label">Car Distance (km/week)</label>
+                        <input type="number" id="carDistance" class="form-input" placeholder="e.g., 100" min="0" value="0">
+                        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">Average weekly driving distance</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fuel Type</label>
+                        <select id="fuelType" class="form-select">
+                            <option value="petrol">Petrol/Gasoline</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electric">Electric</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Public Transport (km/week)</label>
+                        <input type="number" id="publicTransport" class="form-input" placeholder="e.g., 50" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flights Section -->
+            <div class="calculator-section">
+                <div class="section-title">
+                    <span class="section-icon">✈️</span>
+                    Flights
+                </div>
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label class="form-label">Domestic Flights (per year)</label>
+                        <input type="number" id="domesticFlights" class="form-input" placeholder="e.g., 4" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">International Flights (per year)</label>
+                        <input type="number" id="intlFlights" class="form-input" placeholder="e.g., 2" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Home Energy Section -->
+            <div class="calculator-section">
+                <div class="section-title">
+                    <span class="section-icon">⚡</span>
+                    Home Energy
+                </div>
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label class="form-label">Electricity (kWh/month)</label>
+                        <input type="number" id="electricity" class="form-input" placeholder="e.g., 300" min="0" value="0">
+                        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">Check your electricity bill</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Natural Gas (therms/month)</label>
+                        <input type="number" id="naturalGas" class="form-input" placeholder="e.g., 50" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Household Size</label>
+                        <select id="householdSize" class="form-select">
+                            <option value="1">1 person</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4" selected>4 people</option>
+                            <option value="5">5+ people</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diet Section -->
+            <div class="calculator-section">
+                <div class="section-title">
+                    <span class="section-icon">🍽️</span>
+                    Diet & Food
+                </div>
+                <div class="input-grid">
+                    <div class="form-group">
+                        <label class="form-label">Meat Consumption</label>
+                        <select id="dietType" class="form-select">
+                            <option value="high">High (Daily meat)</option>
+                            <option value="medium" selected>Medium (3-4 times/week)</option>
+                            <option value="low">Low (1-2 times/week)</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Food Waste Level</label>
+                        <select id="foodWaste" class="form-select">
+                            <option value="low">Low (Minimal waste)</option>
+                            <option value="medium" selected>Medium (Average)</option>
+                            <option value="high">High (Frequent waste)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button id="calculateBtn" class="btn btn-primary" onclick="calculateFootprint()" style="width: 100%;">
+                <span class="btn-text">🌍 Calculate My Carbon Footprint</span>
+                <div class="loader"></div>
+            </button>
+
+            <div class="result-area" id="resultArea" style="display: none;">
+                <div class="result-header">
+                    <span class="result-title">🌱 Your Carbon Footprint Results</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyResults()" class="btn btn-secondary">📋 Copy</button>
+                        <button onclick="downloadPDF()" class="btn btn-secondary">📥 Download PDF</button>
+                    </div>
+                </div>
+
+                <div class="result-summary">
+                    <div class="total-footprint" id="totalFootprint">0</div>
+                    <div class="footprint-label">tonnes CO2e per year</div>
+                    <div class="tree-equivalent">
+                        <span class="tree-icon">🌳</span>
+                        <div class="tree-text">
+                            <div class="tree-value" id="treesNeeded">0</div>
+                            <div class="tree-label">trees needed to offset your annual emissions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="breakdown-chart">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                        Emissions Breakdown
+                    </h3>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">🚗 Transport</span>
+                        <div class="breakdown-bar-container">
+                            <div class="breakdown-bar breakdown-transport" id="transportBar" style="width: 0%;">0%</div>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">✈️ Flights</span>
+                        <div class="breakdown-bar-container">
+                            <div class="breakdown-bar breakdown-flights" id="flightsBar" style="width: 0%;">0%</div>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">⚡ Energy</span>
+                        <div class="breakdown-bar-container">
+                            <div class="breakdown-bar breakdown-energy" id="energyBar" style="width: 0%;">0%</div>
+                        </div>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">🍽️ Diet</span>
+                        <div class="breakdown-bar-container">
+                            <div class="breakdown-bar breakdown-diet" id="dietBar" style="width: 0%;">0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">
+                        📊 How You Compare
+                    </h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-stat">
+                            <div class="comparison-value" id="nationalAvg">4.5</div>
+                            <div class="comparison-label">National Avg (tonnes)</div>
+                        </div>
+                        <div class="comparison-stat">
+                            <div class="comparison-value" id="globalAvg">4.0</div>
+                            <div class="comparison-label">Global Avg (tonnes)</div>
+                        </div>
+                        <div class="comparison-stat">
+                            <div class="comparison-value" id="yourPercentile">-</div>
+                            <div class="comparison-label">vs Average</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-section" id="tipsSection">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                        💡 Tips to Reduce Your Footprint
+                    </h3>
+                    <div id="tipsContainer"></div>
+                </div>
+
+                <div id="resultContent" style="display: none; margin-top: 1.5rem; white-space: pre-wrap;"></div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the Carbon Footprint Calculator?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                The Carbon Footprint Calculator is a free environmental tool that helps you measure your personal CO2 emissions from daily activities. By analyzing your transportation habits, flight frequency, home energy usage, and diet choices, this calculator provides a comprehensive view of your environmental impact. Get personalized tips to reduce your carbon footprint and contribute to a healthier planet.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Enter your weekly car travel distance and fuel type</li>
+                <li>Input your public transport usage</li>
+                <li>Add your annual flight frequency (domestic and international)</li>
+                <li>Enter your monthly electricity and natural gas consumption</li>
+                <li>Select your diet type and food waste level</li>
+                <li>Click "Calculate" to see your carbon footprint results</li>
+                <li>Review personalized tips to reduce emissions</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Comprehensive emission categories (transport, flights, energy, diet)</li>
+                <li>✅ Industry-standard emission factors (EPA, IPCC)</li>
+                <li>✅ Visual breakdown chart of emissions</li>
+                <li>✅ Comparison with national and global averages</li>
+                <li>✅ Tree offset equivalent calculation</li>
+                <li>✅ Personalized reduction tips</li>
+                <li>✅ Download results as PDF report</li>
+                <li>✅ No signup required, completely free</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>🌍 Understand your environmental impact</li>
+                <li>📊 Identify your highest emission sources</li>
+                <li>💡 Get actionable tips to reduce CO2</li>
+                <li>🎯 Track progress toward sustainability goals</li>
+                <li>🌱 Learn about carbon offset equivalents</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Individuals measuring personal environmental impact</li>
+                <li>Families planning sustainable lifestyle changes</li>
+                <li>Students researching climate change</li>
+                <li>Companies calculating employee carbon footprints</li>
+                <li>Educators teaching environmental awareness</li>
+            </ul>
+
+            <!-- Related Tools Section -->
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); margin-top: 2rem;">
+                🌍 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <a href="../topic-trend-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📈</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Topic Trend Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze search trends</span>
+                    </div>
+                </a>
+                <a href="../wikipedia-popularity-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📄</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Wikipedia Popularity Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Check page views</span>
+                    </div>
+                </a>
+                <a href="../app-store-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">App Store Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze app performance</span>
+                    </div>
+                </a>
+                <a href="../website-business-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Business Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze websites</span>
+                    </div>
+                </a>
+            </div>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the Carbon Footprint Calculator completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the Carbon Footprint Calculator by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How accurate is this carbon footprint calculation?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        This calculator uses industry-standard emission factors from EPA and IPCC guidelines. Results are estimates based on average emission data.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What activities are included in the calculation?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        The calculator includes transportation (driving, flights), home energy (electricity, gas), and diet (meat consumption, food choices).
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How can I reduce my carbon footprint?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        After calculation, you'll receive personalized tips based on your highest emission categories. Common reductions include using public transport, reducing flights, and eating less meat.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SiteGPT Multi-Column Footer -->
+        <div class="sitegpt-footer-wrapper">
+            <div class="sitegpt-footer-container">
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Sitemap Tools</span>
+                    <a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder & Checker</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+                    <a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">AI Chat & Prompt Tools</span>
+                    <a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+                    <a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+                    <a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Converters & Generators</span>
+                    <a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../csv-to-markdown/index.html">Convert CSV to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../json-to-markdown/index.html">Convert JSON to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+                </div>
+                <div class="sitegpt-footer-col aw-footer-brand">
+                    <span class="sitegpt-footer-title">AbetWorks</span>
+                    <a class="sitegpt-footer-link" href="https://abetworks.in" target="_blank" rel="noopener">🌐 Main Website</a>
+                    <a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">📅 Free Consultation</a>
+                    <a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+                    <div class="aw-footer-socials">
+                        <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                        <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                        <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                        <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Emission factors (kg CO2e per unit)
+        const EMISSION_FACTORS = {
+            // Transport: kg CO2e per km
+            petrol: 0.192,
+            diesel: 0.171,
+            electric: 0.053,
+            hybrid: 0.109,
+            publicTransport: 0.089,
+            
+            // Flights: kg CO2e per flight (average)
+            domesticFlight: 250,
+            intlFlight: 1500,
+            
+            // Energy: kg CO2e per kWh/therm
+            electricity: 0.42,
+            naturalGas: 5.3,
+            
+            // Diet: kg CO2e per week
+            diet: {
+                high: 50,
+                medium: 35,
+                low: 20,
+                vegetarian: 10,
+                vegan: 5
+            },
+            
+            // Food waste: kg CO2e per week multiplier
+            foodWaste: {
+                low: 0.5,
+                medium: 1,
+                high: 1.5
+            }
+        };
+
+        // Tips database
+        const TIPS = {
+            transport: [
+                { title: 'Use Public Transport', desc: 'Switching to public transport 2-3 days/week can significantly reduce emissions.', savings: 'Up to 500 kg CO2e/year', icon: '🚌' },
+                { title: 'Consider Carpooling', desc: 'Share rides with colleagues or friends to split emissions.', savings: 'Up to 300 kg CO2e/year', icon: '🚗' },
+                { title: 'Switch to Electric', desc: 'Electric vehicles produce 60% fewer emissions over their lifetime.', savings: 'Up to 1000 kg CO2e/year', icon: '⚡' },
+                { title: 'Cycle or Walk', desc: 'For short trips under 5km, consider cycling or walking.', savings: 'Up to 200 kg CO2e/year', icon: '🚴' }
+            ],
+            flights: [
+                { title: 'Reduce Air Travel', desc: 'Consider video conferencing for business meetings.', savings: 'Up to 1500 kg CO2e/flight', icon: '💻' },
+                { title: 'Choose Direct Flights', desc: 'Takeoff and landing produce most emissions. Direct flights are better.', savings: 'Up to 200 kg CO2e/flight', icon: '✈️' },
+                { title: 'Carbon Offset', desc: 'Purchase carbon offsets for unavoidable flights.', savings: '100% offset possible', icon: '🌳' },
+                { title: 'Train for Short Trips', desc: 'For distances under 500km, trains produce 80% less CO2.', savings: 'Up to 100 kg CO2e/trip', icon: '🚆' }
+            ],
+            energy: [
+                { title: 'Switch to LED Bulbs', desc: 'LEDs use 75% less energy than incandescent bulbs.', savings: 'Up to 100 kg CO2e/year', icon: '💡' },
+                { title: 'Unplug Devices', desc: 'Phantom power accounts for 10% of home energy use.', savings: 'Up to 50 kg CO2e/year', icon: '🔌' },
+                { title: 'Adjust Thermostat', desc: 'Lower heating by 1°C saves 8% energy.', savings: 'Up to 200 kg CO2e/year', icon: '🌡️' },
+                { title: 'Solar Panels', desc: 'Consider installing solar panels for clean energy.', savings: 'Up to 1000 kg CO2e/year', icon: '☀️' }
+            ],
+            diet: [
+                { title: 'Reduce Meat Consumption', desc: 'Try Meatless Mondays or reduce red meat intake.', savings: 'Up to 400 kg CO2e/year', icon: '🥗' },
+                { title: 'Buy Local Food', desc: 'Local produce reduces transportation emissions.', savings: 'Up to 100 kg CO2e/year', icon: '🛒' },
+                { title: 'Reduce Food Waste', desc: 'Plan meals and compost food scraps.', savings: 'Up to 150 kg CO2e/year', icon: '♻️' },
+                { title: 'Choose Plant-Based', desc: 'Plant-based meals have lower carbon footprint.', savings: 'Up to 500 kg CO2e/year', icon: '🌱' }
+            ]
+        };
+
+        let results = {};
+
+        // Initialize theme
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('abet_theme_preference') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Calculate footprint
+        function calculateFootprint() {
+            const btn = document.getElementById('calculateBtn');
+            btn.classList.add('loading');
+
+            setTimeout(() => {
+                // Get input values
+                const carDistance = parseFloat(document.getElementById('carDistance').value) || 0;
+                const fuelType = document.getElementById('fuelType').value;
+                const publicTransport = parseFloat(document.getElementById('publicTransport').value) || 0;
+                const domesticFlights = parseFloat(document.getElementById('domesticFlights').value) || 0;
+                const intlFlights = parseFloat(document.getElementById('intlFlights').value) || 0;
+                const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+                const naturalGas = parseFloat(document.getElementById('naturalGas').value) || 0;
+                const householdSize = parseInt(document.getElementById('householdSize').value) || 4;
+                const dietType = document.getElementById('dietType').value;
+                const foodWaste = document.getElementById('foodWaste').value;
+
+                // Calculate annual emissions (kg CO2e)
+                const transportEmissions = (carDistance * 52 * EMISSION_FACTORS[fuelType]) + (publicTransport * 52 * EMISSION_FACTORS.publicTransport);
+                const flightEmissions = (domesticFlights * EMISSION_FACTORS.domesticFlight) + (intlFlights * EMISSION_FACTORS.intlFlight);
+                const energyEmissions = ((electricity * 12 * EMISSION_FACTORS.electricity) + (naturalGas * 12 * EMISSION_FACTORS.naturalGas)) / householdSize;
+                const dietEmissions = (EMISSION_FACTORS.diet[dietType] * 52) * EMISSION_FACTORS.foodWaste[foodWaste];
+
+                const totalKg = transportEmissions + flightEmissions + energyEmissions + dietEmissions;
+                const totalTonnes = totalKg / 1000;
+
+                // Store results
+                results = {
+                    transport: transportEmissions,
+                    flights: flightEmissions,
+                    energy: energyEmissions,
+                    diet: dietEmissions,
+                    total: totalTonnes
+                };
+
+                // Render results
+                renderResults();
+                btn.classList.remove('loading');
+                document.getElementById('resultArea').style.display = 'block';
+                
+                // Scroll to results
+                document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+
+        // Render results
+        function renderResults() {
+            const { transport, flights, energy, diet, total } = results;
+            const totalKg = total * 1000;
+
+            // Total footprint
+            document.getElementById('totalFootprint').textContent = total.toFixed(2);
+
+            // Trees needed (1 tree absorbs ~25 kg CO2/year)
+            const trees = Math.ceil(totalKg / 25);
+            document.getElementById('treesNeeded').textContent = trees;
+
+            // Breakdown percentages
+            const sum = transport + flights + energy + diet;
+            const transportPct = sum > 0 ? Math.round((transport / sum) * 100) : 0;
+            const flightsPct = sum > 0 ? Math.round((flights / sum) * 100) : 0;
+            const energyPct = sum > 0 ? Math.round((energy / sum) * 100) : 0;
+            const dietPct = sum > 0 ? Math.round((diet / sum) * 100) : 0;
+
+            // Animate bars
+            setTimeout(() => {
+                document.getElementById('transportBar').style.width = transportPct + '%';
+                document.getElementById('transportBar').textContent = transportPct + '%';
+                document.getElementById('flightsBar').style.width = flightsPct + '%';
+                document.getElementById('flightsBar').textContent = flightsPct + '%';
+                document.getElementById('energyBar').style.width = energyPct + '%';
+                document.getElementById('energyBar').textContent = energyPct + '%';
+                document.getElementById('dietBar').style.width = dietPct + '%';
+                document.getElementById('dietBar').textContent = dietPct + '%';
+            }, 100);
+
+            // Comparison
+            const nationalAvg = 4.5; // US average
+            const globalAvg = 4.0;
+            const vsNational = ((total - nationalAvg) / nationalAvg * 100).toFixed(0);
+            
+            document.getElementById('nationalAvg').textContent = nationalAvg;
+            document.getElementById('globalAvg').textContent = globalAvg;
+            
+            const percentileEl = document.getElementById('yourPercentile');
+            if (vsNational > 0) {
+                percentileEl.textContent = '+' + vsNational + '%';
+                percentileEl.style.color = '#ef4444';
+            } else {
+                percentileEl.textContent = vsNational + '%';
+                percentileEl.style.color = '#10b981';
+            }
+
+            // Generate tips based on highest emission category
+            generateTips();
+
+            // Result content for copy
+            document.getElementById('resultContent').textContent = generateResultText();
+        }
+
+        // Generate tips
+        function generateTips() {
+            const { transport, flights, energy, diet } = results;
+            const categories = [
+                { name: 'transport', value: transport, tips: TIPS.transport },
+                { name: 'flights', value: flights, tips: TIPS.flights },
+                { name: 'energy', value: energy, tips: TIPS.energy },
+                { name: 'diet', value: diet, tips: TIPS.diet }
+            ];
+
+            // Sort by highest emission
+            categories.sort((a, b) => b.value - a.value);
+
+            // Get top 3 tips from highest 2 categories
+            const selectedTips = [];
+            for (let i = 0; i < 2 && i < categories.length; i++) {
+                if (categories[i].value > 0) {
+                    selectedTips.push(...categories[i].tips.slice(0, 2));
+                }
+            }
+
+            // If no tips selected, add general tips
+            if (selectedTips.length === 0) {
+                selectedTips.push(...TIPS.energy.slice(0, 2));
+            }
+
+            const container = document.getElementById('tipsContainer');
+            container.innerHTML = selectedTips.slice(0, 4).map(tip => `
+                <div class="tip-card">
+                    <span class="tip-icon">${tip.icon}</span>
+                    <div class="tip-content">
+                        <div class="tip-title">${tip.title}</div>
+                        <div class="tip-desc">${tip.desc}</div>
+                        <div class="tip-savings">💚 ${tip.savings}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Generate result text
+        function generateResultText() {
+            const { transport, flights, energy, diet, total } = results;
+            return `Carbon Footprint Report
+======================
+Your Annual Carbon Footprint: ${total.toFixed(2)} tonnes CO2e
+
+Breakdown:
+- Transportation: ${(transport/1000).toFixed(2)} tonnes (${Math.round(transport/(transport+flights+energy+diet)*100) || 0}%)
+- Flights: ${(flights/1000).toFixed(2)} tonnes (${Math.round(flights/(transport+flights+energy+diet)*100) || 0}%)
+- Home Energy: ${(energy/1000).toFixed(2)} tonnes (${Math.round(energy/(transport+flights+energy+diet)*100) || 0}%)
+- Diet: ${(diet/1000).toFixed(2)} tonnes (${Math.round(diet/(transport+flights+energy+diet)*100) || 0}%)
+
+Equivalent to planting ${Math.ceil(total*1000/25)} trees to offset annually.
+
+Comparison:
+- National Average: 4.5 tonnes CO2e
+- Global Average: 4.0 tonnes CO2e
+
+Generated by Abetworks Carbon Footprint Calculator`;
+        }
+
+        // Copy results
+        function copyResults() {
+            const resultContent = document.getElementById('resultContent');
+            if (!resultContent || !resultContent.textContent) {
+                alert('No results to copy');
+                return;
+            }
+            
+            navigator.clipboard.writeText(resultContent.textContent).then(() => {
+                alert('Results copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            const printWindow = window.open('', '_blank');
+            if (!printWindow) {
+                alert('Please allow popups to download PDF');
+                return;
+            }
+
+            const { total } = results;
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Carbon Footprint Report</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; color: #333; }
+                        h1 { color: #10b981; font-size: 28px; }
+                        .summary { background: #f0fdf4; border: 2px solid #10b981; border-radius: 16px; padding: 30px; text-align: center; margin: 30px 0; }
+                        .total { font-size: 48px; font-weight: 800; color: #10b981; }
+                        @media print { body { padding: 0; } }
+                    </style>
+                
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/carbon-footprint-calculator/">
+    <meta name="twitter:title" content="Free Carbon Footprint Calculator Online | Abetworks">
+    <meta name="twitter:description" content="Free online carbon footprint calculator tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+                <body>
+                    <h1>🌍 Carbon Footprint Report</h1>
+                    <p>Generated on ${new Date().toLocaleString()}</p>
+                    <div class="summary">
+                        <div class="total">${total.toFixed(2)}</div>
+                        <div>tonnes CO2e per year</div>
+                    </div>
+                    <p>${generateResultText()}</p>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                            setTimeout(() => window.close(), 500);
+                        };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+        });
+    </script>
+
+    
+        <!-- Related Tools Section -->
+        <div class="related-tools" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e5e7eb;">
+            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 24px;">🔗 Related Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <a href="../qr-code-generator/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">📱</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">QR Code Generator</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Create custom QR codes instantly</span>
+                </a>
+                <a href="../url-shortener/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🔗</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">URL Shortener</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Shorten long URLs into clean links</span>
+                </a>
+                <a href="../image-compressor/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🖼️</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">Image Compressor</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Compress images while maintaining quality</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style>
+[data-theme="dark"] .related-tools h2 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:first-child {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:last-child {
+    color: #94a3b8 !important;
+}
+
+    </style>
+</body>
+</html>

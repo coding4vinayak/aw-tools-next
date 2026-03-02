@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Growth Tools & Services - Abetworks</title>
+    <meta name="description" content="100+ free tools + premium services to grow your business. AI automation, web development, analytics & more.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --secondary: #7C3AED;
+            --accent: #06B6D4;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #0F172A;
+            --darker: #020617;
+            --light: #F8FAFC;
+            --gray: #64748B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667EEA, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s 0.2s both;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #667EEA, #06B6D4, #F093FB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient 5s ease infinite;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s 0.4s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+            animation: fadeInUp 0.8s 0.6s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667EEA, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s 0.8s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Free Tools Grid */
+        .tools-section {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .tool-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(37, 99, 235, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .tool-desc {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.2);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(124, 58, 237, 0.2));
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: #10B981;
+            font-weight: 700;
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667EEA, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .service-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .service-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Categories Tabs */
+        .categories {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(124, 58, 237, 0.15));
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667EEA, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes gradient {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            .nav-links { gap: 1rem; }
+            .hero { padding: 8rem 1rem 4rem; }
+            .hero-stats { gap: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .tools-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo">Abetworks</a>
+        <div class="nav-links">
+            <a href="#free-tools" class="nav-link">Free Tools</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="https://abetworks.in" class="nav-link">Main Site</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-btn">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">🚀 Everything You Need to Grow Your Business</div>
+        <h1>
+            <span>Business Growth</span><br>
+            Tools & Services
+        </h1>
+        <p>
+            100+ free tools + premium automation services. 
+            From AI chatbots to complete website automation - we have everything to scale your business.
+        </p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">102</div>
+                <div class="stat-label">Free Tools</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Core Services</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">₹0</div>
+                <div class="stat-label">Starting Cost</div>
+            </div>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="#free-tools" class="btn-primary">Browse Free Tools</a>
+            <a href="#services" class="btn-secondary">View Services</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="btn-secondary">📅 Free Consultation</a>
+        </div>
+    </section>
+
+    <!-- Free Tools Section -->
+    <section class="section tools-section" id="free-tools">
+        <div class="section-header reveal">
+            <span class="section-label">100% Free</span>
+            <h2 class="section-title">Free Business <span style="background: linear-gradient(135deg, #667EEA, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Growth Tools</span></h2>
+            <p class="section-subtitle">No signup required. No credit card. Just click and use.</p>
+        </div>
+
+        <div class="categories reveal">
+            <button class="category-btn active" onclick="filterTools('all')">All Tools</button>
+            <button class="category-btn" onclick="filterTools('ai')">AI Tools</button>
+            <button class="category-btn" onclick="filterTools('seo')">SEO Tools</button>
+            <button class="category-btn" onclick="filterTools('converters')">Converters</button>
+            <button class="category-btn" onclick="filterTools('validators')">Validators</button>
+            <button class="category-btn" onclick="filterTools('calculators')">Calculators</button>
+        </div>
+
+        <div class="tools-grid reveal" id="toolsGrid">
+            <!-- AI Tools -->
+            <a href="tools/ai-reply-generator/index.html" class="tool-card" data-category="ai">
+                <div class="tool-icon">✍️</div>
+                <div class="tool-title">AI Reply Generator</div>
+                <div class="tool-desc">Generate professional email responses instantly with AI</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/ai-email-response-generator/index.html" class="tool-card" data-category="ai">
+                <div class="tool-icon">📧</div>
+                <div class="tool-title">AI Email Response</div>
+                <div class="tool-desc">Craft perfect email replies in seconds</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/ai-faq-generator/index.html" class="tool-card" data-category="ai">
+                <div class="tool-icon">❓</div>
+                <div class="tool-title">AI FAQ Generator</div>
+                <div class="tool-desc">Auto-generate FAQs from your content</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/ai-prompt-optimizer/index.html" class="tool-card" data-category="ai">
+                <div class="tool-icon">⚡</div>
+                <div class="tool-title">AI Prompt Optimizer</div>
+                <div class="tool-desc">Get better results from AI with optimized prompts</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+
+            <!-- SEO Tools -->
+            <a href="tools/sitemap-finder-checker/index.html" class="tool-card" data-category="seo">
+                <div class="tool-icon">🗺️</div>
+                <div class="tool-title">Sitemap Finder</div>
+                <div class="tool-desc">Find any website's sitemap instantly</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/sitemap-urls-comparison-tool/index.html" class="tool-card" data-category="seo">
+                <div class="tool-icon">🔄</div>
+                <div class="tool-title">Sitemap Comparison</div>
+                <div class="tool-desc">Compare two sitemap URL lists</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/xml-sitemap-generator/index.html" class="tool-card" data-category="seo">
+                <div class="tool-icon">📄</div>
+                <div class="tool-title">XML Sitemap Generator</div>
+                <div class="tool-desc">Create SEO-friendly XML sitemaps</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/sitemap-to-robots-txt-generator/index.html" class="tool-card" data-category="seo">
+                <div class="tool-icon">🤖</div>
+                <div class="tool-title">Robots.txt Generator</div>
+                <div class="tool-desc">Generate robots.txt from sitemaps</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/landing-page-grader/index.html" class="tool-card" data-category="seo">
+                <div class="tool-icon">📊</div>
+                <div class="tool-title">Landing Page Grader</div>
+                <div class="tool-desc">Score and improve your landing pages</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+
+            <!-- Converters -->
+            <a href="tools/convert-pdf-to-markdown/index.html" class="tool-card" data-category="converters">
+                <div class="tool-icon">📝</div>
+                <div class="tool-title">PDF to Markdown</div>
+                <div class="tool-desc">Convert PDF documents to Markdown</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/convert-rtf-to-markdown/index.html" class="tool-card" data-category="converters">
+                <div class="tool-icon">📄</div>
+                <div class="tool-title">RTF to Markdown</div>
+                <div class="tool-desc">Convert RTF files to Markdown format</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/convert-xml-to-markdown/index.html" class="tool-card" data-category="converters">
+                <div class="tool-icon">🔧</div>
+                <div class="tool-title">XML to Markdown</div>
+                <div class="tool-desc">Transform XML to clean Markdown</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/convert-docx-to-markdown/index.html" class="tool-card" data-category="converters">
+                <div class="tool-icon">📎</div>
+                <div class="tool-title">DOCX to Markdown</div>
+                <div class="tool-desc">Convert Word documents to Markdown</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+
+            <!-- Validators -->
+            <a href="tools/email-validity-checker/index.html" class="tool-card" data-category="validators">
+                <div class="tool-icon">✅</div>
+                <div class="tool-title">Email Validator</div>
+                <div class="tool-desc">Verify email addresses instantly</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/phone-spam-checker/index.html" class="tool-card" data-category="validators">
+                <div class="tool-icon">📱</div>
+                <div class="tool-title">Phone Spam Checker</div>
+                <div class="tool-desc">Check if a number is spam</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/company-buying-power-checker/index.html" class="tool-card" data-category="validators">
+                <div class="tool-icon">💼</div>
+                <div class="tool-title">Company Lookup</div>
+                <div class="tool-desc">Get company info & buying power</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+
+            <!-- Calculators -->
+            <a href="tools/cpl-calculator/index.html" class="tool-card" data-category="calculators">
+                <div class="tool-icon">🧮</div>
+                <div class="tool-title">CPL Calculator</div>
+                <div class="tool-desc">Calculate cost per lead</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/roas-quick-checker/index.html" class="tool-card" data-category="calculators">
+                <div class="tool-icon">📈</div>
+                <div class="tool-title">ROAS Calculator</div>
+                <div class="tool-desc">Calculate return on ad spend</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+            <a href="tools/currency-converter/index.html" class="tool-card" data-category="calculators">
+                <div class="tool-icon">💱</div>
+                <div class="tool-title">Currency Converter</div>
+                <div class="tool-desc">Real-time currency conversion</div>
+                <span class="tool-badge">✓ Free</span>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="tools/index.html" class="btn-secondary">View All 102 Tools →</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="section-header reveal">
+            <span class="section-label">Premium Services</span>
+            <h2 class="section-title">Business <span style="background: linear-gradient(135deg, #667EEA, #06B6D4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Automation Services</span></h2>
+            <p class="section-subtitle">Custom solutions to automate and scale your business</p>
+        </div>
+
+        <div class="services-grid reveal">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3 class="service-title">Website Automation</h3>
+                <p class="service-description">Automate repetitive web tasks - from data extraction to content updates. Save hours every week.</p>
+                <ul class="service-features">
+                    <li>Web scraping & data extraction</li>
+                    <li>Automated content publishing</li>
+                    <li>Form automation</li>
+                    <li>Scheduled tasks</li>
+                    <li>API integrations</li>
+                </ul>
+                <div class="service-price">₹25,000 <span>/ project</span></div>
+                <button class="service-btn" onclick="window.location.href='https://tripetto.app/run/BKR1M1PACY'">Get Started →</button>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="service-icon">💬</div>
+                <h3 class="service-title">AI Chatbot Development</h3>
+                <p class="service-description">24/7 customer support with intelligent AI chatbots. Handle inquiries and close sales automatically.</p>
+                <ul class="service-features">
+                    <li>Custom AI training</li>
+                    <li>Multi-platform deployment</li>
+                    <li>Lead qualification</li>
+                    <li>Appointment scheduling</li>
+                    <li>Analytics dashboard</li>
+                </ul>
+                <div class="service-price">₹35,000 <span>/ project</span></div>
+                <button class="service-btn" onclick="window.location.href='https://tripetto.app/run/BKR1M1PACY'">Get Started →</button>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3 class="service-title">Web Development</h3>
+                <p class="service-description">Beautiful, fast, conversion-optimized websites built with modern technologies that scale.</p>
+                <ul class="service-features">
+                    <li>Responsive design</li>
+                    <li>SEO-optimized</li>
+                    <li>E-commerce solutions</li>
+                    <li>CMS integration</li>
+                    <li>Performance optimization</li>
+                </ul>
+                <div class="service-price">₹50,000 <span>/ project</span></div>
+                <button class="service-btn" onclick="window.location.href='https://tripetto.app/run/BKR1M1PACY'">Get Started →</button>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3 class="service-title">Data Analytics</h3>
+                <p class="service-description">Turn raw data into actionable insights. Custom dashboards that drive smarter decisions.</p>
+                <ul class="service-features">
+                    <li>Custom dashboards</li>
+                    <li>Data visualization</li>
+                    <li>Predictive analytics</li>
+                    <li>Automated reporting</li>
+                    <li>KPI tracking</li>
+                </ul>
+                <div class="service-price">₹40,000 <span>/ project</span></div>
+                <button class="service-btn" onclick="window.location.href='https://tripetto.app/run/BKR1M1PACY'">Get Started →</button>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3 class="service-title">CRM Automation</h3>
+                <p class="service-description">Streamline your sales pipeline with automated follow-ups, lead scoring, and customer management.</p>
+                <ul class="service-features">
+                    <li>CRM setup</li>
+                    <li>Email automation</li>
+                    <li>Lead scoring</li>
+                    <li>Pipeline tracking</li>
+                    <li>Tool integration</li>
+                </ul>
+                <div class="service-price">₹30,000 <span>/ project</span></div>
+                <button class="service-btn" onclick="window.location.href='https://tripetto.app/run/BKR1M1PACY'">Get Started →</button>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card">
+                <div class="service-icon">🔌</div>
+                <h3 class="service-title">API Development</h3>
+                <p class="service-description">Connect your systems with custom APIs. Seamless integrations for your tech stack.</p>
+                <ul class="service-features">
+                    <li>RESTful API design</li>
+                    <li>Third-party integrations</li>
+                    <li>API documentation</li>
+                    <li>Security & auth</li>
+                    <li>Monitoring</li>
+                </ul>
+                <div class="service-price">₹35,000 <span>/ project</span></div>
+                <button class="service-btn" onclick="window.location.href='https://tripetto.app/run/BKR1M1PACY'">Get Started →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="reveal">
+            <h2>Ready to Grow Your Business?</h2>
+            <p>
+                Start with our 100+ free tools, or get a custom automation solution. 
+                Book a free consultation to discuss your needs.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://tripetto.app/run/BKR1M1PACY" class="btn-primary">📅 Book Free Consultation</a>
+                <a href="mailto:admin@abetworks.in" class="btn-secondary">✉ Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Abetworks</h3>
+                <p>AI Solutions • Data Analytics • Business Consultancy</p>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.4);">
+                    Transforming businesses with intelligent automation.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="https://abetworks.in">Main Website</a>
+                <a href="tools/index.html">All Free Tools</a>
+                <a href="#services">Services</a>
+                <a href="https://tripetto.app/run/BKR1M1PACY">Book Consultation</a>
+            </div>
+            <div class="footer-links">
+                <h4>Categories</h4>
+                <a href="#free-tools">AI Tools</a>
+                <a href="#free-tools">SEO Tools</a>
+                <a href="#free-tools">Converters</a>
+                <a href="#free-tools">Validators</a>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <a href="https://www.linkedin.com/company/abetworks" target="_blank">LinkedIn</a>
+                <a href="https://x.com/abetworks" target="_blank">Twitter/X</a>
+                <a href="https://www.instagram.com/abetworks.in" target="_blank">Instagram</a>
+                <a href="https://t.me/abetworks" target="_blank">Telegram</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Abetworks. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Filter tools by category
+        function filterTools(category) {
+            const cards = document.querySelectorAll('.tool-card');
+            const buttons = document.querySelectorAll('.category-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Scroll reveal
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+</body>
+</html>

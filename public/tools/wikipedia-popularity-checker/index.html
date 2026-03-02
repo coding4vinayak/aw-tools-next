@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="wikipedia popularity checker, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+
+    <title>Free Wikipedia Popularity Checker | Page Views Analytics | Abetworks</title>
+    <meta name="description" content="Check Wikipedia article page views for the last 30, 60, or 90 days. Analyze popularity trends, compare multiple articles, and export data as CSV. Free, no signup required.">
+    <meta name="robots" content="index, follow">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/wikipedia-popularity-checker/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free Wikipedia Popularity Checker | Abetworks">
+    <meta property="og:description" content="Check Wikipedia article page views and analyze popularity trends. Compare articles and export data.">
+    <meta property="og:url" content="https://abetworks.in/tools/wikipedia-popularity-checker/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the Wikipedia Popularity Checker completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Wikipedia Popularity Checker by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What data source does this tool use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "This tool uses the official Wikimedia REST API to fetch real page view statistics for Wikipedia articles."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How far back can I view page view data?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can view page views for the last 30, 60, or 90 days. The Wikimedia API provides daily aggregated page view data."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I compare multiple Wikipedia articles?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! You can add multiple articles to compare their page view trends side by side and see which topics are more popular."
+                }
+            }
+        ]
+    }
+    </script>
+    <style>
+.chart-container {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            min-height: 300px;
+        }
+        .chart-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 250px;
+            padding: 20px 10px;
+            gap: 4px;
+        }
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--accent-blue), rgba(37, 99, 235, 0.3));
+            border-radius: 4px 4px 0 0;
+            min-width: 8px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        .bar:hover {
+            opacity: 0.8;
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-45deg);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .stat-card {
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .article-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .article-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .article-icon {
+            font-size: 1.5rem;
+        }
+        .article-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .article-views {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .remove-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+        .time-range-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .time-range-btn {
+            padding: 0.5rem 1rem;
+            background: var(--icon-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .time-range-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+        .comparison-mode {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .add-article-section {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .trend-up {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+        .trend-down {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+        .trend-stable {
+            background: rgba(107, 114, 128, 0.15);
+            color: #6b7280;
+        }
+    </style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/wikipedia-popularity-checker/">
+    <meta name="twitter:title" content="Free Wikipedia Popularity Checker Online | Abetworks">
+    <meta name="twitter:description" content="Free online wikipedia popularity checker tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link hide-mobile" target="_blank" rel="noopener">AbetWorks.in ↗</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Wikipedia Popularity Checker</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Wikipedia Popularity Checker</h1>
+            <p class="tool-subtitle">Check Wikipedia article page views for the last 30, 60, or 90 days. Analyze trends, compare articles, and export data.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Wikipedia Article Name</label>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="text" id="articleInput" class="form-input" placeholder="e.g., Artificial intelligence, Python (programming language)" style="flex: 1; min-width: 250px;">
+                    <button id="addArticleBtn" class="btn btn-primary" onclick="addArticle()">
+                        <span class="btn-text">Add Article</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Enter the exact Wikipedia article title. You can add multiple articles to compare.
+                </p>
+            </div>
+
+            <div class="time-range-selector">
+                <button class="time-range-btn active" onclick="setTimeRange(30)">Last 30 Days</button>
+                <button class="time-range-btn" onclick="setTimeRange(60)">Last 60 Days</button>
+                <button class="time-range-btn" onclick="setTimeRange(90)">Last 90 Days</button>
+            </div>
+
+            <div id="comparisonMode" class="comparison-mode" style="display: none;">
+                <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">📊 Article Comparison</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                    Comparing <span id="comparisonCount">0</span> articles
+                </p>
+                <div id="articleList" class="article-list"></div>
+                <div class="add-article-section">
+                    <input type="text" id="compareArticleInput" class="form-input" placeholder="Add another article to compare..." style="flex: 1;">
+                    <button class="btn btn-secondary" onclick="addCompareArticle()">Add</button>
+                </div>
+            </div>
+
+            <div class="result-area" id="resultArea">
+                <div class="result-header">
+                    <span class="result-title">📈 Page Views Analysis</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="copyResults()" class="btn btn-secondary">📋 Copy</button>
+                        <button onclick="exportCSV()" class="btn btn-secondary">📥 Export CSV</button>
+                    </div>
+                </div>
+
+                <div id="chartContainer" class="chart-container">
+                    <div class="chart-placeholder">
+                        <span>Add an article to see page view trends</span>
+                    </div>
+                </div>
+
+                <div class="stats-grid" id="statsGrid" style="display: none;">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalViews">-</div>
+                        <div class="stat-label">Total Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgDailyViews">-</div>
+                        <div class="stat-label">Avg Daily Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="peakViews">-</div>
+                        <div class="stat-label">Peak Day Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="trendIndicator">-</div>
+                        <div class="stat-label">Trend</div>
+                    </div>
+                </div>
+
+                <div id="resultContent" class="result-content" style="display: none; margin-top: 1.5rem; white-space: pre-wrap;"></div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the Wikipedia Popularity Checker?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                The Wikipedia Popularity Checker is a free analytics tool that lets you view and analyze page view statistics for any Wikipedia article. Using the official Wikimedia REST API, this tool provides real-time data on how many times an article has been viewed over the last 30, 60, or 90 days. Perfect for researchers, content creators, marketers, and anyone curious about topic popularity trends.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Enter the exact Wikipedia article title in the input field</li>
+                <li>Click "Add Article" to fetch page view data</li>
+                <li>Select your preferred time range (30, 60, or 90 days)</li>
+                <li>View the interactive chart showing daily page views</li>
+                <li>Add more articles to compare popularity trends</li>
+                <li>Export your data as CSV for further analysis</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Real-time page view data from Wikimedia API</li>
+                <li>✅ Flexible time ranges: 30, 60, or 90 days</li>
+                <li>✅ Interactive bar chart visualization</li>
+                <li>✅ Compare multiple articles side by side</li>
+                <li>✅ Key statistics: total views, daily average, peak day</li>
+                <li>✅ Trend indicator (up/down/stable)</li>
+                <li>✅ Export data as CSV for further analysis</li>
+                <li>✅ No signup required, completely free</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>📊 Track topic popularity over time</li>
+                <li>📈 Identify trending subjects and seasonal patterns</li>
+                <li>🔍 Compare interest levels between related topics</li>
+                <li>💡 Make data-driven content decisions</li>
+                <li>⚡ Instant access to official Wikimedia statistics</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Content creators researching topic demand</li>
+                <li>Marketers analyzing brand or product interest</li>
+                <li>Researchers studying information consumption patterns</li>
+                <li>Students comparing historical event interest</li>
+                <li>SEO professionals identifying trending keywords</li>
+            </ul>
+
+            <!-- Related Tools Section -->
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary); margin-top: 2rem;">
+                📊 Related Analytics Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <a href="../topic-trend-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📈</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Topic Trend Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze search trends</span>
+                    </div>
+                </a>
+                <a href="../app-store-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">App Store Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze app performance</span>
+                    </div>
+                </a>
+                <a href="../company-lookup/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🏢</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Company Lookup</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Get company information</span>
+                    </div>
+                </a>
+                <a href="../website-business-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Business Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze websites</span>
+                    </div>
+                </a>
+            </div>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the Wikipedia Popularity Checker completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the Wikipedia Popularity Checker by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What data source does this tool use?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        This tool uses the official Wikimedia REST API to fetch real page view statistics for Wikipedia articles.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How far back can I view page view data?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        You can view page views for the last 30, 60, or 90 days. The Wikimedia API provides daily aggregated page view data.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Can I compare multiple Wikipedia articles?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes! You can add multiple articles to compare their page view trends side by side and see which topics are more popular.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SiteGPT Multi-Column Footer -->
+        <div class="sitegpt-footer-wrapper">
+            <div class="sitegpt-footer-container">
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Sitemap Tools</span>
+                    <a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder & Checker</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+                    <a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+                    <a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">AI Chat & Prompt Tools</span>
+                    <a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+                    <a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+                    <a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+                </div>
+                <div class="sitegpt-footer-col">
+                    <span class="sitegpt-footer-title">Converters & Generators</span>
+                    <a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../csv-to-markdown/index.html">Convert CSV to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../json-to-markdown/index.html">Convert JSON to Markdown</a>
+                    <a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+                </div>
+                <div class="sitegpt-footer-col aw-footer-brand">
+                    <span class="sitegpt-footer-title">AbetWorks</span>
+                    <a class="sitegpt-footer-link" href="https://abetworks.in" target="_blank" rel="noopener">🌐 Main Website</a>
+                    <a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">📅 Free Consultation</a>
+                    <a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+                    <div class="aw-footer-socials">
+                        <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                        <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                        <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                        <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // State management
+        let articles = [];
+        let currentTimeRange = 30;
+        let pageViewData = {};
+
+        // Initialize theme from shared components
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('abet_theme_preference') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        // Theme toggle functions
+        function toggleTheme() {
+            const themes = ['dark', 'light', 'ocean', 'forest', 'sunset', 'midnight'];
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextTheme = themes[(currentIndex + 1) % themes.length];
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('abet_theme_preference', nextTheme);
+        }
+
+        // Set time range
+        function setTimeRange(days) {
+            currentTimeRange = days;
+            document.querySelectorAll('.time-range-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Re-fetch data for all articles
+            if (articles.length > 0) {
+                fetchAllArticlesData();
+            }
+        }
+
+        // Add article
+        async function addArticle() {
+            const input = document.getElementById('articleInput');
+            const articleName = input.value.trim();
+            
+            if (!articleName) {
+                alert('Please enter a Wikipedia article name');
+                return;
+            }
+
+            if (articles.includes(articleName)) {
+                alert('This article is already added');
+                return;
+            }
+
+            const btn = document.getElementById('addArticleBtn');
+            btn.classList.add('loading');
+
+            try {
+                await fetchArticleData(articleName);
+                input.value = '';
+                updateUI();
+            } catch (error) {
+                alert('Error fetching data: ' + error.message);
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        // Add compare article
+        async function addCompareArticle() {
+            const input = document.getElementById('compareArticleInput');
+            const articleName = input.value.trim();
+            
+            if (!articleName) {
+                alert('Please enter a Wikipedia article name');
+                return;
+            }
+
+            if (articles.includes(articleName)) {
+                alert('This article is already added');
+                return;
+            }
+
+            try {
+                await fetchArticleData(articleName);
+                input.value = '';
+                updateUI();
+            } catch (error) {
+                alert('Error fetching data: ' + error.message);
+            }
+        }
+
+        // Remove article
+        function removeArticle(articleName) {
+            articles = articles.filter(a => a !== articleName);
+            delete pageViewData[articleName];
+            updateUI();
+        }
+
+        // Fetch article data from Wikimedia API
+        async function fetchArticleData(articleName) {
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() - currentTimeRange);
+
+            const formatDate = (date) => date.toISOString().split('T')[0];
+            
+            const url = `https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/user/${encodeURIComponent(articleName.replace(/ /g, '_'))}/daily/${formatDate(startDate)}/${formatDate(endDate)}`;
+
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error(`Article "${articleName}" not found. Please check the exact title.`);
+                }
+                throw new Error('Failed to fetch page view data');
+            }
+
+            const data = await response.json();
+            
+            if (!data.items || data.items.length === 0) {
+                throw new Error(`No page view data found for "${articleName}"`);
+            }
+
+            articles.push(articleName);
+            pageViewData[articleName] = data.items.map(item => ({
+                date: item.timestamp,
+                views: item.views
+            }));
+        }
+
+        // Fetch all articles data
+        async function fetchAllArticlesData() {
+            pageViewData = {};
+            const currentArticles = [...articles];
+            articles = [];
+            
+            for (const article of currentArticles) {
+                try {
+                    await fetchArticleData(article);
+                } catch (error) {
+                    console.error(`Error fetching ${article}:`, error);
+                }
+            }
+            
+            updateUI();
+        }
+
+        // Update UI
+        function updateUI() {
+            const resultArea = document.getElementById('resultArea');
+            const comparisonMode = document.getElementById('comparisonMode');
+            const statsGrid = document.getElementById('statsGrid');
+            const chartContainer = document.getElementById('chartContainer');
+
+            if (articles.length === 0) {
+                resultArea.style.display = 'none';
+                comparisonMode.style.display = 'none';
+                return;
+            }
+
+            resultArea.style.display = 'block';
+            
+            if (articles.length > 1) {
+                comparisonMode.style.display = 'block';
+                document.getElementById('comparisonCount').textContent = articles.length;
+                
+                const articleList = document.getElementById('articleList');
+                articleList.innerHTML = articles.map(article => {
+                    const data = pageViewData[article] || [];
+                    const totalViews = data.reduce((sum, d) => sum + d.views, 0);
+                    return `
+                        <div class="article-item">
+                            <div class="article-info">
+                                <span class="article-icon">📄</span>
+                                <div>
+                                    <div class="article-name">${article}</div>
+                                    <div class="article-views">${formatNumber(totalViews)} total views</div>
+                                </div>
+                            </div>
+                            <button class="remove-btn" onclick="removeArticle('${article.replace(/'/g, "\\'")}')">×</button>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                comparisonMode.style.display = 'none';
+            }
+
+            // Render chart
+            renderChart();
+            
+            // Show stats for single article
+            if (articles.length === 1) {
+                statsGrid.style.display = 'grid';
+                updateStats(articles[0]);
+            } else {
+                statsGrid.style.display = 'none';
+            }
+        }
+
+        // Update statistics
+        function updateStats(articleName) {
+            const data = pageViewData[articleName] || [];
+            if (data.length === 0) return;
+
+            const totalViews = data.reduce((sum, d) => sum + d.views, 0);
+            const avgDailyViews = Math.round(totalViews / data.length);
+            const peakViews = Math.max(...data.map(d => d.views));
+            
+            // Calculate trend (compare first half to second half)
+            const midPoint = Math.floor(data.length / 2);
+            const firstHalfAvg = data.slice(0, midPoint).reduce((sum, d) => sum + d.views, 0) / midPoint;
+            const secondHalfAvg = data.slice(midPoint).reduce((sum, d) => sum + d.views, 0) / (data.length - midPoint);
+            const trendPercent = ((secondHalfAvg - firstHalfAvg) / firstHalfAvg) * 100;
+
+            document.getElementById('totalViews').textContent = formatNumber(totalViews);
+            document.getElementById('avgDailyViews').textContent = formatNumber(avgDailyViews);
+            document.getElementById('peakViews').textContent = formatNumber(peakViews);
+            
+            const trendEl = document.getElementById('trendIndicator');
+            if (trendPercent > 5) {
+                trendEl.innerHTML = `<span class="trend-indicator trend-up">↑ ${trendPercent.toFixed(1)}%</span>`;
+            } else if (trendPercent < -5) {
+                trendEl.innerHTML = `<span class="trend-indicator trend-down">↓ ${Math.abs(trendPercent).toFixed(1)}%</span>`;
+            } else {
+                trendEl.innerHTML = `<span class="trend-indicator trend-stable">→ Stable</span>`;
+            }
+        }
+
+        // Render bar chart
+        function renderChart() {
+            const chartContainer = document.getElementById('chartContainer');
+            
+            if (articles.length === 0) {
+                chartContainer.innerHTML = '<div class="chart-placeholder"><span>Add an article to see page view trends</span></div>';
+                return;
+            }
+
+            // Aggregate data by date (for multiple articles, show combined or individual)
+            let allData = [];
+            
+            if (articles.length === 1) {
+                allData = pageViewData[articles[0]] || [];
+            } else {
+                // For comparison, show combined views per day
+                const dateMap = {};
+                articles.forEach(article => {
+                    (pageViewData[article] || []).forEach(d => {
+                        if (!dateMap[d.date]) dateMap[d.date] = 0;
+                        dateMap[d.date] += d.views;
+                    });
+                });
+                allData = Object.entries(dateMap)
+                    .map(([date, views]) => ({ date, views }))
+                    .sort((a, b) => a.date.localeCompare(b.date));
+            }
+
+            if (allData.length === 0) {
+                chartContainer.innerHTML = '<div class="chart-placeholder"><span>No data available</span></div>';
+                return;
+            }
+
+            // Sample data for visualization (show every Nth day to avoid overcrowding)
+            const maxBars = 30;
+            const step = Math.max(1, Math.floor(allData.length / maxBars));
+            const sampledData = allData.filter((_, i) => i % step === 0);
+
+            const maxViews = Math.max(...sampledData.map(d => d.views));
+            
+            chartContainer.innerHTML = `
+                <div class="bar-chart">
+                    ${sampledData.map(d => {
+                        const height = (d.views / maxViews) * 220;
+                        const date = new Date(d.date);
+                        const label = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        return `
+                            <div class="bar" style="height: ${height}px;" title="${label}: ${formatNumber(d.views)} views">
+                                <span class="bar-value">${formatNumber(d.views)}</span>
+                                <span class="bar-label">${label}</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            // Update result content
+            const resultContent = document.getElementById('resultContent');
+            resultContent.style.display = 'block';
+            resultContent.textContent = generateResultText(allData);
+        }
+
+        // Generate result text
+        function generateResultText(data) {
+            if (data.length === 0) return '';
+            
+            const totalViews = data.reduce((sum, d) => sum + d.views, 0);
+            const avgDaily = Math.round(totalViews / data.length);
+            const peakDay = data.reduce((max, d) => d.views > max.views ? d : max, data[0]);
+            
+            return `Wikipedia Page Views Summary
+============================
+Total Views: ${formatNumber(totalViews)}
+Average Daily Views: ${formatNumber(avgDaily)}
+Peak Day: ${new Date(peakDay.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} (${formatNumber(peakDay.views)} views)
+Analysis Period: ${currentTimeRange} days`;
+        }
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toLocaleString('en-US');
+        }
+
+        // Copy results
+        function copyResults() {
+            const resultContent = document.getElementById('resultContent');
+            if (!resultContent || !resultContent.textContent) {
+                alert('No results to copy');
+                return;
+            }
+            
+            navigator.clipboard.writeText(resultContent.textContent).then(() => {
+                alert('Results copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+
+        // Export CSV
+        function exportCSV() {
+            if (articles.length === 0) {
+                alert('No data to export');
+                return;
+            }
+
+            let csv = 'Date,Article,Views\n';
+            
+            articles.forEach(article => {
+                (pageViewData[article] || []).forEach(d => {
+                    csv += `${d.date},"${article}",${d.views}\n`;
+                });
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `wikipedia-pageviews-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            
+            // Allow Enter key to add article
+            document.getElementById('articleInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') addArticle();
+            });
+            
+            document.getElementById('compareArticleInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') addCompareArticle();
+            });
+        });
+    </script>
+</body>
+</html>

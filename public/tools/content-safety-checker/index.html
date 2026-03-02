@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="content safety checker, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm-start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Free Content Safety Checker - Profanity & Toxicity Detector | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Check text for profanity, toxicity, and readability. Free content safety analyzer with export reports for moderators and content creators." name="description"/>
+<link href="https://abetworks.in/tools/content-safety-checker/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Free Content Safety Checker - Profanity & Toxicity Detector | Abetworks" property="og:title"/>
+<meta content="Check text for profanity, toxicity, and readability. Free content safety analyzer." property="og:description"/>
+<meta content="https://abetworks.in/tools/content-safety-checker/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is this content safety checker free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, this content safety checker is 100% free with no limits or registration required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How does profanity detection work?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The tool uses a comprehensive list of profane words and phrases to detect inappropriate content in your text."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I check text from a URL?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can paste a URL and the tool will fetch and analyze the text content from that page."
+            }
+        }
+    ]
+}</script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/content-safety-checker/">
+    <meta name="twitter:title" content="Free Content Safety Checker Online | Abetworks">
+    <meta name="twitter:description" content="Free online content safety checker tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>Content Safety Checker</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Content Safety Checker</h1>
+<p class="tool-subtitle">Analyze text for profanity, toxicity, and readability. Perfect for content moderation and quality assurance.</p>
+</div>
+<div class="tool-workspace">
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+<label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+<input type="radio" name="inputType" value="text" checked onchange="toggleInputType()"/> Text
+</label>
+<label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+<input type="radio" name="inputType" value="url" onchange="toggleInputType()"/> URL
+</label>
+</div>
+
+<div class="form-group" id="textInputGroup">
+<label class="form-label">Enter Text to Analyze</label>
+<textarea class="form-textarea" id="textContent" placeholder="Paste your text here to check for profanity, toxicity, and readability..." rows="6"></textarea>
+<div style="text-align: right; margin-top: 0.5rem;">
+<span id="charCount" style="font-size: 0.85rem; color: var(--text-secondary);">0 characters</span>
+</div>
+</div>
+
+<div class="form-group hidden" id="urlInputGroup">
+<label class="form-label">Enter URL to Analyze</label>
+<input class="form-input" id="urlContent" placeholder="https://example.com/article" type="text"/>
+</div>
+
+<button class="btn btn-primary" id="analyzeBtn" onclick="analyzeContent()" style="width: 100%; margin-bottom: 1.5rem;">
+<span class="btn-text">🔍 Analyze Content</span>
+<div class="loader"></div>
+</button>
+
+<div class="result-area hidden" id="resultArea">
+<div class="result-header">
+<span class="result-title">Content Analysis Report</span>
+<div style="display: flex; gap: 0.5rem;">
+<button class="btn btn-secondary" onclick="copyReport()">📋 Copy</button>
+<button class="btn btn-primary" onclick="exportReport()">⬇️ Export Report</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Overall Safety</p>
+<p id="overallSafety" style="font-size: 1.5rem; font-weight: 700;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Profanity Score</p>
+<p id="profanityScore" style="font-size: 1.25rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Toxicity Score</p>
+<p id="toxicityScore" style="font-size: 1.25rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Readability</p>
+<p id="readabilityScore" style="font-size: 1.25rem; font-weight: 600;">-</p>
+</div>
+</div>
+
+<div style="margin-top: 1.5rem;">
+<h4 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">Detailed Analysis</h4>
+
+<div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+<h5 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">🚫 Profanity Detection</h5>
+<span id="profanityStatus" style="font-size: 0.85rem; padding: 0.25rem 0.75rem; border-radius: 6px;">-</span>
+</div>
+<p id="profanityDetails" style="font-size: 0.9rem; color: var(--text-secondary);">-</p>
+<div id="profanityWords" style="margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+</div>
+
+<div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+<h5 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">⚠️ Toxicity Analysis</h5>
+<span id="toxicityStatus" style="font-size: 0.85rem; padding: 0.25rem 0.75rem; border-radius: 6px;">-</span>
+</div>
+<p id="toxicityDetails" style="font-size: 0.9rem; color: var(--text-secondary);">-</p>
+</div>
+
+<div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+<h5 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">📖 Readability Metrics</h5>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.75rem;">
+<div>
+<p style="font-size: 0.8rem; color: var(--text-secondary);">Word Count</p>
+<p id="wordCount" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div>
+<p style="font-size: 0.8rem; color: var(--text-secondary);">Sentence Count</p>
+<p id="sentenceCount" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div>
+<p style="font-size: 0.8rem; color: var(--text-secondary);">Avg Word Length</p>
+<p id="avgWordLength" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div>
+<p style="font-size: 0.8rem; color: var(--text-secondary);">Reading Time</p>
+<p id="readingTime" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+</div>
+<p id="readabilityDetails" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.75rem;">-</p>
+</div>
+
+<div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+<h5 style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">💡 Recommendations</h5>
+</div>
+<ul id="recommendations" style="font-size: 0.9rem; color: var(--text-secondary); padding-left: 1.25rem; line-height: 1.8;">-</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Related Tools Section -->
+<section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+🔗 Related Tools
+</h3>
+<div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+<a href="../ai-faq-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">❓</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">AI FAQ Generator</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Generate FAQs</span>
+</div>
+</a>
+<a href="../text-to-faq-generator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">📝</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Text to FAQ</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Convert text to FAQs</span>
+</div>
+</a>
+<a href="../landing-page-grader/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">📝</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Landing Page Grader</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Grade landing pages</span>
+</div>
+</a>
+<a href="../website-business-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Analyzer</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze websites</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+<h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+What is the Content Safety Checker?
+</h2>
+<p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+The Content Safety Checker by Abetworks is a free, comprehensive tool that analyzes text for profanity, toxicity, and readability. Perfect for content moderators, social media managers, educators, and anyone who needs to ensure their content is appropriate and accessible. Get detailed reports with actionable recommendations to improve your content quality.
+</p>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+How to Use
+</h3>
+<ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Select input type (Text or URL)</li>
+<li>Paste your text or enter a URL</li>
+<li>Click "Analyze Content" to start the check</li>
+<li>Review profanity, toxicity, and readability scores</li>
+<li>Read detailed analysis and recommendations</li>
+<li>Copy or export the report for documentation</li>
+</ol>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Features
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>✅ Profanity detection with word highlighting</li>
+<li>✅ Toxicity score calculation</li>
+<li>✅ Readability analysis (Flesch-Kincaid)</li>
+<li>✅ Word and sentence counting</li>
+<li>✅ Reading time estimation</li>
+<li>✅ URL content analysis</li>
+<li>✅ Detailed recommendations</li>
+<li>✅ Copy report functionality</li>
+<li>✅ Export as text file</li>
+<li>✅ Real-time character counting</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Benefits
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>🛡️ Ensure content is appropriate for all audiences</li>
+<li>📊 Get objective content quality metrics</li>
+<li>✏️ Improve readability for better engagement</li>
+<li>⚡ Fast, automated content analysis</li>
+<li>📋 Export reports for compliance documentation</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Use Cases
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Content moderators reviewing user submissions</li>
+<li>Social media managers checking posts</li>
+<li>Educators reviewing student work</li>
+<li>Writers ensuring content appropriateness</li>
+<li>Community managers monitoring forums</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+Frequently Asked Questions
+</h3>
+<div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Is this content safety checker free?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, this content safety checker is 100% free with no limits or registration required.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+How does profanity detection work?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+The tool uses a comprehensive list of profane words and phrases to detect inappropriate content in your text.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Can I check text from a URL?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, you can paste a URL and the tool will fetch and analyze the text content from that page.
+</p>
+</div>
+</div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Content Tools</span>
+<a class="sitegpt-footer-link" href="../ai-faq-generator/index.html">AI FAQ Generator</a>
+<a class="sitegpt-footer-link" href="../text-to-faq-generator/index.html">Text to FAQ</a>
+<a class="sitegpt-footer-link" href="../ai-letter-generator/index.html">AI Letter Generator</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Writing Tools</span>
+<a class="sitegpt-footer-link" href="../convert-paste-to-markdown/index.html">Paste to Markdown</a>
+<a class="sitegpt-footer-link" href="../text-to-pdf-converter/index.html">Text to PDF</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Analysis Tools</span>
+<a class="sitegpt-footer-link" href="../landing-page-grader/index.html">Landing Page Grader</a>
+<a class="sitegpt-footer-link" href="../website-business-analyzer/index.html">Website Analyzer</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">📅 Free Consultation</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+</div>
+</div>
+</div>
+
+</main>
+
+<script src="/tools/shared/api-client.js"></script>
+<script>
+// Profanity word list (common words for detection)
+const profanityList = [
+    'damn', 'hell', 'crap', 'ass', 'bitch', 'bastard', 'shit', 'fuck', 'fuck', 
+    'piss', 'bloody', 'bollocks', 'bugger', 'cock', 'cunt', 'dick', 'fag', 
+    'goddamn', 'goddamnit', 'motherfucker', 'asshole', 'bullshit', 'shithead',
+    'fucker', 'fucking', 'fucked', 'shitty', 'pissed', 'wanker', 'twat'
+];
+
+// Toxic phrases and patterns
+const toxicPatterns = [
+    /you\s+(are|'re)\s+(stupid|idiot|dumb|moron|retard)/gi,
+    /i\s+hate\s+/gi,
+    /kill\s+(yourself|myself|them)/gi,
+    /shut\s+up/gi,
+    /go\s+to\s+hell/gi,
+    /die/gi,
+    /stupid\s+(person|idiot|fool)/gi,
+    /worthless/gi,
+    /useless/gi,
+    /pathetic/gi
+];
+
+let analysisData = null;
+
+function toggleInputType() {
+    const inputType = document.querySelector('input[name="inputType"]:checked').value;
+    const textGroup = document.getElementById('textInputGroup');
+    const urlGroup = document.getElementById('urlInputGroup');
+    
+    if (inputType === 'text') {
+        textGroup.classList.remove('hidden');
+        urlGroup.classList.add('hidden');
+    } else {
+        textGroup.classList.add('hidden');
+        urlGroup.classList.remove('hidden');
+    }
+}
+
+// Character count
+document.getElementById('textContent').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = `${this.value.length} characters`;
+});
+
+async function analyzeContent() {
+    const btn = document.getElementById('analyzeBtn');
+    const resultArea = document.getElementById('resultArea');
+    const inputType = document.querySelector('input[name="inputType"]:checked').value;
+    
+    let text = '';
+    
+    if (inputType === 'text') {
+        text = document.getElementById('textContent').value.trim();
+    } else {
+        const url = document.getElementById('urlContent').value.trim();
+        if (!url) {
+            alert('Please enter a URL');
+            return;
+        }
+        
+        btn.classList.add('loading');
+        resultArea.classList.add('hidden');
+        
+        try {
+            // Fetch URL content using a CORS proxy or direct fetch
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Failed to fetch URL');
+            const html = await response.text();
+            
+            // Extract text from HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Remove scripts and styles
+            doc.querySelectorAll('script, style, nav, footer, header').forEach(el => el.remove());
+            
+            text = doc.body.textContent || doc.body.innerText;
+            text = text.replace(/\s+/g, ' ').trim();
+        } catch (error) {
+            console.error('URL fetch error:', error);
+            alert('Failed to fetch URL content. Please try pasting the text directly.');
+            btn.classList.remove('loading');
+            return;
+        }
+    }
+    
+    if (!text) {
+        alert('Please enter text to analyze');
+        return;
+    }
+    
+    btn.classList.add('loading');
+    resultArea.classList.add('hidden');
+    
+    setTimeout(() => {
+        // Perform analysis
+        analysisData = performAnalysis(text);
+        renderResults(analysisData);
+        
+        resultArea.classList.remove('hidden');
+        btn.classList.remove('loading');
+    }, 500);
+}
+
+function performAnalysis(text) {
+    const textLower = text.toLowerCase();
+    const words = text.split(/\s+/);
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    
+    // Profanity detection
+    const foundProfanity = [];
+    profanityList.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        if (regex.test(textLower)) {
+            foundProfanity.push(word);
+        }
+    });
+    
+    const profanityCount = foundProfanity.length;
+    const profanityScore = Math.min(100, Math.round((profanityCount / Math.max(1, words.length)) * 1000));
+    
+    // Toxicity detection
+    let toxicMatches = 0;
+    toxicPatterns.forEach(pattern => {
+        if (pattern.test(text)) {
+            toxicMatches++;
+        }
+    });
+    
+    const toxicityScore = Math.min(100, Math.round((toxicMatches / Math.max(1, sentences.length)) * 50));
+    
+    // Readability (simplified Flesch-Kincaid)
+    const totalSyllables = words.reduce((sum, word) => sum + countSyllables(word), 0);
+    const avgWordsPerSentence = words.length / Math.max(1, sentences.length);
+    const avgSyllablesPerWord = totalSyllables / Math.max(1, words.length);
+    
+    // Flesch Reading Ease: 206.835 - 1.015 * (words/sentences) - 84.6 * (syllables/words)
+    let fleschScore = 206.835 - 1.015 * avgWordsPerSentence - 84.6 * avgSyllablesPerWord;
+    fleschScore = Math.max(0, Math.min(100, Math.round(fleschScore)));
+    
+    // Reading time (average 200 words per minute)
+    const readingTimeMinutes = Math.ceil(words.length / 200);
+    
+    // Calculate average word length
+    const avgWordLength = Math.round(words.reduce((sum, word) => sum + word.length, 0) / Math.max(1, words.length) * 10) / 10;
+    
+    // Overall safety
+    let overallSafety = 'Safe';
+    let safetyColor = '#22c55e';
+    if (profanityScore > 30 || toxicityScore > 50) {
+        overallSafety = 'Warning';
+        safetyColor = '#f59e0b';
+    }
+    if (profanityScore > 60 || toxicityScore > 70) {
+        overallSafety = 'Unsafe';
+        safetyColor = '#ef4444';
+    }
+    
+    // Generate recommendations
+    const recommendations = [];
+    if (profanityCount > 0) {
+        recommendations.push(`Remove ${profanityCount} profane word(s) to make content more appropriate.`);
+    }
+    if (toxicMatches > 0) {
+        recommendations.push('Reduce toxic language patterns to improve content tone.');
+    }
+    if (fleschScore < 50) {
+        recommendations.push('Simplify sentence structure to improve readability.');
+    }
+    if (fleschScore > 80) {
+        recommendations.push('Content is very easy to read. Consider adding more depth if appropriate.');
+    }
+    if (avgWordsPerSentence > 25) {
+        recommendations.push('Break down long sentences for better readability.');
+    }
+    if (recommendations.length === 0) {
+        recommendations.push('Content looks good! No major issues detected.');
+    }
+    
+    return {
+        text: text,
+        wordCount: words.length,
+        sentenceCount: sentences.length,
+        avgWordLength: avgWordLength,
+        readingTime: readingTimeMinutes,
+        profanityCount: profanityCount,
+        profanityWords: foundProfanity,
+        profanityScore: profanityScore,
+        toxicityScore: toxicityScore,
+        fleschScore: fleschScore,
+        overallSafety: overallSafety,
+        safetyColor: safetyColor,
+        recommendations: recommendations,
+        timestamp: new Date().toISOString()
+    };
+}
+
+function countSyllables(word) {
+    word = word.toLowerCase().replace(/[^a-z]/g, '');
+    if (word.length <= 3) return 1;
+    
+    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+    word = word.replace(/^y/, '');
+    
+    const matches = word.match(/[aeiouy]{1,2}/g);
+    return matches ? matches.length : 1;
+}
+
+function renderResults(data) {
+    // Overall scores
+    document.getElementById('overallSafety').textContent = data.overallSafety;
+    document.getElementById('overallSafety').style.color = data.safetyColor;
+    
+    document.getElementById('profanityScore').textContent = `${data.profanityScore}/100`;
+    document.getElementById('toxicityScore').textContent = `${data.toxicityScore}/100`;
+    
+    // Readability
+    let readabilityLabel = 'Average';
+    if (data.fleschScore >= 80) readabilityLabel = 'Very Easy';
+    else if (data.fleschScore >= 60) readabilityLabel = 'Easy';
+    else if (data.fleschScore >= 40) readabilityLabel = 'Average';
+    else if (data.fleschScore >= 20) readabilityLabel = 'Difficult';
+    else readabilityLabel = 'Very Difficult';
+    
+    document.getElementById('readabilityScore').textContent = readabilityLabel;
+    
+    // Profanity details
+    const profanityStatus = document.getElementById('profanityStatus');
+    if (data.profanityCount === 0) {
+        profanityStatus.textContent = '✅ Clean';
+        profanityStatus.style.background = '#22c55e';
+        profanityStatus.style.color = 'white';
+    } else {
+        profanityStatus.textContent = `⚠️ ${data.profanityCount} found`;
+        profanityStatus.style.background = '#ef4444';
+        profanityStatus.style.color = 'white';
+    }
+    
+    document.getElementById('profanityDetails').textContent = data.profanityCount === 0 
+        ? 'No profane words detected in the content.'
+        : `Found ${data.profanityCount} potentially inappropriate word(s). Consider reviewing and replacing.`;
+    
+    const profanityWordsContainer = document.getElementById('profanityWords');
+    if (data.profanityWords.length > 0) {
+        profanityWordsContainer.innerHTML = data.profanityWords.map(word => 
+            `<span style="background: #ef4444; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">${word}</span>`
+        ).join('');
+    } else {
+        profanityWordsContainer.innerHTML = '';
+    }
+    
+    // Toxicity details
+    const toxicityStatus = document.getElementById('toxicityStatus');
+    if (data.toxicityScore < 30) {
+        toxicityStatus.textContent = '✅ Low';
+        toxicityStatus.style.background = '#22c55e';
+        toxicityStatus.style.color = 'white';
+    } else if (data.toxicityScore < 60) {
+        toxicityStatus.textContent = '⚠️ Moderate';
+        toxicityStatus.style.background = '#f59e0b';
+        toxicityStatus.style.color = 'white';
+    } else {
+        toxicityStatus.textContent = '🚫 High';
+        toxicityStatus.style.background = '#ef4444';
+        toxicityStatus.style.color = 'white';
+    }
+    
+    document.getElementById('toxicityDetails').textContent = data.toxicityScore < 30
+        ? 'Content tone appears respectful and non-toxic.'
+        : 'Content contains some potentially toxic language patterns. Consider revising tone.';
+    
+    // Readability metrics
+    document.getElementById('wordCount').textContent = data.wordCount;
+    document.getElementById('sentenceCount').textContent = data.sentenceCount;
+    document.getElementById('avgWordLength').textContent = data.avgWordLength;
+    document.getElementById('readingTime').textContent = data.readingTime <= 1 ? '< 1 min' : `${data.readingTime} min`;
+    
+    document.getElementById('readabilityDetails').textContent = 
+        `Flesch Reading Ease Score: ${data.fleschScore}/100. ${readabilityLabel} to read.`;
+    
+    // Recommendations
+    document.getElementById('recommendations').innerHTML = data.recommendations
+        .map(rec => `<li>${rec}</li>`).join('');
+}
+
+function copyReport() {
+    if (!analysisData) return;
+    
+    let text = `Content Safety Analysis Report\n`;
+    text += `Generated: ${new Date(analysisData.timestamp).toLocaleString()}\n\n`;
+    text += `Overall Safety: ${analysisData.overallSafety}\n`;
+    text += `Profanity Score: ${analysisData.profanityScore}/100\n`;
+    text += `Toxicity Score: ${analysisData.toxicityScore}/100\n`;
+    text += `Readability: ${analysisData.fleschScore}/100\n\n`;
+    text += `Metrics:\n`;
+    text += `- Word Count: ${analysisData.wordCount}\n`;
+    text += `- Sentence Count: ${analysisData.sentenceCount}\n`;
+    text += `- Avg Word Length: ${analysisData.avgWordLength}\n`;
+    text += `- Reading Time: ${analysisData.readingTime} min\n\n`;
+    text += `Profanity Found: ${analysisData.profanityWords.join(', ') || 'None'}\n\n`;
+    text += `Recommendations:\n`;
+    analysisData.recommendations.forEach(rec => {
+        text += `- ${rec}\n`;
+    });
+    
+    navigator.clipboard.writeText(text);
+    if (window.AbetworksUI) {
+        AbetworksUI.showToast('Report copied to clipboard!');
+    }
+}
+
+function exportReport() {
+    if (!analysisData) return;
+    
+    let text = `Content Safety Analysis Report\n`;
+    text += `Generated: ${new Date(analysisData.timestamp).toLocaleString()}\n\n`;
+    text += `Overall Safety: ${analysisData.overallSafety}\n`;
+    text += `Profanity Score: ${analysisData.profanityScore}/100\n`;
+    text += `Toxicity Score: ${analysisData.toxicityScore}/100\n`;
+    text += `Readability: ${analysisData.fleschScore}/100\n\n`;
+    text += `Metrics:\n`;
+    text += `- Word Count: ${analysisData.wordCount}\n`;
+    text += `- Sentence Count: ${analysisData.sentenceCount}\n`;
+    text += `- Avg Word Length: ${analysisData.avgWordLength}\n`;
+    text += `- Reading Time: ${analysisData.readingTime} min\n\n`;
+    text += `Profanity Found: ${analysisData.profanityWords.join(', ') || 'None'}\n\n`;
+    text += `Recommendations:\n`;
+    analysisData.recommendations.forEach(rec => {
+        text += `- ${rec}\n`;
+    });
+    
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `content-safety-report-${Date.now()}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    if (window.AbetworksUI) {
+        AbetworksUI.showToast('Report exported!');
+    }
+}
+</script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

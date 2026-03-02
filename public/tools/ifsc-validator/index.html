@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="ifsc validator, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <title>Free IFSC Code Validator & Lookup | Indian Banks | Abetworks</title>
+    <meta name="description" content="Validate and lookup Indian IFSC codes instantly. Get bank name, branch, address, contact details, and verify IFSC format. Free, no signup required.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/ifsc-validator/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free IFSC Code Validator & Lookup | Abetworks">
+    <meta property="og:description" content="Validate and lookup Indian IFSC codes instantly. Get bank, branch, and address details.">
+    <meta property="og:url" content="https://abetworks.in/tools/ifsc-validator/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the IFSC Validator completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the IFSC Validator by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is an IFSC code?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "IFSC (Indian Financial System Code) is an 11-character alphanumeric code that uniquely identifies a bank branch in India for electronic fund transfers like NEFT, RTGS, and IMPS."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How accurate is the IFSC data?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our IFSC data is sourced from the official RBI database and updated regularly to ensure accuracy and reliability."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/ifsc-validator/">
+    <meta name="twitter:title" content="Free Ifsc Validator Online | Abetworks">
+    <meta name="twitter:description" content="Free online ifsc validator tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-link" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 600;">Contact</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>IFSC Validator</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+            <h1 class="sitegpt-h1">IFSC Validator</h1>
+            <p class="tool-subtitle">Validate and lookup Indian IFSC codes instantly. Get bank name, branch, address, and contact details.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Enter IFSC Code</label>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="text" id="ifscInput" class="form-input" placeholder="Enter 11-character IFSC code (e.g., SBIN0001234)" maxlength="11" style="flex: 1; min-width: 200px; font-family: monospace; font-size: 1.1rem; text-transform: uppercase;">
+                    <button id="validateBtn" class="btn btn-primary" onclick="validateIFSC()">
+                        <span class="btn-text">🔍 Validate & Lookup</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    💡 Tip: IFSC codes are 11 characters - 4 letters (bank) + 0 + 6 alphanumeric (branch)
+                </p>
+            </div>
+
+            <div class="result-area" id="resultArea" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <div id="validationBadge" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                </div>
+
+                <div class="bank-details-section" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">🏦</span>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Bank Name</div>
+                                <div id="bankName" style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">📍</span>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Branch</div>
+                                <div id="branchName" style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); grid-column: 1 / -1;">
+                        <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">🏠</span>
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Address</div>
+                                <div id="branchAddress" style="font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-top: 0.25rem;">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">📞</span>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Contact</div>
+                                <div id="branchContact" style="font-size: 1rem; color: var(--text-primary);">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">🏙️</span>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">City</div>
+                                <div id="branchCity" style="font-size: 1rem; color: var(--text-primary);">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">📬</span>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">District</div>
+                                <div id="branchDistrict" style="font-size: 1rem; color: var(--text-primary);">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">🗺️</span>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">State</div>
+                                <div id="branchState" style="font-size: 1rem; color: var(--text-primary);">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ifsc-info-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <div class="result-header">
+                        <span class="result-title">📋 IFSC Code Details</span>
+                        <button onclick="copyIFSC()" class="btn btn-secondary">📋 Copy IFSC</button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">IFSC Code</div>
+                            <div id="ifscCodeDisplay" style="font-family: monospace; font-size: 1.25rem; font-weight: 600; color: var(--accent-blue);">-</div>
+                        </div>
+                        <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Bank Code</div>
+                            <div id="bankCode" style="font-family: monospace; font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">-</div>
+                        </div>
+                        <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Branch Code</div>
+                            <div id="branchCode" style="font-family: monospace; font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transfer-info-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">💸 Supported Transfer Methods</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span style="padding: 0.5rem 1rem; background: rgba(37, 99, 235, 0.1); border: 1px solid var(--accent-blue); border-radius: 20px; font-size: 0.85rem; color: var(--accent-blue); font-weight: 600;">✅ NEFT</span>
+                        <span style="padding: 0.5rem 1rem; background: rgba(37, 99, 235, 0.1); border: 1px solid var(--accent-blue); border-radius: 20px; font-size: 0.85rem; color: var(--accent-blue); font-weight: 600;">✅ RTGS</span>
+                        <span style="padding: 0.5rem 1rem; background: rgba(37, 99, 235, 0.1); border: 1px solid var(--accent-blue); border-radius: 20px; font-size: 0.85rem; color: var(--accent-blue); font-weight: 600;">✅ IMPS</span>
+                        <span style="padding: 0.5rem 1rem; background: rgba(37, 99, 235, 0.1); border: 1px solid var(--accent-blue); border-radius: 20px; font-size: 0.85rem; color: var(--accent-blue); font-weight: 600;">✅ UPI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                📊 Related Calculator Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../currency-converter/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">💱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Currency Converter</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Convert currencies</span>
+                    </div>
+                </a>
+                <a href="../eu-vat-validator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🇪🇺</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">EU VAT Validator</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Validate EU VAT numbers</span>
+                    </div>
+                </a>
+                <a href="../phone-spam-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📱</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Phone Spam Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Check spam numbers</span>
+                    </div>
+                </a>
+                <a href="../email-validity-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📧</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Email Validity Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Verify email addresses</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+<!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the IFSC Validator?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                Our free IFSC Validator is a comprehensive tool for validating and looking up Indian Financial System Code (IFSC) codes. Instantly verify IFSC code format, get complete bank branch details including name, address, contact information, and ensure your fund transfers reach the correct destination. Essential for NEFT, RTGS, IMPS, and UPI transactions.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Enter the 11-character IFSC code in the input field</li>
+                <li>Click "Validate & Lookup" to verify and fetch details</li>
+                <li>Review the bank name, branch, address, and contact information</li>
+                <li>Copy the IFSC code or use the details for your transaction</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Instant IFSC code validation and format check</li>
+                <li>✅ Complete bank branch details (name, address, contact)</li>
+                <li>✅ City, district, and state information</li>
+                <li>✅ Bank code and branch code breakdown</li>
+                <li>✅ One-click copy IFSC functionality</li>
+                <li>✅ Support for all Indian banks (SBI, HDFC, ICICI, Axis, etc.)</li>
+                <li>✅ No signup required, completely free and unlimited</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>🛡️ Prevent failed transactions with accurate IFSC verification</li>
+                <li>🛡️ Avoid fraud by confirming branch details before transfers</li>
+                <li>🛡️ Save time with instant lookup instead of calling banks</li>
+                <li>🛡️ Ensure NEFT/RTGS/IMPS transfers reach correct branches</li>
+                <li>🛡️ Get complete address for bank correspondence</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>💼 Setting up salary transfers for employees</li>
+                <li>🏠 Making home loan EMI payments</li>
+                <li>📱 Configuring UPI auto-pay mandates</li>
+                <li>💳 Adding beneficiaries for fund transfers</li>
+                <li>📊 Verifying vendor payment details for business</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the IFSC Validator completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the IFSC Validator by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What is an IFSC code?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        IFSC (Indian Financial System Code) is an 11-character alphanumeric code that uniquely identifies a bank branch in India for electronic fund transfers like NEFT, RTGS, and IMPS.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        How accurate is the IFSC data?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Our IFSC data is sourced from the official RBI database and updated regularly to ensure accuracy and reliability.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+    
+        
+
+        <style>
+        .related-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+        }
+        </style>
+
+</main>
+
+    <script src="/tools/shared/api-client.js"></script>
+    <script>
+        // Auto-uppercase IFSC input
+        document.getElementById('ifscInput').addEventListener('input', function(e) {
+            this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        });
+
+        // Allow Enter key to trigger validation
+        document.getElementById('ifscInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateIFSC();
+            }
+        });
+
+        async function validateIFSC() {
+            const ifscCode = document.getElementById('ifscInput').value.trim().toUpperCase();
+            const btn = document.getElementById('validateBtn');
+            const resultArea = document.getElementById('resultArea');
+
+            if (!ifscCode) {
+                AbetworksUI.showError('Please enter an IFSC code');
+                return;
+            }
+
+            // Basic format validation
+            if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifscCode)) {
+                displayInvalidResult(ifscCode);
+                return;
+            }
+
+            btn.classList.add('loading');
+            resultArea.style.display = 'none';
+
+            try {
+                // Use Razorpay IFSC API
+                const response = await fetch(`https://ifsc.razorpay.com/${ifscCode}`);
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        displayInvalidResult(ifscCode);
+                    } else {
+                        throw new Error('API request failed');
+                    }
+                    return;
+                }
+
+                const data = await response.json();
+                
+                if (data.error || !data.BANK) {
+                    displayInvalidResult(ifscCode);
+                    return;
+                }
+
+                displayValidResult(data, ifscCode);
+
+            } catch (error) {
+                console.error('IFSC Validation Error:', error);
+                // Try to show at least the format validation
+                displayFormatOnlyResult(ifscCode);
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        function displayValidResult(data, ifscCode) {
+            const resultArea = document.getElementById('resultArea');
+            const validationBadge = document.getElementById('validationBadge');
+
+            // Validation badge
+            validationBadge.innerHTML = '✅ Valid IFSC Code';
+            validationBadge.style.background = 'rgba(34, 197, 94, 0.1)';
+            validationBadge.style.color = '#22c55e';
+
+            // Bank details
+            document.getElementById('bankName').textContent = data.BANK || 'N/A';
+            document.getElementById('branchName').textContent = data.BRANCH || 'N/A';
+            document.getElementById('branchAddress').textContent = data.ADDRESS || 'Address not available';
+            document.getElementById('branchContact').textContent = data.CONTACT || 'Not available';
+            document.getElementById('branchCity').textContent = data.CITY || 'N/A';
+            document.getElementById('branchDistrict').textContent = data.DISTRICT || 'N/A';
+            document.getElementById('branchState').textContent = data.STATE || 'N/A';
+
+            // IFSC breakdown
+            document.getElementById('ifscCodeDisplay').textContent = ifscCode;
+            document.getElementById('bankCode').textContent = ifscCode.substring(0, 4);
+            document.getElementById('branchCode').textContent = ifscCode.substring(5);
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function displayInvalidResult(ifscCode) {
+            const resultArea = document.getElementById('resultArea');
+            const validationBadge = document.getElementById('validationBadge');
+
+            validationBadge.innerHTML = '❌ Invalid IFSC Code - Not Found';
+            validationBadge.style.background = 'rgba(239, 68, 68, 0.1)';
+            validationBadge.style.color = '#ef4444';
+
+            // Clear all fields
+            ['bankName', 'branchName', 'branchAddress', 'branchContact', 
+             'branchCity', 'branchDistrict', 'branchState', 'ifscCodeDisplay',
+             'bankCode', 'branchCode'].forEach(id => {
+                document.getElementById(id).textContent = '-';
+            });
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function displayFormatOnlyResult(ifscCode) {
+            const resultArea = document.getElementById('resultArea');
+            const validationBadge = document.getElementById('validationBadge');
+
+            validationBadge.innerHTML = '⚠️ Valid Format - Unable to Fetch Details';
+            validationBadge.style.background = 'rgba(234, 179, 8, 0.1)';
+            validationBadge.style.color = '#eab308';
+
+            // Show IFSC breakdown
+            document.getElementById('ifscCodeDisplay').textContent = ifscCode;
+            document.getElementById('bankCode').textContent = ifscCode.substring(0, 4);
+            document.getElementById('branchCode').textContent = ifscCode.substring(5);
+
+            // Clear other fields
+            ['bankName', 'branchName', 'branchAddress', 'branchContact', 
+             'branchCity', 'branchDistrict', 'branchState'].forEach(id => {
+                document.getElementById(id).textContent = 'Unable to fetch';
+            });
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function copyIFSC() {
+            const ifscCode = document.getElementById('ifscCodeDisplay').textContent;
+            if (ifscCode && ifscCode !== '-') {
+                AbetworksUI.copyToClipboard(ifscCode);
+            }
+        }
+    </script>
+
+    
+        <!-- Related Tools Section -->
+        <div class="related-tools" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e5e7eb;">
+            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 24px;">🔗 Related Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <a href="../qr-code-generator/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">📱</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">QR Code Generator</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Create custom QR codes instantly</span>
+                </a>
+                <a href="../url-shortener/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🔗</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">URL Shortener</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Shorten long URLs into clean links</span>
+                </a>
+                <a href="../image-compressor/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🖼️</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">Image Compressor</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Compress images while maintaining quality</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style>
+[data-theme="dark"] .related-tools h2 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:first-child {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:last-child {
+    color: #94a3b8 !important;
+}
+
+    </style>
+</body>
+</html>

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="browser detector, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm-start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Free Browser Detector - Detect Browser, OS & Device | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Detect your browser name, version, operating system, device type, and screen resolution instantly. Free browser detection tool with copy functionality." name="description"/>
+<link href="https://abetworks.in/tools/browser-detector/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Free Browser Detector - Detect Browser, OS & Device | Abetworks" property="og:title"/>
+<meta content="Detect your browser name, version, operating system, device type, and screen resolution instantly." property="og:description"/>
+<meta content="https://abetworks.in/tools/browser-detector/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is this browser detector tool free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, this browser detector is 100% free with no limits or registration required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How does browser detection work?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Browser detection uses the navigator.userAgent string to identify your browser, operating system, and device information."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does this tool store my browser data?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No, all detection happens client-side in your browser. No data is sent to or stored on our servers."
+            }
+        }
+    ]
+}</script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/browser-detector/">
+    <meta name="twitter:title" content="Free Browser Detector Online | Abetworks">
+    <meta name="twitter:description" content="Free online browser detector tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>Browser Detector</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Browser Detector</h1>
+<p class="tool-subtitle">Detect your browser name, version, OS, device type, and screen resolution instantly.</p>
+</div>
+<div class="tool-workspace">
+<button class="btn btn-primary" id="detectBtn" onclick="detectBrowser()" style="width: 100%; margin-bottom: 1.5rem;">
+<span class="btn-text">🔍 Detect My Browser</span>
+<div class="loader"></div>
+</button>
+
+<div class="result-area hidden" id="resultArea">
+<div class="result-header">
+<span class="result-title">Browser & Device Details</span>
+<div style="display: flex; gap: 0.5rem;">
+<button class="btn btn-secondary" onclick="copyDetails()">📋 Copy</button>
+<button class="btn btn-primary" onclick="detectBrowser()">🔄 Refresh</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Browser</p>
+<p id="browserName" style="font-size: 1.5rem; font-weight: 700; color: var(--accent-blue);">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Version</p>
+<p id="browserVersion" style="font-size: 1.25rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Operating System</p>
+<p id="osName" style="font-size: 1.25rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">OS Version</p>
+<p id="osVersion" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Device Type</p>
+<p id="deviceType" style="font-size: 1.25rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Screen Resolution</p>
+<p id="screenResolution" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Available Screen</p>
+<p id="availableScreen" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Color Depth</p>
+<p id="colorDepth" style="font-size: 1.1rem; font-weight: 600;">- bits</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Pixel Ratio</p>
+<p id="pixelRatio" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Language</p>
+<p id="language" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Cookies Enabled</p>
+<p id="cookiesEnabled" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Touch Support</p>
+<p id="touchSupport" style="font-size: 1.1rem; font-weight: 600;">-</p>
+</div>
+</div>
+
+<div style="background: var(--icon-bg); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; border: 1px solid var(--border-color);">
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">User Agent String</p>
+<p id="userAgent" style="font-size: 0.9rem; font-weight: 500; word-break: break-all; color: var(--text-primary);">-</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Related Tools Section -->
+<section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+🔗 Related Tools
+</h3>
+<div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+<a href="../user-agent-parser/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">🔍</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">User Agent Parser</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Parse user agents</span>
+</div>
+</a>
+<a href="../what-is-my-ip/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">🌐</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">What Is My IP</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Find your IP address</span>
+</div>
+</a>
+<a href="../network-diagnostics/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">📡</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Network Diagnostics</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Test network speed</span>
+</div>
+</a>
+<a href="../http-header-inspector/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+<span class="related-tool-icon" style="font-size: 2rem;">🔎</span>
+<div>
+<span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">HTTP Header Inspector</span>
+<span style="color: var(--text-secondary); font-size: 0.85rem;">Inspect HTTP headers</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+<h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+What is the Browser Detector?
+</h2>
+<p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+The Browser Detector by Abetworks is a free, client-side tool that instantly identifies your web browser, operating system, device type, and screen specifications. Whether you're a developer testing compatibility or a user curious about your setup, our tool provides comprehensive browser fingerprinting with detailed information.
+</p>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+How to Use
+</h3>
+<ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Click "Detect My Browser" to analyze your setup</li>
+<li>View browser name and version instantly</li>
+<li>See operating system and device type details</li>
+<li>Check screen resolution and color depth</li>
+<li>Copy all details or refresh for updated data</li>
+</ol>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Features
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>✅ Browser name and version detection</li>
+<li>✅ Operating system identification</li>
+<li>✅ Device type detection (desktop/mobile/tablet)</li>
+<li>✅ Screen resolution and available screen size</li>
+<li>✅ Color depth and pixel ratio info</li>
+<li>✅ Language and timezone detection</li>
+<li>✅ Cookies and touch support check</li>
+<li>✅ Full user agent string display</li>
+<li>✅ One-click copy functionality</li>
+<li>✅ 100% client-side, no data sent to servers</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Benefits
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>🔍 Quickly identify your browser environment</li>
+<li>🛠️ Debug cross-browser compatibility issues</li>
+<li>📱 Verify mobile vs desktop detection</li>
+<li>⚡ Instant results with no server requests</li>
+<li>🔒 Privacy-friendly, all processing is local</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Use Cases
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Web developers testing responsive designs</li>
+<li>QA engineers verifying browser compatibility</li>
+<li>Users troubleshooting website issues</li>
+<li>Support teams gathering client information</li>
+<li>Anyone curious about their browser fingerprint</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+Frequently Asked Questions
+</h3>
+<div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Is this browser detector tool free?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, this browser detector is 100% free with no limits or registration required.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+How does browser detection work?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Browser detection uses the navigator.userAgent string to identify your browser, operating system, and device information.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Does this tool store my browser data?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+No, all detection happens client-side in your browser. No data is sent to or stored on our servers.
+</p>
+</div>
+</div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Quick Tools</span>
+<a class="sitegpt-footer-link" href="../what-is-my-ip/index.html">What Is My IP</a>
+<a class="sitegpt-footer-link" href="../user-agent-parser/index.html">User Agent Parser</a>
+<a class="sitegpt-footer-link" href="../network-diagnostics/index.html">Network Diagnostics</a>
+<a class="sitegpt-footer-link" href="../ip-location-finder/index.html">IP Location Finder</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">SEO Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder</a>
+<a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+<a class="sitegpt-footer-link" href="../meta-tag-extractor/index.html">Meta Tag Extractor</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters</span>
+<a class="sitegpt-footer-link" href="../convert-csv-to-markdown/index.html">CSV to Markdown</a>
+<a class="sitegpt-footer-link" href="../convert-json-to-markdown/index.html">JSON to Markdown</a>
+<a class="sitegpt-footer-link" href="../text-to-pdf-converter/index.html">Text to PDF</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">📅 Free Consultation</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+</div>
+</div>
+</div>
+
+</main>
+
+<script src="/tools/shared/api-client.js"></script>
+<script>
+let browserData = null;
+
+function detectBrowser() {
+    const btn = document.getElementById('detectBtn');
+    const resultArea = document.getElementById('resultArea');
+    
+    btn.classList.add('loading');
+    resultArea.classList.add('hidden');
+    
+    // Small delay for UX
+    setTimeout(() => {
+        // Parse user agent
+        const ua = navigator.userAgent;
+        const platform = navigator.platform;
+        
+        // Detect browser
+        let browserName = 'Unknown';
+        let browserVersion = 'Unknown';
+        
+        if (ua.includes('Firefox/')) {
+            browserName = 'Mozilla Firefox';
+            browserVersion = ua.split('Firefox/')[1].split(' ')[0];
+        } else if (ua.includes('Edg/')) {
+            browserName = 'Microsoft Edge';
+            browserVersion = ua.split('Edg/')[1].split(' ')[0];
+        } else if (ua.includes('Chrome/')) {
+            browserName = 'Google Chrome';
+            browserVersion = ua.split('Chrome/')[1].split(' ')[0];
+        } else if (ua.includes('Safari/') && !ua.includes('Chrome')) {
+            browserName = 'Apple Safari';
+            browserVersion = ua.split('Version/')[1]?.split(' ')[0] || 'Unknown';
+        } else if (ua.includes('MSIE') || ua.includes('Trident/')) {
+            browserName = 'Internet Explorer';
+            browserVersion = ua.includes('MSIE ') ? ua.split('MSIE ')[1].split(';')[0] : '11';
+        } else if (ua.includes('Opera') || ua.includes('OPR/')) {
+            browserName = 'Opera';
+            browserVersion = ua.includes('OPR/') ? ua.split('OPR/')[1].split(' ')[0] : ua.split('Version/')[1]?.split(' ')[0] || 'Unknown';
+        }
+        
+        // Detect OS
+        let osName = 'Unknown';
+        let osVersion = 'Unknown';
+        
+        if (ua.includes('Windows')) {
+            osName = 'Windows';
+            if (ua.includes('Windows NT 10.0')) osVersion = '10/11';
+            else if (ua.includes('Windows NT 6.3')) osVersion = '8.1';
+            else if (ua.includes('Windows NT 6.2')) osVersion = '8';
+            else if (ua.includes('Windows NT 6.1')) osVersion = '7';
+            else osVersion = 'Other';
+        } else if (ua.includes('Mac OS X')) {
+            osName = 'macOS';
+            osVersion = ua.split('Mac OS X ')[1]?.split(')')[0].replace(/_/g, '.') || 'Unknown';
+        } else if (ua.includes('Linux')) {
+            osName = 'Linux';
+            osVersion = 'Various';
+        } else if (ua.includes('Android')) {
+            osName = 'Android';
+            osVersion = ua.split('Android ')[1]?.split(';')[0] || 'Unknown';
+        } else if (ua.includes('iOS') || ua.includes('iPhone') || ua.includes('iPad')) {
+            osName = 'iOS';
+            osVersion = ua.split('OS ')[1]?.split(' ')[0].replace(/_/g, '.') || 'Unknown';
+        } else if (ua.includes('CrOS')) {
+            osName = 'Chrome OS';
+            osVersion = 'Unknown';
+        }
+        
+        // Detect device type
+        let deviceType = 'Desktop';
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+            if (/iPad|Tablet/i.test(ua) || (ua.includes('Mac') && navigator.maxTouchPoints > 1)) {
+                deviceType = 'Tablet';
+            } else {
+                deviceType = 'Mobile';
+            }
+        }
+        
+        // Screen info
+        const screenResolution = `${screen.width} x ${screen.height}`;
+        const availableScreen = `${screen.availWidth} x ${screen.availHeight}`;
+        const colorDepth = screen.colorDepth;
+        const pixelRatio = window.devicePixelRatio || 1;
+        
+        // Other info
+        const language = navigator.language || navigator.userLanguage || 'Unknown';
+        const cookiesEnabled = navigator.cookieEnabled ? 'Yes' : 'No';
+        const touchSupport = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 ? `Yes (${navigator.maxTouchPoints} points)` : 'No';
+        
+        // Store data
+        browserData = {
+            browser: browserName,
+            version: browserVersion,
+            os: osName,
+            osVersion: osVersion,
+            deviceType: deviceType,
+            screenResolution: screenResolution,
+            availableScreen: availableScreen,
+            colorDepth: colorDepth,
+            pixelRatio: pixelRatio,
+            language: language,
+            cookiesEnabled: cookiesEnabled,
+            touchSupport: touchSupport,
+            userAgent: ua
+        };
+        
+        // Update UI
+        document.getElementById('browserName').textContent = browserName;
+        document.getElementById('browserVersion').textContent = browserVersion;
+        document.getElementById('osName').textContent = osName;
+        document.getElementById('osVersion').textContent = osVersion;
+        document.getElementById('deviceType').textContent = deviceType;
+        document.getElementById('screenResolution').textContent = screenResolution;
+        document.getElementById('availableScreen').textContent = availableScreen;
+        document.getElementById('colorDepth').textContent = `${colorDepth} bits`;
+        document.getElementById('pixelRatio').textContent = `${pixelRatio}x`;
+        document.getElementById('language').textContent = language;
+        document.getElementById('cookiesEnabled').textContent = cookiesEnabled;
+        document.getElementById('touchSupport').textContent = touchSupport;
+        document.getElementById('userAgent').textContent = ua;
+        
+        resultArea.classList.remove('hidden');
+        btn.classList.remove('loading');
+    }, 300);
+}
+
+function copyDetails() {
+    if (!browserData) return;
+    
+    const text = `Browser: ${browserData.browser} ${browserData.version}
+OS: ${browserData.os} ${browserData.osVersion}
+Device: ${browserData.deviceType}
+Screen: ${browserData.screenResolution}
+Available: ${browserData.availableScreen}
+Color Depth: ${browserData.colorDepth}-bit
+Pixel Ratio: ${browserData.pixelRatio}x
+Language: ${browserData.language}
+Cookies: ${browserData.cookiesEnabled}
+Touch: ${browserData.touchSupport}
+User Agent: ${browserData.userAgent}`;
+    
+    navigator.clipboard.writeText(text);
+    if (window.AbetworksUI) {
+        AbetworksUI.showToast('Browser details copied!');
+    } else {
+        alert('Browser details copied to clipboard!');
+    }
+}
+
+// Auto-detect on page load
+window.addEventListener('load', detectBrowser);
+</script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

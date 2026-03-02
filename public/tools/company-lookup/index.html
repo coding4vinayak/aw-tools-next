@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="company lookup, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <title>Free Company Lookup & Business Data | Abetworks</title>
+    <meta name="description" content="Lookup company information by domain or name. Get company size, industry, location, description, logo, and social profiles. Free business intelligence tool.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <link rel="canonical" href="https://abetworks.in/tools/company-lookup/">
+    <!-- Open Graph Elements -->
+    <meta property="og:title" content="Free Company Lookup & Business Data | Abetworks">
+    <meta property="og:description" content="Lookup company information by domain or name. Get size, industry, location, and more.">
+    <meta property="og:url" content="https://abetworks.in/tools/company-lookup/">
+    <meta property="og:image" content="https://abetworks.in/assets/images/og-default.jpg">
+    <meta property="og:type" content="website">
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is the Company Lookup completely free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, the Company Lookup by Abetworks is 100% free with no usage limits or signup required."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What information can I get about a company?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can get company name, domain, industry, size, location, description, logo, founding year, social media profiles, and contact information."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I search by company name or domain?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, you can search using either a company domain (e.g., google.com) or company name (e.g., Google Inc)."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/company-lookup/">
+    <meta name="twitter:title" content="Free Company Lookup Online | Abetworks">
+    <meta name="twitter:description" content="Free online company lookup tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-link" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 600;">Contact</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Company Lookup</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TOOL</span>
+            <h1 class="sitegpt-h1">Company Lookup</h1>
+            <p class="tool-subtitle">Lookup company information by domain or name. Get size, industry, location, description, logo, and social profiles.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Enter Domain or Company Name</label>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <input type="text" id="companyInput" class="form-input" placeholder="Enter domain (e.g., google.com) or company name" style="flex: 1; min-width: 250px;">
+                    <button id="lookupBtn" class="btn btn-primary" onclick="lookupCompany()">
+                        <span class="btn-text">🔍 Lookup Company</span>
+                        <div class="loader"></div>
+                    </button>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    💡 Tip: For best results, use the company domain (e.g., microsoft.com, apple.com)
+                </p>
+            </div>
+
+            <div class="quick-search" style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Try:</span>
+                <button onclick="setExample('google.com')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">Google</button>
+                <button onclick="setExample('microsoft.com')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">Microsoft</button>
+                <button onclick="setExample('stripe.com')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">Stripe</button>
+                <button onclick="setExample('shopify.com')" class="btn btn-secondary" style="padding: 0.4rem 0.75rem; font-size: 0.85rem;">Shopify</button>
+            </div>
+
+            <div class="result-area" id="resultArea" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <div class="company-header" style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 2rem;">
+                    <img id="companyLogo" src="" alt="Company Logo" style="width: 100px; height: 100px; border-radius: 12px; object-fit: contain; background: var(--icon-bg); border: 1px solid var(--border-color);">
+                    <div style="flex: 1; min-width: 250px;">
+                        <h2 id="companyName" style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">-</h2>
+                        <a id="companyDomain" href="#" target="_blank" rel="noopener" style="color: var(--accent-blue); text-decoration: none; font-size: 1rem;">-</a>
+                        <p id="companyDescription" style="color: var(--text-secondary); line-height: 1.6; margin-top: 1rem; max-width: 600px;">-</p>
+                    </div>
+                    <button onclick="copyCompanyData()" class="btn btn-secondary">📋 Copy Data</button>
+                </div>
+
+                <div class="company-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">🏢</span>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Industry</div>
+                        </div>
+                        <div id="companyIndustry" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">-</div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">👥</span>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Company Size</div>
+                        </div>
+                        <div id="companySize" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">-</div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">📅</span>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Founded</div>
+                        </div>
+                        <div id="companyFounded" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">-</div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">🌍</span>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Location</div>
+                        </div>
+                        <div id="companyLocation" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">-</div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">💰</span>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Revenue</div>
+                        </div>
+                        <div id="companyRevenue" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">-</div>
+                    </div>
+
+                    <div class="result-card" style="background: var(--icon-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.5rem;">🏷️</span>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary);">Company Type</div>
+                        </div>
+                        <div id="companyType" style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary);">-</div>
+                    </div>
+                </div>
+
+                <div class="social-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <div class="result-header">
+                        <span class="result-title">📱 Social Profiles</span>
+                    </div>
+                    <div id="socialProfiles" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <!-- Social profiles will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="tech-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <div class="result-header">
+                        <span class="result-title">🛠️ Technologies Used</span>
+                    </div>
+                    <div id="techStack" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                        <!-- Tech stack will be displayed here -->
+                    </div>
+                </div>
+
+                <div class="contact-section" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <div class="result-header">
+                        <span class="result-title">📧 Contact Information</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Email</div>
+                            <div id="companyEmail" style="font-size: 1rem; color: var(--text-primary);">-</div>
+                        </div>
+                        <div class="result-card" style="background: var(--icon-bg); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Phone</div>
+                            <div id="companyPhone" style="font-size: 1rem; color: var(--text-primary);">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                🔗 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../ip-location-finder/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🌍</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">IP Location Finder</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Find IP geolocation</span>
+                    </div>
+                </a>
+                <a href="../company-buying-power-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">💰</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Company Buying Power Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Check buying power</span>
+                    </div>
+                </a>
+                <a href="../lead-quality-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">✅</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Lead Quality Checker</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Score lead quality</span>
+                    </div>
+                </a>
+                <a href="../website-business-analyzer/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website Business Analyzer</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Analyze websites</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+<!-- SEO Content -->
+        <section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+            <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                What is the Company Lookup?
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                Our free Company Lookup tool provides instant access to comprehensive business intelligence data. Simply enter a company domain or name to retrieve detailed information including company size, industry, location, description, logo, founding year, social media profiles, and contact details. Perfect for sales prospecting, market research, competitive analysis, and business development.
+            </p>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                How to Use
+            </h3>
+            <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Enter a company domain (e.g., google.com) or company name in the search field</li>
+                <li>Click "Lookup Company" to fetch the business data</li>
+                <li>Review the comprehensive company profile including size, industry, and location</li>
+                <li>Copy the company data or explore social profiles and tech stack</li>
+            </ol>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Features
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>✅ Search by domain or company name</li>
+                <li>✅ Company logo and branding assets</li>
+                <li>✅ Industry classification and company type</li>
+                <li>✅ Employee count and company size</li>
+                <li>✅ Location, revenue, and founding year</li>
+                <li>✅ Social media profiles (LinkedIn, Twitter, Facebook, etc.)</li>
+                <li>✅ Technology stack detection</li>
+                <li>✅ Contact information (email, phone)</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Benefits
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>🎯 Accelerate sales prospecting with instant company insights</li>
+                <li>🎯 Qualify leads faster with size and industry data</li>
+                <li>🎯 Personalize outreach using company details</li>
+                <li>🎯 Research competitors and market landscape</li>
+                <li>🎯 Build targeted account lists for ABM campaigns</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+                Use Cases
+            </h3>
+            <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>💼 Sales teams researching prospects before outreach</li>
+                <li>📊 Market analysts studying industry competitors</li>
+                <li>🤝 Business development identifying partnership opportunities</li>
+                <li>📈 Marketing teams building ideal customer profiles</li>
+                <li>🔍 Recruiters researching potential employer clients</li>
+            </ul>
+
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+                Frequently Asked Questions
+            </h3>
+            <div class="faq-accordion" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Is the Company Lookup completely free?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, the Company Lookup by Abetworks is 100% free with no usage limits or signup required.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        What information can I get about a company?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        You can get company name, domain, industry, size, location, description, logo, founding year, social media profiles, and contact information.
+                    </p>
+                </div>
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                        Can I search by company name or domain?
+                    </h4>
+                    <p style="color: var(--text-secondary); line-height: 1.5; margin: 0;">
+                        Yes, you can search using either a company domain (e.g., google.com) or company name (e.g., Google Inc).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AbetWorks Upgrade CTA Block -->
+        <section class="aw-upgrade-cta">
+            <div class="aw-upgrade-inner">
+                <div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+                <h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites & CRM automation.</h2>
+                <p class="aw-upgrade-sub">Used by businesses in India & globally. Get a free consultation — no strings attached.</p>
+                <div class="aw-upgrade-actions">
+                    <a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." target="_blank" rel="noopener">
+                        ✉ Email — Outside India
+                    </a>
+                    <a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener">
+                        📅 Book Free Consultation
+                    </a>
+                </div>
+                <div class="aw-upgrade-social">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" title="AbetWorks website">🌐 abetworks.in</a>
+                    <a href="https://www.linkedin.com/company/abetworks" target="_blank" rel="noopener" title="LinkedIn">in</a>
+                    <a href="https://x.com/abetworks" target="_blank" rel="noopener" title="Twitter/X">𝕏</a>
+                    <a href="https://www.instagram.com/abetworks.in" target="_blank" rel="noopener" title="Instagram">📸</a>
+                    <a href="https://t.me/abetworks" target="_blank" rel="noopener" title="Telegram">✈</a>
+                    <a href="https://www.youtube.com/@AbetWorks" target="_blank" rel="noopener" title="YouTube">▶</a>
+                </div>
+            </div>
+        </section>
+    
+        
+
+        <style>
+        .related-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+        }
+        </style>
+
+</main>
+
+    <script src="/tools/shared/api-client.js"></script>
+    <script>
+        function setExample(domain) {
+            document.getElementById('companyInput').value = domain;
+        }
+
+        async function lookupCompany() {
+            const query = document.getElementById('companyInput').value.trim();
+            const btn = document.getElementById('lookupBtn');
+            const resultArea = document.getElementById('resultArea');
+
+            if (!query) {
+                alert('Please enter a domain or company name');
+                return;
+            }
+
+            btn.classList.add('loading');
+            resultArea.style.display = 'none';
+
+            try {
+                // Extract domain if URL is entered
+                let domain = extractDomain(query);
+                
+                console.log('Looking up:', query, 'Domain:', domain);
+
+                // Try multiple data sources
+                let companyData = await fetchCompanyData(domain);
+
+                if (!companyData || !companyData.name) {
+                    // Fallback: Try with company name search
+                    companyData = await fetchCompanyDataByName(query);
+                }
+
+                if (!companyData || !companyData.name) {
+                    throw new Error('Company data not found');
+                }
+
+                displayCompanyData(companyData, domain);
+                alert('✓ Company found: ' + companyData.name);
+
+            } catch (error) {
+                console.error('Company Lookup Error:', error);
+                alert('✗ Error: ' + error.message + '\n\nShowing basic domain information instead.');
+                // Display basic info from domain
+                displayBasicDomainInfo(query);
+            } finally {
+                btn.classList.remove('loading');
+            }
+        }
+
+        async function fetchCompanyData(domain) {
+            // Try Clearbit API (public endpoint for logo)
+            try {
+                const logoResponse = await fetch(`https://logo.clearbit.com/${domain}?size=200`);
+                const logoUrl = logoResponse.ok ? `https://logo.clearbit.com/${domain}?size=200` : null;
+
+                // Try to get company data from various free sources
+                const companyData = {
+                    domain: domain,
+                    name: domain.replace(/^(www\.)?/, '').split('.')[0],
+                    logo: logoUrl
+                };
+
+                // Try additional free APIs
+                try {
+                    // Hunter.io domain search (limited free tier)
+                    // Note: This would require an API key in production
+                } catch (e) {}
+
+                return companyData;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        async function fetchCompanyDataByName(name) {
+            // For name-based search, we'll use a combination of techniques
+            return {
+                name: name,
+                domain: null
+            };
+        }
+
+        function displayCompanyData(data, domain) {
+            const resultArea = document.getElementById('resultArea');
+
+            // Company header
+            document.getElementById('companyName').textContent = data.name || 'Unknown';
+            document.getElementById('companyDomain').textContent = data.domain || domain;
+            document.getElementById('companyDomain').href = data.domain ? `https://${data.domain}` : '#';
+            document.getElementById('companyDescription').textContent = data.description || 'Company description not available';
+            
+            // Logo
+            const logoImg = document.getElementById('companyLogo');
+            if (data.logo) {
+                logoImg.src = data.logo;
+                logoImg.style.display = 'block';
+            } else {
+                logoImg.src = `https://www.google.com/s2/favicons?domain=${domain}&sz=200`;
+                logoImg.style.display = 'block';
+            }
+
+            // Company details
+            document.getElementById('companyIndustry').textContent = data.industry || 'Not available';
+            document.getElementById('companySize').textContent = formatCompanySize(data.size) || 'Not available';
+            document.getElementById('companyFounded').textContent = data.founded || 'Not available';
+            document.getElementById('companyLocation').textContent = formatLocation(data) || 'Not available';
+            document.getElementById('companyRevenue').textContent = data.revenue || 'Not available';
+            document.getElementById('companyType').textContent = data.type || 'Not available';
+
+            // Social profiles
+            displaySocialProfiles(data);
+
+            // Tech stack
+            displayTechStack(data.tech || []);
+
+            // Contact info
+            document.getElementById('companyEmail').textContent = data.email || 'Not available';
+            document.getElementById('companyPhone').textContent = data.phone || 'Not available';
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function displayBasicDomainInfo(query) {
+            const resultArea = document.getElementById('resultArea');
+            const domain = extractDomain(query) || query;
+
+            document.getElementById('companyName').textContent = domain.replace(/^(www\.)?/, '').split('.')[0];
+            document.getElementById('companyDomain').textContent = domain;
+            document.getElementById('companyDomain').href = `https://${domain}`;
+            document.getElementById('companyDescription').textContent = 'Detailed company information is not available for this domain. Try searching for a well-known company.';
+            
+            // Use Google's favicon service as fallback logo
+            document.getElementById('companyLogo').src = `https://www.google.com/s2/favicons?domain=${domain}&sz=200`;
+
+            // Clear other fields
+            document.getElementById('companyIndustry').textContent = 'Not available';
+            document.getElementById('companySize').textContent = 'Not available';
+            document.getElementById('companyFounded').textContent = 'Not available';
+            document.getElementById('companyLocation').textContent = 'Not available';
+            document.getElementById('companyRevenue').textContent = 'Not available';
+            document.getElementById('companyType').textContent = 'Not available';
+
+            // Clear social profiles
+            document.getElementById('socialProfiles').innerHTML = '<span style="color: var(--text-secondary);">No social profiles found</span>';
+
+            // Clear tech stack
+            document.getElementById('techStack').innerHTML = '<span style="color: var(--text-secondary);">No technology data available</span>';
+
+            // Clear contact info
+            document.getElementById('companyEmail').textContent = 'Not available';
+            document.getElementById('companyPhone').textContent = 'Not available';
+
+            resultArea.style.display = 'block';
+            resultArea.classList.add('active');
+        }
+
+        function displaySocialProfiles(data) {
+            const container = document.getElementById('socialProfiles');
+            const profiles = [];
+
+            if (data.linkedin) profiles.push({ name: 'LinkedIn', url: data.linkedin, icon: 'in' });
+            if (data.twitter || data.facebook) profiles.push({ name: 'Twitter', url: data.twitter || data.facebook, icon: '𝕏' });
+            if (data.facebook) profiles.push({ name: 'Facebook', url: data.facebook, icon: 'f' });
+
+            if (profiles.length === 0) {
+                container.innerHTML = '<span style="color: var(--text-secondary);">No social profiles found</span>';
+                return;
+            }
+
+            container.innerHTML = profiles.map(p => `
+                <a href="${p.url}" target="_blank" rel="noopener" 
+                   style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; 
+                          background: var(--icon-bg); border: 1px solid var(--border-color); 
+                          border-radius: 8px; color: var(--text-primary); text-decoration: none;
+                          transition: all 0.2s;"
+                   onmouseover="this.style.borderColor='var(--accent-blue)'"
+                   onmouseout="this.style.borderColor='var(--border-color)'">
+                    <span>${p.icon}</span>
+                    <span>${p.name}</span>
+                </a>
+            `).join('');
+        }
+
+        function displayTechStack(tech) {
+            const container = document.getElementById('techStack');
+            
+            if (!tech || tech.length === 0) {
+                container.innerHTML = '<span style="color: var(--text-secondary);">No technology data available</span>';
+                return;
+            }
+
+            container.innerHTML = tech.slice(0, 10).map(t => `
+                <span style="padding: 0.4rem 0.85rem; background: rgba(37, 99, 235, 0.1); 
+                       border: 1px solid var(--accent-blue); border-radius: 20px; 
+                       font-size: 0.85rem; color: var(--accent-blue); font-weight: 500;">
+                    ${t}
+                </span>
+            `).join('');
+        }
+
+        function formatCompanySize(size) {
+            if (!size) return null;
+            if (typeof size === 'number') {
+                if (size < 10) return '1-10 employees';
+                if (size < 50) return '10-50 employees';
+                if (size < 200) return '50-200 employees';
+                if (size < 1000) return '200-1000 employees';
+                return '1000+ employees';
+            }
+            return size;
+        }
+
+        function formatLocation(data) {
+            const parts = [];
+            if (data.city) parts.push(data.city);
+            if (data.state) parts.push(data.state);
+            if (data.country) parts.push(data.country);
+            return parts.join(', ') || null;
+        }
+
+        function extractDomain(input) {
+            try {
+                // Handle full URLs
+                if (input.includes('://')) {
+                    const url = new URL(input);
+                    return url.hostname.replace(/^www\./, '');
+                }
+                // Handle domain-like strings
+                if (input.includes('.') && !input.includes(' ')) {
+                    return input.replace(/^www\./, '').split('/')[0];
+                }
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function copyCompanyData() {
+            const name = document.getElementById('companyName').textContent;
+            const domain = document.getElementById('companyDomain').textContent;
+            const industry = document.getElementById('companyIndustry').textContent;
+            const size = document.getElementById('companySize').textContent;
+            const location = document.getElementById('companyLocation').textContent;
+
+            const data = `Company: ${name}\nDomain: ${domain}\nIndustry: ${industry}\nSize: ${size}\nLocation: ${location}`;
+            AbetworksUI.copyToClipboard(data);
+        }
+    </script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="list data extractor, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ``; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Free List Data Extractor Online | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Extract list items from HTML or URLs. Get data from ul, ol, and dl tags instantly. Free HTML list extractor tool for web scraping." name="description"/>
+<link href="https://abetworks.in/tools/list-data-extractor/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Free List Data Extractor Online | Abetworks" property="og:title"/>
+<meta content="Extract list items from HTML or URLs. Get data from ul, ol, and dl tags instantly." property="og:description"/>
+<meta content="https://abetworks.in/tools/list-data-extractor/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is the List Data Extractor free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the List Data Extractor by Abetworks is 100% free with no hidden limits or credit card requirements."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What types of lists can this extract?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "This tool extracts data from HTML list tags including ul (unordered lists), ol (ordered lists), and dl (description lists)."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I export the extracted data?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can copy extracted lists to clipboard or export as TXT format."
+            }
+        }
+    ]
+}</script>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/list-data-extractor/">
+    <meta name="twitter:title" content="Free List Data Extractor Online | Abetworks">
+    <meta name="twitter:description" content="Free online list data extractor tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>List Data Extractor</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">List Data Extractor</h1>
+<p class="tool-subtitle">Extract list items from HTML or URLs. Get data from ul, ol, and dl tags instantly. Perfect for web scraping and data extraction.</p>
+</div>
+<div class="tool-workspace">
+<div class="form-group">
+<label class="form-label">Input Method</label>
+<div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+<button class="btn btn-secondary" id="htmlModeBtn" onclick="setMode('html')" style="flex: 1;">📝 Paste HTML</button>
+<button class="btn btn-secondary" id="urlModeBtn" onclick="setMode('url')" style="flex: 1;">🔗 Enter URL</button>
+</div>
+</div>
+
+<!-- HTML Input -->
+<div id="htmlInputSection">
+<label class="form-label">Paste HTML Code</label>
+<textarea class="form-textarea" id="htmlInput" placeholder="Paste HTML code containing lists (ul, ol, dl)..." rows="8"></textarea>
+<button class="btn btn-primary" onclick="extractFromHTML()" style="margin-top: 1rem; width: 100%;">
+<span class="btn-text">📋 Extract Lists</span>
+<div class="loader"></div>
+</button>
+</div>
+
+<!-- URL Input -->
+<div id="urlInputSection" style="display: none;">
+<label class="form-label">Enter Website URL</label>
+<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+<input class="form-input flex-1" id="urlInput" placeholder="https://example.com" style="flex: 1; min-width: 250px;" type="url"/>
+<button class="btn btn-primary" id="fetchUrlBtn" onclick="extractFromURL()">
+<span class="btn-text">🔍 Fetch & Extract</span>
+<div class="loader"></div>
+</button>
+</div>
+<p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+Enter a URL to fetch the page and extract all list items.
+</p>
+</div>
+
+<div class="result-area hidden" id="resultArea">
+<div class="result-header">
+<span class="result-title">📋 Extracted Lists (<span id="listsCountDisplay">0</span>)</span>
+<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+<button class="btn btn-secondary" onclick="copyAllLists()">📋 Copy All</button>
+<button class="btn btn-secondary" onclick="exportTXT()">📥 Export TXT</button>
+</div>
+</div>
+
+<!-- Extracted Lists -->
+<div id="listsContainer" style="display: grid; gap: 1.5rem; margin-top: 1.5rem;">
+<!-- Lists will be rendered here -->
+</div>
+</div>
+</div>
+
+<!-- Related Tools Section -->
+        <section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+                🔗 Related Tools
+            </h3>
+            <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <a href="../meta-tag-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔍</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Meta Tag Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract meta tags</span>
+                    </div>
+                </a>
+                <a href="../website-url-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">🔗</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Website URL Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract all URLs</span>
+                    </div>
+                </a>
+                <a href="../wordpress-content-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📝</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">WordPress Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract WordPress posts</span>
+                    </div>
+                </a>
+                <a href="../wikipedia-content-extractor/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+                    <span class="related-tool-icon" style="font-size: 2rem;">📖</span>
+                    <div>
+                        <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Wikipedia Extractor</span>
+                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Extract Wikipedia content</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+<h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+What is the List Data Extractor?
+</h2>
+<p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+The List Data Extractor by Abetworks is a free, powerful online tool that extracts list items from HTML code or website URLs. Parse ul (unordered lists), ol (ordered lists), and dl (description lists) to get structured data instantly. Perfect for web scraping, data extraction, and content analysis.
+</p>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+How to Use
+</h3>
+<ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>Choose input method: Paste HTML or Enter URL</li>
+<li>Paste HTML code or enter website URL</li>
+<li>Click "Extract Lists" or "Fetch & Extract"</li>
+<li>View all extracted list items organized by list type</li>
+<li>Copy individual lists or export all data as TXT</li>
+</ol>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Features
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>✅ Extract from ul (unordered lists)</li>
+<li>✅ Extract from ol (ordered lists)</li>
+<li>✅ Extract from dl (description lists)</li>
+<li>✅ Support for nested lists</li>
+<li>✅ Extract from pasted HTML or URL</li>
+<li>✅ Copy individual lists or all</li>
+<li>✅ Export as TXT format</li>
+<li>✅ No signup required, completely free</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Benefits
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>📊 Quick data extraction from web pages</li>
+<li>🔍 Scrape product lists, features, specifications</li>
+<li>💡 Extract structured data for analysis</li>
+<li>⚡ Fast, client-side processing</li>
+<li>🎯 No coding required</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+Use Cases
+</h3>
+<ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+<li>E-commerce: Extract product features and specifications</li>
+<li>Research: Gather data from comparison tables</li>
+<li>Content: Extract bullet points and key features</li>
+<li>SEO: Analyze competitor content structure</li>
+<li>Data entry: Convert web lists to structured data</li>
+</ul>
+
+<h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+Frequently Asked Questions
+</h3>
+<div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Is the List Data Extractor free?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, the List Data Extractor by Abetworks is 100% free with no hidden limits or credit card requirements.
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+What types of lists can this extract?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+This tool extracts data from HTML list tags including ul (unordered lists), ol (ordered lists), and dl (description lists).
+</p>
+</div>
+<div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+<h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+Can I export the extracted data?
+</h4>
+<p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+Yes, you can copy extracted lists to clipboard or export as TXT format.
+</p>
+</div>
+</div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Sitemap Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder &amp; Checker</a>
+<a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">AI Chat &amp; Prompt Tools</span>
+<a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+<a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters &amp; Generators</span>
+<a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+<a class="sitegpt-footer-link" href="../csv-to-markdown/index.html">Convert CSV to Markdown</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">📅 Free Consultation</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+<div class="aw-footer-socials">
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.629L18.243 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg></a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram"><svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.62-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a>
+</div>
+</div>
+</div>
+</div>
+
+        
+
+        <style>
+        .related-tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+        }
+        .list-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .list-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .list-type-ul { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+        .list-type-ol { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .list-type-dl { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+        .list-items {
+            display: grid;
+            gap: 0.5rem;
+        }
+        .list-item {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            padding: 0.5rem;
+            background: var(--icon-bg);
+            border-radius: 6px;
+        }
+        .list-item-bullet {
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+        .list-item-text {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+        </style>
+
+</main>
+<script src="/tools/shared/business-bank.js"></script>
+<script src="/tools/shared/components.js"></script>
+<script>
+let extractedLists = [];
+let currentMode = 'html';
+
+function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('htmlModeBtn').classList.toggle('btn-primary', mode === 'html');
+    document.getElementById('htmlModeBtn').classList.toggle('btn-secondary', mode !== 'html');
+    document.getElementById('urlModeBtn').classList.toggle('btn-primary', mode === 'url');
+    document.getElementById('urlModeBtn').classList.toggle('btn-secondary', mode !== 'url');
+    document.getElementById('htmlInputSection').style.display = mode === 'html' ? 'block' : 'none';
+    document.getElementById('urlInputSection').style.display = mode === 'url' ? 'block' : 'none';
+}
+
+function extractFromHTML() {
+    const html = document.getElementById('htmlInput').value.trim();
+    if (!html) {
+        alert('Please paste HTML code');
+        return;
+    }
+
+    extractedLists = parseListsFromHTML(html);
+    renderLists(extractedLists);
+    
+    document.getElementById('listsCountDisplay').textContent = extractedLists.length;
+    document.getElementById('resultArea').classList.remove('hidden');
+}
+
+async function extractFromURL() {
+    const url = document.getElementById('urlInput').value.trim();
+    if (!url) {
+        alert('Please enter a URL');
+        return;
+    }
+
+    try {
+        new URL(url);
+    } catch (e) {
+        alert('Please enter a valid URL');
+        return;
+    }
+
+    const btn = document.getElementById('fetchUrlBtn');
+    btn.classList.add('loading');
+
+    try {
+        // Use microlink.io API to fetch webpage HTML
+        const apiUrl = `https://api.microlink.io?url=${encodeURIComponent(url)}&html=true`;
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch webpage');
+        }
+
+        const data = await response.json();
+        
+        if (data.status === 'error') {
+            throw new Error(data.data.message || 'Failed to fetch webpage');
+        }
+
+        const html = data.data.html || '';
+        extractedLists = parseListsFromHTML(html);
+        renderLists(extractedLists);
+        
+        document.getElementById('listsCountDisplay').textContent = extractedLists.length;
+        document.getElementById('resultArea').classList.remove('hidden');
+        
+    } catch (error) {
+        alert('Error: ' + error.message);
+    } finally {
+        btn.classList.remove('loading');
+    }
+}
+
+function parseListsFromHTML(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const lists = [];
+
+    // Find all ul, ol, and dl elements
+    const ulLists = doc.querySelectorAll('ul');
+    const olLists = doc.querySelectorAll('ol');
+    const dlLists = doc.querySelectorAll('dl');
+
+    // Process unordered lists
+    ulLists.forEach((list, index) => {
+        const items = Array.from(list.querySelectorAll(':scope > li')).map(li => {
+            // Handle nested lists by getting text content
+            const text = li.textContent.trim().replace(/\s+/g, ' ');
+            return text;
+        }).filter(item => item);
+
+        if (items.length > 0) {
+            lists.push({
+                type: 'ul',
+                typeName: 'Unordered List',
+                items: items,
+                index: lists.length + 1
+            });
+        }
+    });
+
+    // Process ordered lists
+    olLists.forEach((list, index) => {
+        const items = Array.from(list.querySelectorAll(':scope > li')).map((li, i) => {
+            const text = li.textContent.trim().replace(/\s+/g, ' ');
+            return text;
+        }).filter(item => item);
+
+        if (items.length > 0) {
+            lists.push({
+                type: 'ol',
+                typeName: 'Ordered List',
+                items: items,
+                index: lists.length + 1
+            });
+        }
+    });
+
+    // Process description lists
+    dlLists.forEach((list, index) => {
+        const items = [];
+        const dts = list.querySelectorAll(':scope > dt');
+        const dds = list.querySelectorAll(':scope > dd');
+
+        dts.forEach((dt, i) => {
+            const term = dt.textContent.trim();
+            const description = dds[i] ? dds[i].textContent.trim() : '';
+            if (term || description) {
+                items.push(`${term}${description ? ': ' + description : ''}`);
+            }
+        });
+
+        if (items.length > 0) {
+            lists.push({
+                type: 'dl',
+                typeName: 'Description List',
+                items: items,
+                index: lists.length + 1
+            });
+        }
+    });
+
+    return lists;
+}
+
+function renderLists(lists) {
+    const container = document.getElementById('listsContainer');
+    if (lists.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-secondary);">No lists found in the provided HTML.</p>';
+        return;
+    }
+
+    container.innerHTML = lists.map(list => `
+        <div class="list-card">
+            <div class="list-header">
+                <span class="list-type-badge list-type-${list.type}">${getIconForType(list.type)} ${list.typeName}</span>
+                <button class="btn btn-secondary" onclick="copyList(${list.index - 1})" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">📋 Copy List</button>
+            </div>
+            <div class="list-items">
+                ${list.items.map((item, i) => `
+                    <div class="list-item">
+                        <span class="list-item-bullet">${list.type === 'ol' ? (i + 1) + '.' : '•'}</span>
+                        <span class="list-item-text">${escapeHtml(item)}</span>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+}
+
+function getIconForType(type) {
+    switch(type) {
+        case 'ul': return '•';
+        case 'ol': return '1.';
+        case 'dl': return '📝';
+        default: return '';
+    }
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function copyList(index) {
+    const list = extractedLists[index];
+    const text = list.items.map((item, i) => {
+        const bullet = list.type === 'ol' ? `${i + 1}.` : '•';
+        return `${bullet} ${item}`;
+    }).join('\n');
+    
+    navigator.clipboard.writeText(text).then(() => {
+        alert('List copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+    });
+}
+
+function copyAllLists() {
+    const allText = extractedLists.map(list => {
+        const header = `=== ${list.typeName} ===`;
+        const items = list.items.map((item, i) => {
+            const bullet = list.type === 'ol' ? `${i + 1}.` : '•';
+            return `${bullet} ${item}`;
+        }).join('\n');
+        return `${header}\n${items}`;
+    }).join('\n\n');
+    
+    navigator.clipboard.writeText(allText).then(() => {
+        alert('All lists copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy:', err);
+    });
+}
+
+function exportTXT() {
+    const txt = extractedLists.map(list => {
+        const header = `=== ${list.typeName} ===`;
+        const items = list.items.map((item, i) => {
+            const bullet = list.type === 'ol' ? `${i + 1}.` : '•';
+            return `${bullet} ${item}`;
+        }).join('\n');
+        return `${header}\n${items}`;
+    }).join('\n\n');
+    
+    const blob = new Blob([txt], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'extracted-lists.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+</script>
+
+    
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style class="abetworks-social-footer">
+[data-theme="dark"] .abetworks-social-footer h3 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer footer {
+    color: #94a3b8 !important;
+    border-top-color: #334155 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer .btn-secondary {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+    border-color: #475569 !important;
+}
+
+[data-theme="dark"] .abetworks-social-footer a[style*="background: #f3f4f6"] {
+    background: #334155 !important;
+    color: #f1f5f9 !important;
+}
+
+    </style>
+</body>
+</html>

@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+    <meta name="keywords" content="currency trend analyzer, free online tool, no signup, abetworks, web tool">
+    <meta name="author" content="Abetworks">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm-start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ``; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-XXXXXXX');</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YV2S02Q9N8"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YV2S02Q9N8');
+    </script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Currency Trend Analyzer | 30/60/90 Day Trends | Abetworks</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet"/>
+<meta content="Analyze currency trends over 30, 60, and 90 days. View charts, statistics, and predictions. Free currency trend analyzer with moving average forecasting." name="description"/>
+<link href="https://abetworks.in/tools/currency-trend-analyzer/" rel="canonical"/>
+<!-- Open Graph Elements -->
+<meta content="Currency Trend Analyzer | Abetworks" property="og:title"/>
+<meta content="Analyze currency trends over 30, 60, and 90 days with charts and predictions." property="og:description"/>
+<meta content="https://abetworks.in/tools/currency-trend-analyzer/" property="og:url"/>
+<meta content="https://abetworks.in/assets/images/og-default.jpg" property="og:image"/>
+<meta content="website" property="og:type"/>
+<!-- FAQ Schema -->
+<script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is the Currency Trend Analyzer free to use?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the Currency Trend Analyzer by Abetworks is 100% free with no usage limits or signup required."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What time periods are supported?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our tool analyzes 30-day, 60-day, and 90-day currency trends with detailed statistics for each period."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How accurate is the trend prediction?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The prediction uses simple moving average analysis and should be used for informational purposes only, not financial advice."
+            }
+        }
+    ]
+}</script>
+<style>
+    .no-ai-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #51cf66, #40c057);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+    .trend-period-selector {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+        flex-wrap: wrap;
+    }
+    .trend-period-btn {
+        padding: 0.75rem 1.5rem;
+        border: 1px solid var(--border-color);
+        background: var(--icon-bg);
+        color: var(--text-secondary);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+    .trend-period-btn:hover {
+        border-color: var(--accent-blue);
+        background: rgba(37, 99, 235, 0.1);
+    }
+    .trend-period-btn.active {
+        background: var(--accent-blue);
+        color: white;
+        border-color: var(--accent-blue);
+    }
+    .chart-container {
+        background: var(--icon-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-top: 1.5rem;
+        overflow-x: auto;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    .stat-card {
+        background: var(--bg-card);
+        padding: 1.25rem;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        text-align: center;
+    }
+    .stat-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+    }
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    .stat-value.positive {
+        color: #51cf66;
+    }
+    .stat-value.negative {
+        color: #ff6b6b;
+    }
+    .prediction-box {
+        background: linear-gradient(135deg, rgba(81, 207, 102, 0.1), rgba(64, 192, 87, 0.1));
+        border: 1px solid rgba(81, 207, 102, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    .trend-direction {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+    .trend-up {
+        background: rgba(81, 207, 102, 0.2);
+        color: #51cf66;
+    }
+    .trend-down {
+        background: rgba(255, 107, 107, 0.2);
+        color: #ff6b6b;
+    }
+    .trend-stable {
+        background: rgba(139, 92, 246, 0.2);
+        color: #a78bfa;
+    }
+</style>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://abetworks.in/tools/currency-trend-analyzer/">
+    <meta name="twitter:title" content="Free Currency Trend Analyzer Online | Abetworks">
+    <meta name="twitter:description" content="Free online currency trend analyzer tool. No signup required. Fast, reliable, and easy to use.">
+    <meta name="twitter:image" content="https://abetworks.in/tools/shared/og-image.jpg">
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<nav class="navbar">
+<a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+<div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+</nav>
+<main class="main-content">
+<div class="sitegpt-breadcrumb">
+<div class="sitegpt-breadcrumb-card">
+<a href="/tools/index.html">Home</a>
+<span class="separator">/</span>
+<a href="/tools/index.html">Tools</a>
+<span class="separator">/</span>
+<span>Currency Trend Analyzer</span>
+</div>
+</div>
+<div class="sitegpt-tool-header">
+<span class="sitegpt-category">FREE TOOL</span>
+<h1 class="sitegpt-h1">Currency Trend Analyzer</h1>
+<p class="tool-subtitle">Analyze currency pair trends over 30, 60, and 90 days. View charts, statistics, and get trend predictions using moving averages.</p>
+<div class="no-ai-badge">
+    <span>⚡</span>
+</div>
+</div>
+
+<div class="tool-workspace">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Base Currency</label>
+            <select class="form-select" id="baseCurrency">
+                <option value="USD" selected>USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="INR">INR - Indian Rupee</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SGD">SGD - Singapore Dollar</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+                <option value="MXN">MXN - Mexican Peso</option>
+                <option value="BRL">BRL - Brazilian Real</option>
+                <option value="ZAR">ZAR - South African Rand</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label">Target Currency</label>
+            <select class="form-select" id="targetCurrency">
+                <option value="EUR">EUR - Euro</option>
+                <option value="USD" selected>USD - US Dollar</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="INR">INR - Indian Rupee</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SGD">SGD - Singapore Dollar</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+                <option value="MXN">MXN - Mexican Peso</option>
+                <option value="BRL">BRL - Brazilian Real</option>
+                <option value="ZAR">ZAR - South African Rand</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" id="analyzeBtn" onclick="analyzeTrend()" style="width: 100%;">
+        <span class="btn-text">📈 Analyze Trend</span>
+        <div class="loader"></div>
+    </button>
+
+    <div class="trend-period-selector hidden" id="periodSelector">
+        <button class="trend-period-btn active" onclick="setPeriod(30)">30 Days</button>
+        <button class="trend-period-btn" onclick="setPeriod(60)">60 Days</button>
+        <button class="trend-period-btn" onclick="setPeriod(90)">90 Days</button>
+    </div>
+
+    <div class="result-area hidden" id="resultArea">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Current Rate</div>
+                <div class="stat-value" id="currentRate">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Period High</div>
+                <div class="stat-value" id="periodHigh">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Period Low</div>
+                <div class="stat-value" id="periodLow">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Period Average</div>
+                <div class="stat-value" id="periodAvg">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Change</div>
+                <div class="stat-value" id="periodChange">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Volatility</div>
+                <div class="stat-value" id="periodVolatility">-</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">📊 <span id="chartTitle">30-Day Trend</span></h4>
+            <canvas id="trendChart" width="800" height="300" style="width: 100%; height: auto; background: var(--bg-dark); border-radius: 8px;"></canvas>
+        </div>
+
+        <div class="prediction-box">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">🔮 Next Week Prediction</h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Based on Simple Moving Average (SMA) analysis</p>
+            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <div>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">Predicted Direction:</span>
+                    <div id="predictionDirection" class="trend-direction trend-stable">
+                        <span>➡️</span>
+                        <span>Stable</span>
+                    </div>
+                </div>
+                <div>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">Predicted Rate:</span>
+                    <div id="predictedRate" style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">-</div>
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 1rem; font-style: italic;">
+                ⚠️ This prediction is for informational purposes only and should not be considered financial advice.
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary" onclick="exportToCSV()">📊 Export CSV</button>
+            <button class="btn btn-secondary" onclick="copyAnalysis()">📋 Copy Analysis</button>
+        </div>
+    </div>
+</div>
+
+<!-- Related Tools Section -->
+<section class="related-tools" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">
+        💱 Related Tools
+    </h3>
+    <div class="related-tools-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        <a href="../currency-converter/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">💱</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Currency Converter</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Live currency conversion</span>
+            </div>
+        </a>
+        <a href="../historical-currency-converter/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📅</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">Historical Currency Converter</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Past exchange rates</span>
+            </div>
+        </a>
+        <a href="../cpl-calculator/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📊</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">CPL Calculator</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Calculate cost per lead</span>
+            </div>
+        </a>
+        <a href="../roas-quick-checker/index.html" class="related-tool-card" style="background: var(--bg-card); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border-color); text-decoration: none; transition: all 0.3s ease; display: flex; align-items: center; gap: 1rem;">
+            <span class="related-tool-icon" style="font-size: 2rem;">📈</span>
+            <div>
+                <span class="related-tool-title" style="color: var(--text-primary); font-weight: 600; font-size: 1rem; display: block;">ROAS Quick Checker</span>
+                <span style="color: var(--text-secondary); font-size: 0.85rem;">Calculate ad returns</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- SEO Content -->
+<section class="seo-content-block" style="margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border-color);">
+    <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+        What is the Currency Trend Analyzer?
+    </h2>
+    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+        The Currency Trend Analyzer by Abetworks is a powerful free tool that helps you visualize and analyze currency pair trends over time. Track 30-day, 60-day, and 90-day trends with interactive charts, detailed statistics, and simple moving average predictions to inform your currency decisions.
+    </p>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        How to Use
+    </h3>
+    <ol style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>Select your base currency (the currency you're converting from)</li>
+        <li>Select your target currency (the currency you're converting to)</li>
+        <li>Click "Analyze Trend" to load the trend data</li>
+        <li>Switch between 30, 60, and 90-day views using the period buttons</li>
+        <li>Review statistics including high, low, average, and volatility</li>
+        <li>Check the trend prediction and export data if needed</li>
+    </ol>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        Features
+    </h3>
+    <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>✅ Multi-period analysis: 30, 60, and 90 days</li>
+        <li>✅ Interactive trend chart visualization</li>
+        <li>✅ Key statistics: high, low, average, change, volatility</li>
+        <li>✅ Simple Moving Average (SMA) prediction</li>
+        <li>✅ Trend direction indicator (up/down/stable)</li>
+        <li>✅ Export data as CSV for further analysis</li>
+        <li>✅ Copy analysis summary to clipboard</li>
+        <li>✅ No signup required, completely free</li>
+    </ul>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary);">
+        Use Cases
+    </h3>
+    <ul style="color: var(--text-secondary); line-height: 2; margin-bottom: 2rem; padding-left: 1.5rem;">
+        <li>📊 Investors analyzing currency performance before trading</li>
+        <li>💼 Businesses planning international payments</li>
+        <li>✈️ Travelers timing currency exchanges for trips</li>
+        <li>📈 Forex traders identifying trend patterns</li>
+        <li>🌍 Expats monitoring home currency performance</li>
+        <li>📊 Financial analysts preparing currency reports</li>
+    </ul>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+        Understanding the Statistics
+    </h3>
+    <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Period High/Low</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            The highest and lowest exchange rates during the selected period. These values help identify the trading range and potential support/resistance levels.
+        </p>
+
+        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Period Average</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">
+            The mean exchange rate over the period. Current rates above average suggest an uptrend, while rates below suggest a downtrend.
+        </p>
+
+        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Volatility</h4>
+        <p style="color: var(--text-secondary); line-height: 1.6;">
+            Measured as the standard deviation of daily changes. Higher volatility indicates more price fluctuation and potentially higher risk/opportunity.
+        </p>
+    </div>
+
+    <h3 style="font-size: 1.35rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-primary); margin-top: 2rem;">
+        Frequently Asked Questions
+    </h3>
+    <div class="faq-accordion" style="display:flex; flex-direction:column; gap: 1rem;">
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                Is the Currency Trend Analyzer free to use?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Yes, the Currency Trend Analyzer by Abetworks is 100% free with no usage limits or signup required.
+            </p>
+        </div>
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                What time periods are supported?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                Our tool analyzes 30-day, 60-day, and 90-day currency trends with detailed statistics for each period.
+            </p>
+        </div>
+        <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                How accurate is the trend prediction?
+            </h4>
+            <p style="color: var(--text-secondary); line-height: 1.5; margin:0;">
+                The prediction uses simple moving average analysis and should be used for informational purposes only, not financial advice.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- AbetWorks Upgrade CTA Block -->
+<section class="aw-upgrade-cta">
+<div class="aw-upgrade-inner">
+<div class="aw-upgrade-badge">🚀 Want This Automated For Your Business?</div>
+<h2 class="aw-upgrade-heading">AbetWorks builds custom AI systems, websites &amp; CRM automation.</h2>
+<p class="aw-upgrade-sub">Used by businesses in India &amp; globally. Get a free consultation — no strings attached.</p>
+<div class="aw-upgrade-actions">
+<a class="aw-btn-email" href="mailto:admin@abetworks.in?subject=Custom%20Solution%20Inquiry&amp;body=Hi%20AbetWorks%2C%20I%20used%20your%20free%20tool%20and%20would%20like%20to%20discuss%20a%20custom%20solution." rel="noopener" target="_blank">
+✉ Email — Outside India
+</a>
+<a class="aw-btn-consult" href="https://tripetto.app/run/BKR1M1PACY" rel="noopener" target="_blank">
+📅 Book Free Consultation
+</a>
+</div>
+<div class="aw-upgrade-social">
+<a href="https://abetworks.in" rel="noopener" target="_blank" title="AbetWorks website">🌐 abetworks.in</a>
+<a href="https://www.linkedin.com/company/abetworks" rel="noopener" target="_blank" title="LinkedIn">in</a>
+<a href="https://x.com/abetworks" rel="noopener" target="_blank" title="Twitter/X">𝕏</a>
+<a href="https://www.instagram.com/abetworks.in" rel="noopener" target="_blank" title="Instagram">📸</a>
+<a href="https://t.me/abetworks" rel="noopener" target="_blank" title="Telegram">✈</a>
+<a href="https://www.youtube.com/@AbetWorks" rel="noopener" target="_blank" title="YouTube">▶</a>
+</div>
+</div>
+</section>
+
+<!-- SiteGPT Multi-Column Footer -->
+<div class="sitegpt-footer-wrapper">
+<div class="sitegpt-footer-container">
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Sitemap Tools</span>
+<a class="sitegpt-footer-link" href="../sitemap-finder-checker/index.html">Sitemap Finder &amp; Checker</a>
+<a class="sitegpt-footer-link" href="../sitemap-validator/index.html">Sitemap Validator</a>
+<a class="sitegpt-footer-link" href="../xml-sitemap-generator/index.html">XML Sitemap Generator</a>
+<a class="sitegpt-footer-link" href="../sitemap-url-extractor/index.html">Sitemap URL Extractor</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">AI Chat &amp; Prompt Tools</span>
+<a class="sitegpt-footer-link" href="../ai-chatbot-conversation-analysis/index.html">AI Chatbot Conversation Analysis</a>
+<a class="sitegpt-footer-link" href="../best-ai-prompt-generator/index.html">Best AI Prompt Generator</a>
+<a class="sitegpt-footer-link" href="../ai-prompt-optimizer/index.html">AI Prompt Optimizer</a>
+<a class="sitegpt-footer-link" href="../ai-chat-document-data/index.html">AI Chat with Document Data</a>
+</div>
+<div class="sitegpt-footer-col">
+<span class="sitegpt-footer-title">Converters &amp; Generators</span>
+<a class="sitegpt-footer-link" href="../currency-converter/index.html">Currency Converter</a>
+<a class="sitegpt-footer-link" href="../color-converter/index.html">Color Converter</a>
+<a class="sitegpt-footer-link" href="../pdf-to-markdown/index.html">Convert PDF to Markdown</a>
+<a class="sitegpt-footer-link" href="../email-signature-generator/index.html">Email Signature Generator</a>
+</div>
+<div class="sitegpt-footer-col aw-footer-brand">
+<span class="sitegpt-footer-title">AbetWorks</span>
+<a class="sitegpt-footer-link" href="https://abetworks.in" rel="noopener" target="_blank">🌐 Main Website</a>
+<a class="sitegpt-footer-link" href="https://abetworks.in/services/ai.html" rel="noopener" target="_blank">AI Solutions</a>
+<a class="sitegpt-footer-link" href="mailto:admin@abetworks.in">✉ admin@abetworks.in</a>
+</div>
+</div>
+</div>
+
+<style>
+.related-tool-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+</style>
+
+</main>
+
+<script src="/tools/shared/api-client.js"></script>
+<script>
+    let trendData = [];
+    let currentPeriod = 30;
+    let baseCurrency = 'USD';
+    let targetCurrency = 'EUR';
+
+    function setPeriod(days) {
+        currentPeriod = days;
+        document.querySelectorAll('.trend-period-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.includes(days)) btn.classList.add('active');
+        });
+        document.getElementById('chartTitle').textContent = `${days}-Day Trend`;
+        renderChart();
+    }
+
+    async function analyzeTrend() {
+        baseCurrency = document.getElementById('baseCurrency').value;
+        targetCurrency = document.getElementById('targetCurrency').value;
+
+        if (baseCurrency === targetCurrency) {
+            alert('Please select different currencies');
+            return;
+        }
+
+        const btn = document.getElementById('analyzeBtn');
+        btn.classList.add('loading');
+
+        try {
+            // Fetch historical data for 90 days (max period)
+            trendData = [];
+            const today = new Date();
+            
+            for (let i = 90; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                
+                try {
+                    const response = await fetch(`https://api.exchangerate-api.com/v4/historical/${dateStr}/base/${baseCurrency}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.rates && data.rates[targetCurrency]) {
+                            trendData.push({
+                                date: dateStr,
+                                rate: data.rates[targetCurrency]
+                            });
+                        }
+                    }
+                } catch (e) {
+                    // Skip days without data
+                }
+            }
+
+            if (trendData.length === 0) {
+                throw new Error('No data available for this currency pair');
+            }
+
+            // Show results
+            document.getElementById('periodSelector').classList.remove('hidden');
+            document.getElementById('resultArea').classList.remove('hidden');
+            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('resultArea').classList.add('active');
+
+            setPeriod(30);
+            AbetworksUI.showToast('Trend analysis complete!');
+        } catch (error) {
+            alert('Failed to analyze trend: ' + error.message);
+        } finally {
+            btn.classList.remove('loading');
+        }
+    }
+
+    function renderChart() {
+        const data = currentPeriod === 30 ? trendData.slice(-30) : 
+                     currentPeriod === 60 ? trendData.slice(-60) : trendData;
+
+        if (data.length === 0) return;
+
+        const canvas = document.getElementById('trendChart');
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        const padding = 50;
+
+        // Clear canvas
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-dark');
+        ctx.fillRect(0, 0, width, height);
+
+        // Calculate min/max
+        const rates = data.map(d => d.rate);
+        const minRate = Math.min(...rates);
+        const maxRate = Math.max(...rates);
+        const rateRange = maxRate - minRate || 1;
+
+        // Draw grid lines
+        ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--border-color');
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 5; i++) {
+            const y = padding + (height - 2 * padding) * i / 5;
+            ctx.beginPath();
+            ctx.moveTo(padding, y);
+            ctx.lineTo(width - padding, y);
+            ctx.stroke();
+
+            // Y-axis labels
+            const rateValue = maxRate - (rateRange * i / 5);
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-secondary');
+            ctx.font = '11px Inter';
+            ctx.textAlign = 'right';
+            ctx.fillText(rateValue.toFixed(4), padding - 5, y + 4);
+        }
+
+        // Draw trend line
+        ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent-blue');
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+
+        const chartWidth = width - 2 * padding;
+        const chartHeight = height - 2 * padding;
+        const stepX = chartWidth / (data.length - 1);
+
+        data.forEach((point, i) => {
+            const x = padding + i * stepX;
+            const y = padding + chartHeight - ((point.rate - minRate) / rateRange) * chartHeight;
+
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+        ctx.stroke();
+
+        // Draw area fill
+        ctx.lineTo(padding + (data.length - 1) * stepX, padding + chartHeight);
+        ctx.lineTo(padding, padding + chartHeight);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(37, 99, 235, 0.1)';
+        ctx.fill();
+
+        // Draw data points
+        data.forEach((point, i) => {
+            const x = padding + i * stepX;
+            const y = padding + chartHeight - ((point.rate - minRate) / rateRange) * chartHeight;
+
+            ctx.beginPath();
+            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-blue');
+            ctx.fill();
+        });
+
+        // X-axis labels
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text-secondary');
+        ctx.font = '10px Inter';
+        ctx.textAlign = 'center';
+        const labelStep = Math.floor(data.length / 5);
+        for (let i = 0; i < data.length; i += labelStep) {
+            const x = padding + i * stepX;
+            const date = new Date(data[i].date);
+            const label = `${date.getDate()}/${date.getMonth() + 1}`;
+            ctx.fillText(label, x, height - 10);
+        }
+
+        // Update statistics
+        updateStatistics(data);
+    }
+
+    function updateStatistics(data) {
+        const rates = data.map(d => d.rate);
+        const currentRate = rates[rates.length - 1];
+        const startRate = rates[0];
+        const high = Math.max(...rates);
+        const low = Math.min(...rates);
+        const avg = rates.reduce((a, b) => a + b, 0) / rates.length;
+        const change = ((currentRate - startRate) / startRate) * 100;
+
+        // Calculate volatility (standard deviation of daily changes)
+        const dailyChanges = [];
+        for (let i = 1; i < rates.length; i++) {
+            dailyChanges.push((rates[i] - rates[i-1]) / rates[i-1]);
+        }
+        const avgChange = dailyChanges.reduce((a, b) => a + b, 0) / dailyChanges.length;
+        const variance = dailyChanges.reduce((a, b) => a + Math.pow(b - avgChange, 2), 0) / dailyChanges.length;
+        const volatility = Math.sqrt(variance) * 100;
+
+        document.getElementById('currentRate').textContent = currentRate.toFixed(4);
+        document.getElementById('periodHigh').textContent = high.toFixed(4);
+        document.getElementById('periodLow').textContent = low.toFixed(4);
+        document.getElementById('periodAvg').textContent = avg.toFixed(4);
+
+        const changeEl = document.getElementById('periodChange');
+        changeEl.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`;
+        changeEl.className = `stat-value ${change >= 0 ? 'positive' : 'negative'}`;
+
+        const volEl = document.getElementById('periodVolatility');
+        volEl.textContent = `${volatility.toFixed(2)}%`;
+        volEl.className = `stat-value ${volatility > 2 ? 'negative' : 'positive'}`;
+
+        // Calculate prediction using SMA
+        calculatePrediction(rates);
+    }
+
+    function calculatePrediction(rates) {
+        // Simple Moving Average for last 7 days
+        const sma7 = rates.slice(-7).reduce((a, b) => a + b, 0) / 7;
+        const sma14 = rates.slice(-14).reduce((a, b) => a + b, 0) / 14;
+        
+        const currentRate = rates[rates.length - 1];
+        
+        // Simple trend prediction
+        let direction = 'stable';
+        let predictedRate = currentRate;
+        
+        if (sma7 > sma14 && currentRate > sma7) {
+            direction = 'up';
+            predictedRate = currentRate * 1.005; // 0.5% increase prediction
+        } else if (sma7 < sma14 && currentRate < sma7) {
+            direction = 'down';
+            predictedRate = currentRate * 0.995; // 0.5% decrease prediction
+        } else {
+            direction = 'stable';
+            predictedRate = currentRate;
+        }
+
+        const directionEl = document.getElementById('predictionDirection');
+        directionEl.className = `trend-direction trend-${direction}`;
+        
+        const icons = { up: '📈', down: '📉', stable: '➡️' };
+        const labels = { up: 'Trending Up', down: 'Trending Down', stable: 'Stable' };
+        
+        directionEl.innerHTML = `<span>${icons[direction]}</span><span>${labels[direction]}</span>`;
+        document.getElementById('predictedRate').textContent = predictedRate.toFixed(4);
+    }
+
+    function exportToCSV() {
+        const data = currentPeriod === 30 ? trendData.slice(-30) : 
+                     currentPeriod === 60 ? trendData.slice(-60) : trendData;
+        
+        let csv = 'Date,Exchange Rate\n';
+        data.forEach(point => {
+            csv += `${point.date},${point.rate.toFixed(6)}\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `currency-trend-${baseCurrency}-${targetCurrency}-${currentPeriod}days.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        AbetworksUI.showToast('CSV exported successfully!');
+    }
+
+    function copyAnalysis() {
+        const data = currentPeriod === 30 ? trendData.slice(-30) : 
+                     currentPeriod === 60 ? trendData.slice(-60) : trendData;
+        
+        const rates = data.map(d => d.rate);
+        const currentRate = rates[rates.length - 1];
+        const high = Math.max(...rates);
+        const low = Math.min(...rates);
+        const change = ((currentRate - rates[0]) / rates[0]) * 100;
+
+        const text = `Currency Trend Analysis (${currentPeriod} days)\n\n${baseCurrency}/${targetCurrency}\n\nCurrent Rate: ${currentRate.toFixed(4)}\nPeriod High: ${high.toFixed(4)}\nPeriod Low: ${low.toFixed(4)}\nChange: ${change >= 0 ? '+' : ''}${change.toFixed(2)}%\n\nAnalysis by Abetworks Currency Trend Analyzer`;
+        
+        AbetworksUI.copyToClipboard(text);
+    }
+</script>
+
+    
+        <!-- Related Tools Section -->
+        <div class="related-tools" style="margin-top: 40px; padding-top: 32px; border-top: 1px solid #e5e7eb;">
+            <h2 style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 24px;">🔗 Related Tools</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                <a href="../qr-code-generator/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">📱</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">QR Code Generator</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Create custom QR codes instantly</span>
+                </a>
+                <a href="../url-shortener/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🔗</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">URL Shortener</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Shorten long URLs into clean links</span>
+                </a>
+                <a href="../image-compressor/index.html" class="tool-card" style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 16px; padding: 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 36px;">🖼️</span>
+                        <span style="color: #000000; font-weight: 900; font-size: 18px;">Image Compressor</span>
+                    </div>
+                    <span style="color: #333333; font-size: 14px; line-height: 1.5;">Compress images while maintaining quality</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Abetworks Social Links & Footer -->
+        <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+            <div style="text-align: center; margin-bottom: 32px;">
+                <h3 style="font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px;">✨ Abetworks</h3>
+                <p style="color: #6b7280; font-size: 16px; margin-bottom: 24px;">AI Solutions • Data Analytics • Business Consultancy</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://abetworks.in" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s;">🌐 Visit Website</a>
+                    <a href="https://tripetto.app/run/BKR1M1PACY" target="_blank" rel="noopener" style="background: #f9fafb; color: #1a1a1a; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 1px solid #e5e7eb; transition: all 0.2s;">📞 Contact</a>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: center; margin-top: 24px;">
+                    <a href="https://facebook.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📘</a>
+                    <a href="https://twitter.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">🐦</a>
+                    <a href="https://linkedin.com/company/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">💼</a>
+                    <a href="https://instagram.com/abetworks" target="_blank" rel="noopener" style="width: 40px; height: 40px; background: #f3f4f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; text-decoration: none; transition: all 0.2s;">📸</a>
+                </div>
+            </div>
+            <footer style="text-align: center; padding: 24px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 13px;">
+                <p>&copy; 2026 Abetworks. All rights reserved.</p>
+            </footer>
+        </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        });
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            }
+        }
+    </script>
+    <style>
+[data-theme="dark"] .related-tools h2 {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:first-child {
+    color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .related-tools .tool-card span:last-child {
+    color: #94a3b8 !important;
+}
+
+    </style>
+</body>
+</html>
