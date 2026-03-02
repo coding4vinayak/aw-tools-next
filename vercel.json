@@ -1,11 +1,21 @@
 {
   "framework": "nextjs",
   "regions": ["iad1"],
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
-      "destination": "/index.html"
-    },
+      "destination": "/index.html",
+      "permanent": false,
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": "text/html"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
     {
       "source": "/tools",
       "destination": "/tools/index.html"
