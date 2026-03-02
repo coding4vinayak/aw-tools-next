@@ -1,6 +1,8 @@
 import { redirect } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
-  // Redirect to tools index page
-  redirect('/tools/index.html');
+  // Redirect to the static tools index page
+  redirect('/index.html');
 }
