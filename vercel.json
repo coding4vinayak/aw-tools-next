@@ -1,11 +1,7 @@
 {
   "framework": "nextjs",
   "regions": ["iad1"],
-  "outputDirectory": "public",
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    }
-  ]
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install"
 }
