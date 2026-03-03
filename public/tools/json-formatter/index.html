@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Beautifier - Online JSON Tool | Abetworks</title>
+    <meta name="description" content="Free online JSON formatter and beautifier. Format, validate, and minify JSON data. Syntax highlighting and error detection. No signup required.">
+    <meta name="keywords" content="json formatter, json beautifier, json validator, json minifier, format json, free json tool">
+    <link rel="canonical" href="https://abetworks.in/tools/json-formatter/">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <style>
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 1024px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+        }
+        .editor-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .editor-textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            resize: vertical;
+            transition: all 0.2s ease;
+        }
+        .editor-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .action-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .status-bar {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.875rem;
+        }
+        .status-valid {
+            color: #10b981;
+            border-left: 4px solid #10b981;
+        }
+        .status-invalid {
+            color: #ef4444;
+            border-left: 4px solid #ef4444;
+        }
+        .stats-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        .indent-select {
+            padding: 0.5rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-link" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 600;">Contact</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>JSON Formatter</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE DEVELOPER TOOL</span>
+            <h1 class="sitegpt-h1">JSON Formatter & Beautifier</h1>
+            <p class="tool-subtitle">Format, validate, and minify JSON data instantly. Syntax highlighting and error detection for clean, readable JSON.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div style="display: flex; gap: 0.75rem; align-items: center;">
+                    <label class="form-label" style="margin: 0;">Indentation:</label>
+                    <select id="indentSelect" class="indent-select" onchange="formatJSON()">
+                        <option value="2">2 spaces</option>
+                        <option value="4">4 spaces</option>
+                        <option value="0">Tabs</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                    <button onclick="loadSample()" class="btn btn-ghost" style="font-size: 0.875rem;">
+                        📄 Load Sample JSON
+                    </button>
+                </div>
+            </div>
+
+            <div class="tool-container">
+                <div class="editor-panel">
+                    <div class="editor-label">
+                        <span>📝</span>
+                        <span>Input JSON</span>
+                    </div>
+                    <textarea
+                        id="inputJson"
+                        class="editor-textarea"
+                        placeholder="Paste your JSON here..."
+                        spellcheck="false"
+                    ></textarea>
+                    <div class="action-bar">
+                        <button onclick="formatJSON()" class="btn btn-primary">
+                            ✨ Format JSON
+                        </button>
+                        <button onclick="minifyJSON()" class="btn btn-secondary">
+                            🗜️ Minify
+                        </button>
+                        <button onclick="clearAll()" class="btn btn-ghost">
+                            🗑️ Clear
+                        </button>
+                    </div>
+                </div>
+
+                <div class="editor-panel">
+                    <div class="editor-label">
+                        <span>✅</span>
+                        <span>Formatted JSON</span>
+                    </div>
+                    <textarea
+                        id="outputJson"
+                        class="editor-textarea"
+                        placeholder="Formatted JSON will appear here..."
+                        readonly
+                        spellcheck="false"
+                    ></textarea>
+                    <div class="action-bar">
+                        <button onclick="copyOutput()" class="btn btn-primary">
+                            📋 Copy Output
+                        </button>
+                        <button onclick="downloadJSON()" class="btn btn-secondary">
+                            ⬇️ Download .json
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="statusBar" class="status-bar" style="display: none;">
+                <div id="statusMessage"></div>
+                <div class="stats-row">
+                    <span id="statsChars">0 characters</span>
+                    <span id="statsLines">0 lines</span>
+                    <span id="statsSize">0 bytes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <article class="faq-section">
+            <h2>About JSON Formatter & Beautifier</h2>
+            <p>
+                Our free JSON Formatter & Beautifier helps you format, validate, and minify JSON data instantly. Whether you're a developer working with APIs, a data analyst, or anyone working with JSON, this tool makes your JSON readable and well-structured.
+            </p>
+            <h3>Key Features:</h3>
+            <ul>
+                <li>✓ <strong>Format/Beautify</strong> - Make JSON readable with proper indentation</li>
+                <li>✓ <strong>Validate</strong> - Check JSON syntax and detect errors</li>
+                <li>✓ <strong>Minify</strong> - Compress JSON to single line for production</li>
+                <li>✓ <strong>Custom Indentation</strong> - Choose 2 spaces, 4 spaces, or tabs</li>
+                <li>✓ <strong>Real-time Stats</strong> - Character count, line count, file size</li>
+                <li>✓ <strong>Download</strong> - Save formatted JSON as .json file</li>
+                <li>✓ <strong>100% Free</strong> - No signup required, works in browser</li>
+            </ul>
+            <h3>How to Use:</h3>
+            <ol>
+                <li>Paste or type your JSON in the input field</li>
+                <li>Choose your preferred indentation (2 spaces, 4 spaces, or tabs)</li>
+                <li>Click "Format JSON" to beautify it</li>
+                <li>Copy the formatted output or download as .json file</li>
+            </ol>
+            <h3>Common Use Cases:</h3>
+            <p>
+                This tool is perfect for developers debugging API responses, formatting configuration files, preparing JSON for documentation, validating JSON structure, and minifying JSON for production deployment.
+            </p>
+        </article>
+
+        <!-- Related Tools -->
+        <section class="related-tools-section">
+            <h2>Related Tools</h2>
+            <div class="tools-grid">
+                <a href="/tools/json-minifier/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🗜️</div>
+                        <span class="tool-card-title">JSON Minifier</span>
+                    </div>
+                    <span class="tool-card-desc">Minify JSON to reduce file size and remove whitespace.</span>
+                </a>
+                <a href="/tools/json-validator/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">✅</div>
+                        <span class="tool-card-title">JSON Validator</span>
+                    </div>
+                    <span class="tool-card-desc">Validate JSON syntax and detect errors.</span>
+                </a>
+                <a href="/tools/xml-to-json/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🔄</div>
+                        <span class="tool-card-title">XML to JSON</span>
+                    </div>
+                    <span class="tool-card-desc">Convert XML data to JSON format.</span>
+                </a>
+                <a href="/tools/json-to-csv/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">📊</div>
+                        <span class="tool-card-title">JSON to CSV</span>
+                    </div>
+                    <span class="tool-card-desc">Convert JSON arrays to CSV format.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Abetworks. All rights reserved.</p>
+    </footer>
+
+    <script src="/tools/shared/components.js"></script>
+    <script>
+        function formatJSON() {
+            const input = document.getElementById('inputJson').value.trim();
+            const indent = document.getElementById('indentSelect').value;
+            const indentValue = indent === '0' ? '\t' : parseInt(indent);
+            
+            if (!input) {
+                showStatus('Please enter JSON to format', 'invalid');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, indentValue);
+                document.getElementById('outputJson').value = formatted;
+                showStatus('✓ Valid JSON - Formatted successfully!', 'valid');
+                updateStats(formatted);
+            } catch (e) {
+                showStatus('✗ Invalid JSON - ' + e.message, 'invalid');
+                document.getElementById('outputJson').value = '';
+            }
+        }
+        
+        function minifyJSON() {
+            const input = document.getElementById('inputJson').value.trim();
+            
+            if (!input) {
+                showStatus('Please enter JSON to minify', 'invalid');
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                document.getElementById('outputJson').value = minified;
+                showStatus('✓ Valid JSON - Minified successfully!', 'valid');
+                updateStats(minified);
+            } catch (e) {
+                showStatus('✗ Invalid JSON - ' + e.message, 'invalid');
+            }
+        }
+        
+        function copyOutput() {
+            const output = document.getElementById('outputJson');
+            if (!output.value) {
+                showStatus('Nothing to copy', 'invalid');
+                return;
+            }
+            output.select();
+            document.execCommand('copy');
+            showNotification('Copied to clipboard!', 'success');
+        }
+        
+        function downloadJSON() {
+            const output = document.getElementById('outputJson').value;
+            if (!output) {
+                showStatus('Nothing to download', 'invalid');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'formatted.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showNotification('Downloaded as formatted.json', 'success');
+        }
+        
+        function clearAll() {
+            document.getElementById('inputJson').value = '';
+            document.getElementById('outputJson').value = '';
+            document.getElementById('statusBar').style.display = 'none';
+        }
+        
+        function loadSample() {
+            const sample = {
+                "name": "Abetworks Tools",
+                "version": "1.0.0",
+                "description": "100+ Free AI & SEO Tools",
+                "features": [
+                    "AI Tools",
+                    "SEO Tools",
+                    "Productivity Tools",
+                    "Developer Tools"
+                ],
+                "stats": {
+                    "totalTools": 100,
+                    "aiTools": 38,
+                    "users": 50000,
+                    "free": true
+                },
+                "contact": {
+                    "website": "https://abetworks.in",
+                    "email": "contact@abetworks.in"
+                }
+            };
+            document.getElementById('inputJson').value = JSON.stringify(sample, null, 2);
+            formatJSON();
+        }
+        
+        function showStatus(message, type) {
+            const statusBar = document.getElementById('statusBar');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            statusBar.style.display = 'block';
+            statusBar.className = 'status-bar status-' + type;
+            statusMessage.textContent = message;
+        }
+        
+        function updateStats(text) {
+            const chars = text.length;
+            const lines = text.split('\n').length;
+            const bytes = new Blob([text]).size;
+            
+            document.getElementById('statsChars').textContent = chars.toLocaleString() + ' characters';
+            document.getElementById('statsLines').textContent = lines.toLocaleString() + ' lines';
+            document.getElementById('statsSize').textContent = formatBytes(bytes);
+        }
+        
+        function formatBytes(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+        
+        // Auto-format on paste
+        document.getElementById('inputJson').addEventListener('paste', function() {
+            setTimeout(formatJSON, 100);
+        });
+    </script>
+</body>
+</html>

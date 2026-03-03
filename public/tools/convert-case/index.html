@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Case - Upper, Lower, Title Case Converter | Abetworks</title>
+    <meta name="description" content="Free online text case converter. Convert text to uppercase, lowercase, title case, sentence case, and more. Real-time conversion with one-click options.">
+    <meta name="keywords" content="convert case, text case converter, uppercase, lowercase, title case, sentence case, free text tool">
+    <link rel="canonical" href="https://abetworks.in/tools/convert-case/">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <style>
+        .case-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        .case-btn {
+            padding: 0.75rem 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .case-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .output-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-link" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 600;">Contact</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Convert Case</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TEXT TOOL</span>
+            <h1 class="sitegpt-h1">Convert Case</h1>
+            <p class="tool-subtitle">Transform your text between different cases instantly. Convert to uppercase, lowercase, title case, sentence case, and more with a single click.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Enter Your Text</label>
+                <textarea
+                    id="textInput"
+                    class="form-textarea"
+                    placeholder="Type or paste your text here..."
+                    rows="10"
+                >The quick brown fox jumps over the lazy dog. THIS IS AN EXAMPLE TEXT with Mixed CASE.</textarea>
+            </div>
+
+            <div class="case-buttons">
+                <button class="case-btn" onclick="convertCase('upper')">UPPERCASE</button>
+                <button class="case-btn" onclick="convertCase('lower')">lowercase</button>
+                <button class="case-btn" onclick="convertCase('title')">Title Case</button>
+                <button class="case-btn" onclick="convertCase('sentence')">Sentence case</button>
+                <button class="case-btn" onclick="convertCase('camel')">camelCase</button>
+                <button class="case-btn" onclick="convertCase('pascal')">PascalCase</button>
+                <button class="case-btn" onclick="convertCase('snake')">snake_case</button>
+                <button class="case-btn" onclick="convertCase('kebab')">kebab-case</button>
+                <button class="case-btn" onclick="convertCase('constant')">CONSTANT_CASE</button>
+                <button class="case-btn" onclick="convertCase('alternating')">AlTeRnAtInG</button>
+                <button class="case-btn" onclick="convertCase('inverse')">iNVERSE cASE</button>
+                <button class="case-btn" onclick="convertCase('capitalize')">Capitalize First Letter</button>
+            </div>
+
+            <div class="output-section">
+                <div class="form-group">
+                    <label class="form-label">Result</label>
+                    <textarea
+                        id="textOutput"
+                        class="form-textarea"
+                        rows="10"
+                        readonly
+                    ></textarea>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="copyResult()" class="btn btn-primary">
+                        📋 Copy Result
+                    </button>
+                    <button onclick="clearAll()" class="btn btn-secondary">
+                        🗑️ Clear All
+                    </button>
+                    <button onclick="swapText()" class="btn btn-secondary">
+                        🔄 Swap Input/Output
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <article class="faq-section">
+            <h2>About Convert Case Tool</h2>
+            <p>
+                Our free Convert Case tool allows you to quickly transform text between different case formats. Whether you're a developer, writer, or student, this tool helps you format text exactly how you need it.
+            </p>
+            <h3>Available Case Conversions:</h3>
+            <ul>
+                <li>✓ <strong>UPPERCASE</strong> - All letters capital</li>
+                <li>✓ <strong>lowercase</strong> - All letters small</li>
+                <li>✓ <strong>Title Case</strong> - First Letter Of Each Word Capital</li>
+                <li>✓ <strong>Sentence case</strong> - First letter of sentence capital</li>
+                <li>✓ <strong>camelCase</strong> - first Word Lowercase, Rest Capitalized</li>
+                <li>✓ <strong>PascalCase</strong> - All Words Capitalized</li>
+                <li>✓ <strong>snake_case</strong> - lowercase_with_underscores</li>
+                <li>✓ <strong>kebab-case</strong> - lowercase-with-dashes</li>
+                <li>✓ <strong>CONSTANT_CASE</strong> - UPPERCASE_WITH_UNDERSCORES</li>
+                <li>✓ <strong>AlTeRnAtInG</strong> - Alternating case</li>
+                <li>✓ <strong>iNVERSE cASE</strong> - Invert current case</li>
+                <li>✓ <strong>Capitalize First Letter</strong> - Of each word</li>
+            </ul>
+            <h3>Use Cases:</h3>
+            <p>
+                This tool is perfect for developers formatting code variables, writers fixing capitalization, social media managers creating eye-catching posts, and anyone who needs to quickly transform text case.
+            </p>
+        </article>
+
+        <!-- Related Tools -->
+        <section class="related-tools-section">
+            <h2>Related Tools</h2>
+            <div class="tools-grid">
+                <a href="/tools/word-counter/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">📊</div>
+                        <span class="tool-card-title">Word Counter</span>
+                    </div>
+                    <span class="tool-card-desc">Count words, characters, sentences, and paragraphs in real-time.</span>
+                </a>
+                <a href="/tools/reverse-text/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🔄</div>
+                        <span class="tool-card-title">Reverse Text</span>
+                    </div>
+                    <span class="tool-card-desc">Reverse text character by character instantly.</span>
+                </a>
+                <a href="/tools/text-to-slug/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🔗</div>
+                        <span class="tool-card-title">Text to Slug Converter</span>
+                    </div>
+                    <span class="tool-card-desc">Convert text to URL-friendly slugs for SEO.</span>
+                </a>
+                <a href="/tools/remove-emojis/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🧹</div>
+                        <span class="tool-card-title">Remove Emojis</span>
+                    </div>
+                    <span class="tool-card-desc">Strip emoji characters from text content.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Abetworks. All rights reserved.</p>
+    </footer>
+
+    <script src="/tools/shared/components.js"></script>
+    <script>
+        // Initialize output
+        document.getElementById('textOutput').value = document.getElementById('textInput').value;
+
+        function convertCase(type) {
+            const input = document.getElementById('textInput').value;
+            let result = '';
+
+            switch(type) {
+                case 'upper':
+                    result = input.toUpperCase();
+                    break;
+                case 'lower':
+                    result = input.toLowerCase();
+                    break;
+                case 'title':
+                    result = toTitleCase(input);
+                    break;
+                case 'sentence':
+                    result = toSentenceCase(input);
+                    break;
+                case 'camel':
+                    result = toCamelCase(input);
+                    break;
+                case 'pascal':
+                    result = toPascalCase(input);
+                    break;
+                case 'snake':
+                    result = toSnakeCase(input);
+                    break;
+                case 'kebab':
+                    result = toKebabCase(input);
+                    break;
+                case 'constant':
+                    result = input.toUpperCase().replace(/\s+/g, '_');
+                    break;
+                case 'alternating':
+                    result = toAlternatingCase(input);
+                    break;
+                case 'inverse':
+                    result = toInverseCase(input);
+                    break;
+                case 'capitalize':
+                    result = input.replace(/\b\w/g, l => l.toUpperCase());
+                    break;
+            }
+
+            document.getElementById('textOutput').value = result;
+        }
+
+        function toTitleCase(str) {
+            return str.toLowerCase().split(' ').map(word => {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+            }).join(' ');
+        }
+
+        function toSentenceCase(str) {
+            return str.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, c => c.toUpperCase());
+        }
+
+        function toCamelCase(str) {
+            return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+        }
+
+        function toPascalCase(str) {
+            return str.replace(/\w+/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).replace(/[^a-zA-Z0-9]/g, '');
+        }
+
+        function toSnakeCase(str) {
+            return str.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+        }
+
+        function toKebabCase(str) {
+            return str.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        }
+
+        function toAlternatingCase(str) {
+            let result = '';
+            for (let i = 0; i < str.length; i++) {
+                result += i % 2 === 0 ? str[i].toLowerCase() : str[i].toUpperCase();
+            }
+            return result;
+        }
+
+        function toInverseCase(str) {
+            let result = '';
+            for (let i = 0; i < str.length; i++) {
+                const char = str[i];
+                result += char === char.toUpperCase() ? char.toLowerCase() : char.toUpperCase();
+            }
+            return result;
+        }
+
+        function copyResult() {
+            const output = document.getElementById('textOutput');
+            output.select();
+            document.execCommand('copy');
+            showNotification('Result copied to clipboard!', 'success');
+        }
+
+        function clearAll() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('textOutput').value = '';
+        }
+
+        function swapText() {
+            const input = document.getElementById('textInput');
+            const output = document.getElementById('textOutput');
+            const temp = input.value;
+            input.value = output.value;
+            output.value = temp;
+        }
+    </script>
+</body>
+</html>

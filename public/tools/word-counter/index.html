@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter - Count Words, Characters & More | Abetworks</title>
+    <meta name="description" content="Free online word counter tool. Count words, characters, sentences, paragraphs, and reading time. Real-time analysis with detailed statistics.">
+    <meta name="keywords" content="word counter, character count, word count tool, text analyzer, reading time calculator, free word counter">
+    <link rel="canonical" href="https://abetworks.in/tools/word-counter/">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="/tools/shared/ui-system-balanced.css?v=10" rel="stylesheet">
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .additional-stats {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .additional-stats h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.125rem;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .stat-row-label {
+            color: var(--text-secondary);
+        }
+        .stat-row-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://abetworks.in" class="logo-text" target="_blank" rel="noopener">Abetworks</a>
+        <div class="nav-links">
+            <a href="/tools/index.html" class="nav-link">← All Tools</a>
+            <a href="https://abetworks.in" class="nav-link" target="_blank" rel="noopener">Website</a>
+            <a href="https://tripetto.app/run/BKR1M1PACY" class="nav-link" target="_blank" rel="noopener" style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white !important; padding: 10px 20px; border-radius: 8px; font-weight: 600;">Contact</a>
+            <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle dark/light theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="sitegpt-breadcrumb">
+            <div class="sitegpt-breadcrumb-card">
+                <a href="/tools/index.html">Home</a>
+                <span class="separator">/</span>
+                <a href="/tools/index.html">Tools</a>
+                <span class="separator">/</span>
+                <span>Word Counter</span>
+            </div>
+        </div>
+
+        <div class="sitegpt-tool-header">
+            <span class="sitegpt-category">FREE TEXT TOOL</span>
+            <h1 class="sitegpt-h1">Word Counter</h1>
+            <p class="tool-subtitle">Count words, characters, sentences, and paragraphs in real-time. Get detailed text statistics including reading time, speaking time, and more.</p>
+        </div>
+
+        <div class="tool-workspace">
+            <div class="form-group">
+                <label class="form-label">Enter Your Text</label>
+                <textarea
+                    id="textInput"
+                    class="form-textarea"
+                    placeholder="Start typing or paste your text here to analyze..."
+                    rows="12"
+                    oninput="analyzeText()"
+                ></textarea>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="clearText()" class="btn btn-secondary">
+                    🗑️ Clear Text
+                </button>
+                <button onclick="copyText()" class="btn btn-secondary">
+                    📋 Copy Text
+                </button>
+                <button onclick="pasteText()" class="btn btn-secondary">
+                    📥 Paste from Clipboard
+                </button>
+            </div>
+
+            <!-- Main Stats -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <span class="stat-value" id="wordCount">0</span>
+                    <span class="stat-label">Words</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="charCount">0</span>
+                    <span class="stat-label">Characters</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="charCountNoSpaces">0</span>
+                    <span class="stat-label">Characters (no spaces)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="sentenceCount">0</span>
+                    <span class="stat-label">Sentences</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="paragraphCount">0</span>
+                    <span class="stat-label">Paragraphs</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="lineCount">0</span>
+                    <span class="stat-label">Lines</span>
+                </div>
+            </div>
+
+            <!-- Additional Stats -->
+            <div class="additional-stats">
+                <h3>📊 Additional Statistics</h3>
+                <div class="stat-row">
+                    <span class="stat-row-label">Reading Time (at 200 words/min)</span>
+                    <span class="stat-row-value" id="readingTime">0 sec</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-row-label">Speaking Time (at 130 words/min)</span>
+                    <span class="stat-row-value" id="speakingTime">0 sec</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-row-label">Average Word Length</span>
+                    <span class="stat-row-value" id="avgWordLength">0 chars</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-row-label">Average Sentence Length</span>
+                    <span class="stat-row-value" id="avgSentenceLength">0 words</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-row-label">Unique Words</span>
+                    <span class="stat-row-value" id="uniqueWords">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-row-label">Most Frequent Word</span>
+                    <span class="stat-row-value" id="mostFrequentWord">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <article class="faq-section">
+            <h2>About Word Counter Tool</h2>
+            <p>
+                Our free Word Counter tool helps you analyze your text in real-time. Whether you're writing an essay, blog post, social media update, or any other content, this tool provides comprehensive statistics about your text.
+            </p>
+            <h3>Key Features:</h3>
+            <ul>
+                <li>✓ Real-time word and character counting</li>
+                <li>✓ Sentence and paragraph analysis</li>
+                <li>✓ Reading and speaking time estimates</li>
+                <li>✓ Average word and sentence length</li>
+                <li>✓ Unique word count and frequency analysis</li>
+                <li>✓ 100% free - No signup required</li>
+                <li>✓ Works directly in your browser</li>
+            </ul>
+            <h3>Who Can Use This Tool?</h3>
+            <p>
+                This tool is perfect for students, writers, bloggers, social media managers, and anyone who needs to track their text length. It's especially useful for meeting word count requirements for essays, articles, tweets, and other content.
+            </p>
+        </article>
+
+        <!-- Related Tools -->
+        <section class="related-tools-section">
+            <h2>Related Tools</h2>
+            <div class="tools-grid">
+                <a href="/tools/convert-case/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🔤</div>
+                        <span class="tool-card-title">Convert Case</span>
+                    </div>
+                    <span class="tool-card-desc">Change text between uppercase, lowercase, title case, and more.</span>
+                </a>
+                <a href="/tools/character-counter/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">📝</div>
+                        <span class="tool-card-title">Character Counter</span>
+                    </div>
+                    <span class="tool-card-desc">Count characters with detailed analysis and limits.</span>
+                </a>
+                <a href="/tools/text-to-slug/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🔗</div>
+                        <span class="tool-card-title">Text to Slug Converter</span>
+                    </div>
+                    <span class="tool-card-desc">Convert text to URL-friendly slugs for SEO.</span>
+                </a>
+                <a href="/tools/remove-duplicate-lines/index.html" class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-icon">🧹</div>
+                        <span class="tool-card-title">Remove Duplicate Lines</span>
+                    </div>
+                    <span class="tool-card-desc">Clean up duplicate lines from your text.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Abetworks. All rights reserved.</p>
+    </footer>
+
+    <script src="/tools/shared/components.js"></script>
+    <script>
+        function analyzeText() {
+            const text = document.getElementById('textInput').value;
+            
+            // Basic counts
+            const words = text.trim() ? text.trim().split(/\s+/).filter(word => word.length > 0) : [];
+            const wordCount = words.length;
+            const charCount = text.length;
+            const charCountNoSpaces = text.replace(/\s/g, '').length;
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+            const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+            const lines = text.split(/\n/).filter(l => l.trim().length > 0).length;
+            
+            // Update main stats
+            document.getElementById('wordCount').textContent = wordCount.toLocaleString();
+            document.getElementById('charCount').textContent = charCount.toLocaleString();
+            document.getElementById('charCountNoSpaces').textContent = charCountNoSpaces.toLocaleString();
+            document.getElementById('sentenceCount').textContent = sentences.toLocaleString();
+            document.getElementById('paragraphCount').textContent = paragraphs.toLocaleString();
+            document.getElementById('lineCount').textContent = lines.toLocaleString();
+            
+            // Additional stats
+            const readingTimeSeconds = Math.ceil((wordCount / 200) * 60);
+            const speakingTimeSeconds = Math.ceil((wordCount / 130) * 60);
+            
+            document.getElementById('readingTime').textContent = formatTime(readingTimeSeconds);
+            document.getElementById('speakingTime').textContent = formatTime(speakingTimeSeconds);
+            
+            // Average word length
+            const avgWordLen = wordCount > 0 
+                ? (words.reduce((sum, word) => sum + word.length, 0) / wordCount).toFixed(1)
+                : 0;
+            document.getElementById('avgWordLength').textContent = avgWordLen + ' chars';
+            
+            // Average sentence length
+            const avgSentenceLen = sentences > 0 
+                ? Math.round(wordCount / sentences)
+                : 0;
+            document.getElementById('avgSentenceLength').textContent = avgSentenceLen + ' words';
+            
+            // Unique words
+            const uniqueWordsSet = new Set(words.map(w => w.toLowerCase()));
+            document.getElementById('uniqueWords').textContent = uniqueWordsSet.size.toLocaleString();
+            
+            // Most frequent word
+            if (wordCount > 0) {
+                const wordFreq = {};
+                words.forEach(word => {
+                    const lower = word.toLowerCase();
+                    wordFreq[lower] = (wordFreq[lower] || 0) + 1;
+                });
+                const mostFrequent = Object.entries(wordFreq)
+                    .sort((a, b) => b[1] - a[1])[0];
+                document.getElementById('mostFrequentWord').textContent = mostFrequent 
+                    ? `"${mostFrequent[0]}" (${mostFrequent[1]}x)`
+                    : '-';
+            } else {
+                document.getElementById('mostFrequentWord').textContent = '-';
+            }
+        }
+        
+        function formatTime(seconds) {
+            if (seconds < 60) {
+                return seconds + ' sec';
+            } else {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return mins + ' min ' + (secs > 0 ? secs + ' sec' : '');
+            }
+        }
+        
+        function clearText() {
+            document.getElementById('textInput').value = '';
+            analyzeText();
+        }
+        
+        function copyText() {
+            const text = document.getElementById('textInput');
+            text.select();
+            document.execCommand('copy');
+            showNotification('Text copied to clipboard!', 'success');
+        }
+        
+        async function pasteText() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('textInput').value = text;
+                analyzeText();
+                showNotification('Text pasted successfully!', 'success');
+            } catch (err) {
+                showNotification('Failed to paste. Please allow clipboard access.', 'error');
+            }
+        }
+        
+        function showNotification(message, type) {
+            // Simple notification (you can enhance this)
+            alert(message);
+        }
+        
+        // Initialize on load
+        analyzeText();
+    </script>
+</body>
+</html>
