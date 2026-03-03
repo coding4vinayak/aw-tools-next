@@ -816,7 +816,16 @@ function toggleTheme() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize theme from localStorage
     initializeTheme();
-    
+
+    // Auto-detect if running in Next.js app router (hide navbar/footer)
+    const path = window.location.pathname;
+    // If path matches /tools/[slug]/ pattern (not ending with index.html)
+    const isInNextJs = path.match(/^\/tools\/[^\/]+\/$/) && !path.includes('/index.html');
+    if (isInNextJs) {
+        document.body.classList.add('nextjs-embedded');
+        console.log('Running in Next.js - hiding navbar/footer');
+    }
+
     // Inject shared elements (navbar and footer)
     injectSharedElements();
 });

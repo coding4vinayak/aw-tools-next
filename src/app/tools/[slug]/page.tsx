@@ -135,7 +135,9 @@ export default async function ToolPage({ params }: ToolPageProps) {
               width: '100%',
               minHeight: '600px',
               border: 'none',
+              overflow: 'hidden',
             }}
+            scrolling="no"
           />
         </div>
 

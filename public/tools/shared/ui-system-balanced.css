@@ -737,3 +737,23 @@ body {
     font-size: 15px;
     margin-top: 8px;
 }
+
+/* ──────────────────────────────────────────────────────────────
+   NEXT.JS EMBEDDED MODE - Hide navbar/footer to prevent doubles
+   ────────────────────────────────────────────────────────────── */
+body.nextjs-embedded .navbar,
+body.nextjs-embedded .footer,
+body.nextjs-embedded .sitegpt-breadcrumb,
+body.nextjs-embedded .faq-section,
+body.nextjs-embedded .related-tools-section {
+    display: none !important;
+}
+
+body.nextjs-embedded .main-content {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+body.nextjs-embedded .tool-workspace {
+    margin-top: 1rem !important;
+}
