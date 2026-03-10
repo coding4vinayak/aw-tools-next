@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getToolBySlug, getRelatedTools, tools } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
-import ToolIframe from '@/components/ToolIframe';
+import ToolContent from '@/components/ToolContent';
 import type { Tool } from '@/types';
 
 // Generate static params for all tools
@@ -130,10 +130,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
       {/* Tool Workspace - Full Width */}
       <div style={{ width: '100%', marginBottom: '3rem', background: 'var(--card)' }}>
-        <ToolIframe
-          src={`${toolPath}?embedded=true`}
-          title={`${tool.title} - Tool Workspace`}
-        />
+        <ToolContent toolPath={toolPath} />
       </div>
 
       {/* SEO Content and Related Tools - Centered */}
