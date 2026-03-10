@@ -819,11 +819,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-detect if running in Next.js app router (hide navbar/footer)
     const path = window.location.pathname;
+    const urlParams = new URLSearchParams(window.location.search);
+    const isEmbedded = urlParams.get('embedded') === 'true';
+
     // If path matches /tools/[slug]/ pattern (not ending with index.html)
     const isInNextJs = path.match(/^\/tools\/[^\/]+\/$/) && !path.includes('/index.html');
-    if (isInNextJs) {
+
+    if (isInNextJs || isEmbedded) {
         document.body.classList.add('nextjs-embedded');
         console.log('Running in Next.js - hiding navbar/footer');
+        
+        // Auto-resize iframe height to fit content
+        const resizeObserver = new MutationObserver(() => {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage({ type: 'RESIZE_IFRAME', height }, '*');
+        });
+        
+        resizeObserver.observe(document.body, { 
+            childList: true, 
+            subtree: true, 
+            attributes: true 
+        });
+        
+        // Initial resize
+        window.addEventListener('load', () => {
+            window.parent.postMessage({ type: 'RESIZE_IFRAME', height: document.body.scrollHeight }, '*');
+        });
+        
+        // Prevent links from breaking out of iframe improperly
+        // Intercept clicks on relative links to ensure they stay in iframe
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link) {
+                const href = link.getAttribute('href');
+                // If it's a relative link without target="_blank", ensure it stays in iframe
+                if (href && !href.startsWith('http') && !href.startsWith('//') && !link.hasAttribute('target')) {
+                    // Let it navigate normally within iframe
+                    // But prevent any window.open attempts
+                    e.stopPropagation();
+                }
+            }
+        }, true);
     }
 
     // Inject shared elements (navbar and footer)

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getToolBySlug, getRelatedTools, tools } from '@/lib/tools';
 import ToolCard from '@/components/ToolCard';
+import ToolIframe from '@/components/ToolIframe';
 import type { Tool } from '@/types';
 
 // Generate static params for all tools
@@ -74,6 +75,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   return (
     <div className="animate-fade-in">
+      {/* Tool Header Section - Centered */}
       <div className="container" style={{ padding: '2rem 1rem', maxWidth: '1400px' }}>
         {/* Breadcrumb */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
@@ -124,23 +126,18 @@ export default async function ToolPage({ params }: ToolPageProps) {
             <span>Back to All Tools</span>
           </Link>
         </div>
+      </div>
 
-        {/* Tool Workspace - iframe embedding the static HTML tool */}
-        <div className="tool-workspace" style={{ marginBottom: '3rem' }}>
-          <iframe
-            src={toolPath}
-            title={`${tool.title} - Tool Workspace`}
-            loading="lazy"
-            style={{
-              width: '100%',
-              minHeight: '600px',
-              border: 'none',
-              overflow: 'hidden',
-            }}
-            scrolling="no"
-          />
-        </div>
+      {/* Tool Workspace - Full Width */}
+      <div style={{ width: '100%', marginBottom: '3rem', background: 'var(--card)' }}>
+        <ToolIframe
+          src={`${toolPath}?embedded=true`}
+          title={`${tool.title} - Tool Workspace`}
+        />
+      </div>
 
+      {/* SEO Content and Related Tools - Centered */}
+      <div className="container" style={{ padding: '0 1rem', maxWidth: '1400px' }}>
         {/* SEO Content Section */}
         <article
           style={{
